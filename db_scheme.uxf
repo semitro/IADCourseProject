@@ -206,7 +206,7 @@ article_id
 course_id
 title
 subtitle
-text
+content
 test_id</panel_attributes>
     <additional_attributes/>
   </element>
@@ -239,7 +239,7 @@ reward_script_id</panel_attributes>
 --
 question_id
 --
-text
+content
 answer
 wrong1
 wrong2
