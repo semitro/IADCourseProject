@@ -1,0 +1,14 @@
+drop table Resource;
+drop table Users;
+drop table Character;
+drop table Item_Type;
+drop table Item;
+drop table Character_Item;
+drop table Script;
+drop table Event;
+drop table Ability;
+drop table Character_Ability;
+drop table Question;
+drop table Test;
+drop table Course;
+drop table Article;

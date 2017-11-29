@@ -5,7 +5,7 @@ create table Resource(
 	URL varchar(1200) not null
 );
 
-create table User(
+create table Users(
 	user_id     serial primary key,
 	login       varchar(80) unique not null,
 	auth_type   varchar(40)        not null,
@@ -31,32 +31,32 @@ create table Character(
 	adventuring_since date,
 
 	image_resource_id integer
-	                references Resource(resource_id) 
-	                default 0 --# 0 - изображение персонажа
+	                references Resource(resource_id)  
 					on update cascade
-					on delete set default,
+					on delete set default
+					default 0 -- id of character image
 );
 
 create table Item_Type(
-	item_id serial primary key,
-	parent_id integer references Item(item_id)
+	type_id serial primary key,
+	parent_id integer references Item_Type(type_id)
 						on update cascade
 						on delete set null,
 	name varchar(80),
-	image_resource_id references Resource(resource_id)
-					   default 1 --# - предмет
+	image_resource_id integer references Resource(resource_id)
 					   on update cascade 
-					   on delete set default,
+					   on delete set default
+					   default 1 --# - предмет
+
 );
 
 create table Item(
 	item_id serial primary key,
-	type_id integer references Item_Type(item_id)
+	type_id integer references Item_Type(type_id)
 					on update cascade
 					on delete set null, --# ??
 	price integer default 0 not null,
-	name varchar(80) default null,
-
+	name varchar(80) default null
 );
 
 create table Character_Item(
@@ -70,14 +70,6 @@ create table Character_Item(
 	slot smallint default null,
 	primary key(item_id, character_id)
 );
-create table Event(
-	event_id serial primary key,
-	name varchar(800),
-	description varchar(8000) default '',
-	reward_script_id references Script(script_id)
-						on update cascade
-						on delete set null,
-); 
 
 create table Script(
 	script_id serial primary key,
@@ -85,25 +77,37 @@ create table Script(
 	script text not null
 );
 
+
+create table Event(
+	event_id serial primary key,
+	name varchar(800),
+	description varchar(8000) default '',
+	reward_script_id integer references Script(script_id)
+						on update cascade
+						on delete set null
+); 
+
 create table Ability(
 	ability_id serial primary key,
 	name varchar(80),
 	description text default null,
 
 	ability_script_id integer references Script(script_id)
-					default null
-					on update cascade,
-					on delete  set null,
+					on update cascade
+					on delete  set null
+					default null,
+
 	for_class varchar(80) default 'any',
 	min_exp_to_use integer default 0 not null,
 	cooldown integer default 0 not null,
 	only_in_battle boolean default TRUE not null,
 	passive 	   boolean default FALSE not null,
 
-	image_resource_id references Resource(resource_id)
-					   default 2 --# - навык
+	image_resource_id integer references Resource(resource_id)
 					   on update cascade 
-					   on delete set default,
+					   on delete set default
+					   default 2 --# - навык
+
 );
 
 create table Character_Ability(
@@ -132,9 +136,9 @@ create table Test(
 	test_id serial primary key,
 	title varchar(200),
 	description varchar(4000) default '',
-	reward_script_id references Script(script_id)
+	reward_script_id integer references Script(script_id)
 						on update cascade
-						on delete set null,
+						on delete set null
 );
 
 
@@ -146,13 +150,10 @@ create table Course(
 
 create table Article(
 	article_id serial primary key,
-	corse_id integer references Course(corse_id)
+	corse_id integer references Course(course_id)
 				on update cascade
 				on delete set null,
 	title varchar(80),
 	subtitle varchar(80) default '',
-
-	content text not null,
-
+	content text not null
 );
-
