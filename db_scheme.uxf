@@ -7,7 +7,7 @@
       <x>390</x>
       <y>50</y>
       <w>130</w>
-      <h>120</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -17,6 +17,8 @@ auth_type
 id_external
 login
 password
+access_token
+refresh_token
 access_level
 </panel_attributes>
     <additional_attributes/>
@@ -25,7 +27,7 @@ access_level
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>20</y>
+      <y>50</y>
       <w>130</w>
       <h>210</h>
     </coordinates>
@@ -50,7 +52,7 @@ rhythm</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>10</x>
-      <y>180</y>
+      <y>210</y>
       <w>130</w>
       <h>110</h>
     </coordinates>
@@ -68,7 +70,7 @@ descritpion</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>10</x>
-      <y>350</y>
+      <y>380</y>
       <w>130</w>
       <h>90</h>
     </coordinates>
@@ -85,7 +87,7 @@ image_resource_id</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>10</x>
-      <y>30</y>
+      <y>60</y>
       <w>130</w>
       <h>90</h>
     </coordinates>
@@ -101,8 +103,8 @@ slot</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>420</y>
+      <x>780</x>
+      <y>450</y>
       <w>130</w>
       <h>90</h>
     </coordinates>
@@ -119,7 +121,7 @@ reward_script_id</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>390</x>
-      <y>260</y>
+      <y>290</y>
       <w>130</w>
       <h>180</h>
     </coordinates>
@@ -142,7 +144,7 @@ passive</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>290</y>
+      <y>330</y>
       <w>130</w>
       <h>90</h>
     </coordinates>
@@ -158,8 +160,8 @@ last_used</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
-      <y>420</y>
+      <x>200</x>
+      <y>450</y>
       <w>130</w>
       <h>90</h>
     </coordinates>
@@ -175,8 +177,8 @@ url</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>90</y>
+      <x>780</x>
+      <y>110</y>
       <w>130</w>
       <h>80</h>
     </coordinates>
@@ -192,8 +194,8 @@ description
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>90</y>
+      <x>590</x>
+      <y>110</y>
       <w>130</w>
       <h>120</h>
     </coordinates>
@@ -211,8 +213,8 @@ test_id</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>270</y>
+      <x>590</x>
+      <y>300</y>
       <w>130</w>
       <h>90</h>
     </coordinates>
@@ -228,8 +230,8 @@ reward_script_id</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
-      <y>270</y>
+      <x>780</x>
+      <y>290</y>
       <w>130</w>
       <h>120</h>
     </coordinates>
@@ -247,8 +249,8 @@ wrong3</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>420</y>
+      <x>590</x>
+      <y>450</y>
       <w>130</w>
       <h>80</h>
     </coordinates>
@@ -264,7 +266,7 @@ script</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>60</y>
+      <y>90</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
@@ -276,7 +278,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>70</x>
-      <y>110</y>
+      <y>140</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -288,7 +290,7 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>70</x>
-      <y>280</y>
+      <y>310</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -300,19 +302,19 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>260</x>
-      <y>220</y>
+      <y>250</y>
       <w>30</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>m1=1
 m2=*</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>310</y>
+      <y>350</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
@@ -324,71 +326,71 @@ m2=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>70</x>
-      <y>430</y>
-      <w>110</w>
+      <y>460</y>
+      <w>150</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>m1=*
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0;90.0;40.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>280</x>
-      <y>430</y>
-      <w>170</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>m1=*
-m2=1</panel_attributes>
-    <additional_attributes>150.0;10.0;150.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;130.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>100</y>
+      <y>460</y>
+      <w>130</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>m1=*
+m2=1</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;40.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>190</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>m1=*
+m2=0..1</panel_attributes>
+    <additional_attributes>10.0;40.0;140.0;40.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>150</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>m1=*
+    <panel_attributes>m1=n
 m2=1</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>130</y>
-      <w>90</w>
-      <h>40</h>
+      <x>650</x>
+      <y>220</y>
+      <w>50</w>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>m1=*
+    <panel_attributes>m1=0..1
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>200</y>
-      <w>30</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>m1=?
-m2=1</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>720</x>
-      <y>310</y>
+      <x>710</x>
+      <y>340</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>m1=*
+    <panel_attributes>m1=n
 m2=*</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
@@ -396,19 +398,19 @@ m2=*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>510</x>
-      <y>100</y>
-      <w>110</w>
+      <y>130</y>
+      <w>100</w>
       <h>250</h>
     </coordinates>
     <panel_attributes>m1=*
 m2=*</panel_attributes>
-    <additional_attributes>90.0;220.0;50.0;220.0;50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>80.0;220.0;40.0;220.0;40.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>350</y>
+      <x>650</x>
+      <y>380</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -420,24 +422,36 @@ m2=*</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>470</x>
-      <y>430</y>
-      <w>150</w>
+      <y>460</y>
+      <w>140</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>m1=1
 m2=*</panel_attributes>
-    <additional_attributes>130.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>120.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>460</y>
+      <x>710</x>
+      <y>490</y>
       <w>90</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>m1=*
 m2=1</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>210</y>
+      <w>60</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>m1=*
+m2=1</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0;10.0;270.0;40.0;270.0</additional_attributes>
   </element>
 </diagram>
