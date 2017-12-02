@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>vt.smt.ent.Ability</class>
+        <class>vt.smt.ent.Album</class>
+        <class>vt.smt.ent.AlbumBand</class>
+        <class>vt.smt.ent.Alias</class>
+        <class>vt.smt.ent.Article</class>
+        <class>vt.smt.ent.Author</class>
+        <class>vt.smt.ent.Band</class>
+        <class>vt.smt.ent.Character</class>
+        <class>vt.smt.ent.CharacterAbility</class>
+        <class>vt.smt.ent.CharacterItem</class>
+        <class>vt.smt.ent.Composition</class>
+        <class>vt.smt.ent.CompositionAlbum</class>
+        <class>vt.smt.ent.Concert</class>
+        <class>vt.smt.ent.Course</class>
+        <class>vt.smt.ent.Event</class>
+        <class>vt.smt.ent.Item</class>
+        <class>vt.smt.ent.ItemType</class>
+        <class>vt.smt.ent.Label</class>
+        <class>vt.smt.ent.Member</class>
+        <class>vt.smt.ent.MemberRole</class>
+        <class>vt.smt.ent.Performance</class>
+        <class>vt.smt.ent.PerformanceBand</class>
+        <class>vt.smt.ent.Person</class>
+        <class>vt.smt.ent.Place</class>
+        <class>vt.smt.ent.Question</class>
+        <class>vt.smt.ent.Resource</class>
+        <class>vt.smt.ent.Role</class>
+        <class>vt.smt.ent.Script</class>
+        <class>vt.smt.ent.Style</class>
+        <class>vt.smt.ent.Test</class>
+        <class>vt.smt.ent.Tour</class>
+        <class>vt.smt.ent.TourBand</class>
+        <class>vt.smt.ent.Users</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/fight"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value=""/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
