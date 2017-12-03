@@ -35,7 +35,7 @@ public class Script implements Serializable {
     }
 
     @Basic
-    @Column(name =ls "script")
+    @Column(name ="script")
     public String getScript() {
         return script;
     }
