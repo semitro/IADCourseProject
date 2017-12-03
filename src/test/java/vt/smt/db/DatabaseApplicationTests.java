@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import vt.smt.db.repositories.AliasRepository;
-import vt.smt.ent.Alias;
+import vt.smt.ent.bands.Alias;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,7 +18,7 @@ public class DatabaseApplicationTests {
 	public void contextLoads() {
 		Alias a = new Alias();
 		a.setPersonId(1);
-		a.setAlias("fffa");
+
 		aliasRepository.save(a);
 	}
 

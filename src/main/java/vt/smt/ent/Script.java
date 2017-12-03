@@ -1,15 +1,11 @@
 package vt.smt.ent;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
- * Created by semitro on 03.12.17.
+ * This thing contains the script in FAFA script language.
+ * @see Character
  */
 @Entity
 public class Script implements Serializable {
@@ -18,7 +14,7 @@ public class Script implements Serializable {
     private String script;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "script_id")
     public Integer getScriptId() {
         return scriptId;
@@ -39,7 +35,7 @@ public class Script implements Serializable {
     }
 
     @Basic
-    @Column(name = "script")
+    @Column(name =ls "script")
     public String getScript() {
         return script;
     }
