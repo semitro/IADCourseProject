@@ -3,6 +3,8 @@ package vt.smt.ent;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -16,6 +18,7 @@ public class Resource {
     private String url;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "resource_id")
     public Integer getResourceId() {
         return resourceId;

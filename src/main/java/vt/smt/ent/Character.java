@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  * Created by semitro on 03.12.17.
@@ -25,6 +27,7 @@ public class Character {
     private Integer imageResourceId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "character_id")
     public Integer getCharacterId() {
         return characterId;

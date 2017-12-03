@@ -3,6 +3,8 @@ package vt.smt.ent;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -18,6 +20,7 @@ public class Question {
     private String wrong3;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "question_id")
     public Integer getQuestionId() {
         return questionId;

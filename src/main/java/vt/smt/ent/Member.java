@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  * Created by semitro on 03.12.17.
@@ -18,6 +20,7 @@ public class Member {
     private Date leaveDate;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_id")
     public Integer getMemberId() {
         return memberId;

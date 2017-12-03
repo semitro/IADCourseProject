@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 @Entity
@@ -22,6 +24,7 @@ public class Album {
     private String studio2;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "album_id")
     public Integer getAlbumId() {
         return albumId;

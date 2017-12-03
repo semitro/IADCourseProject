@@ -3,6 +3,8 @@ package vt.smt.ent;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -16,6 +18,7 @@ public class Test {
     private Integer rewardScriptId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "test_id")
     public Integer getTestId() {
         return testId;

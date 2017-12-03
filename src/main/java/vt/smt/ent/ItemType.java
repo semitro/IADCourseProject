@@ -14,6 +14,7 @@ public class ItemType {
     private Integer imageResourceId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "type_id")
     public Integer getTypeId() {
         return typeId;

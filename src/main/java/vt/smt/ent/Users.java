@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Arrays;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  * Created by semitro on 03.12.17.
@@ -19,6 +21,7 @@ public class Users {
     private Integer accessLevel;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     public Integer getUserId() {
         return userId;

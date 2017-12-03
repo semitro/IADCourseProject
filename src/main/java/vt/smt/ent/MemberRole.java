@@ -16,6 +16,7 @@ public class MemberRole {
     private Date endDate;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "member_role_id")
     public Integer getMemberRoleId() {
         return memberRoleId;
