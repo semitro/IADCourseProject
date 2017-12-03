@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Created by semitro on 03.12.17.
  */
 @Entity
-@Table(name = "item_type", schema = "public", catalog = "fight")
+@Table(name = "item_type")
 public class ItemType implements Serializable {
     private Integer typeId;
     private Integer parentId;

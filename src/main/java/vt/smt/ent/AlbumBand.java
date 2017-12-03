@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by semitro on 03.12.17.
  */
 @Entity
-@Table(name = "album_band", schema = "public", catalog = "fight")
+@Table(name = "album_band")
 @IdClass(AlbumBandPK.class)
 public class AlbumBand {
     private Integer albumId;

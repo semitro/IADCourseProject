@@ -7,7 +7,7 @@ import java.sql.Date;
  * Created by semitro on 03.12.17.
  */
 @Entity
-@Table(name = "character_ability", schema = "public", catalog = "fight")
+@Table(name = "character_ability")
 @IdClass(CharacterAbilityPK.class)
 public class CharacterAbility {
     private Integer abilityId;

@@ -8,7 +8,7 @@ import java.sql.Date;
  * Created by semitro on 03.12.17.
  */
 @Entity
-@Table(name = "member_role", schema = "public", catalog = "fight")
+@Table(name = "member_role")
 public class MemberRole implements Serializable {
     private Integer memberRoleId;
     private Integer memberId;
