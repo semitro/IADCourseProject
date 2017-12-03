@@ -1,13 +1,8 @@
 package vt.smt.ent;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.sql.Date;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
 /**
  * Created by semitro on 03.12.17.
@@ -15,13 +10,14 @@ import javax.persistence.GenerationType;
 @Entity
 public class Alias implements Serializable {
     private Integer aliasId;
+    @ManyToOne
     private Integer personId;
     private String alias;
     private Date startDate;
     private Date endDate;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "alias_id")
     public Integer getAliasId() {
         return aliasId;

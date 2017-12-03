@@ -20,7 +20,6 @@ public class MuzzFightApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(MuzzFightApplication.class, args);
-		AlbumRepository repository = context.getBean(AlbumRepository.class);
 		System.out.println("sdds");
 		AliasRepository aliasRepository = context.getBean(AliasRepository.class);
 		System.out.println(aliasRepository.findAll());
