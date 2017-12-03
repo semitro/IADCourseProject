@@ -1,5 +1,6 @@
 package vt.smt.ent;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -8,7 +9,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "member_role", schema = "public", catalog = "fight")
-public class MemberRole {
+public class MemberRole implements Serializable {
     private Integer memberRoleId;
     private Integer memberId;
     private Integer roleId;

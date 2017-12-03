@@ -1,5 +1,6 @@
 package vt.smt.ent;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
  * Created by semitro on 03.12.17.
  */
 @Entity
-public class Course {
+public class Course implements Serializable {
     private Integer courseId;
     private String title;
     private String description;

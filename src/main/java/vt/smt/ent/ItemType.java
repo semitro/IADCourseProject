@@ -1,5 +1,6 @@
 package vt.smt.ent;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -7,7 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "item_type", schema = "public", catalog = "fight")
-public class ItemType {
+public class ItemType implements Serializable {
     private Integer typeId;
     private Integer parentId;
     private String name;

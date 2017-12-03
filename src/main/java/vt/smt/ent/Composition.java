@@ -1,5 +1,6 @@
 package vt.smt.ent;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import javax.persistence.GenerationType;
  * Created by semitro on 03.12.17.
  */
 @Entity
-public class Composition {
+public class Composition implements Serializable {
     private Integer compositionId;
     private String name;
     private Date creationDate;

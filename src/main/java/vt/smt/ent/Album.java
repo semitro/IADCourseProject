@@ -1,5 +1,6 @@
 package vt.smt.ent;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.GenerationType;
 
 
 @Entity
-public class Album {
+public class Album implements Serializable {
     private Integer albumId;
     private String name;
     private Boolean isFake;
