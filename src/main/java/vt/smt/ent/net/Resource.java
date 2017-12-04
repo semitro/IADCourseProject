@@ -9,14 +9,20 @@ import java.io.Serializable;
  */
 @Entity
 public class Resource implements Serializable {
-    private Integer resourceId;
-    private String name;
-    private String type;
-    private String url;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resource_id")
+    private Integer resourceId;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
+    @Column(name = "type")
+    private String type;
+    @Basic
+    @Column(name = "url")
+    private String url;
+
     public Integer getResourceId() {
         return resourceId;
     }
@@ -25,8 +31,6 @@ public class Resource implements Serializable {
         this.resourceId = resourceId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -35,8 +39,6 @@ public class Resource implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "type")
     public String getType() {
         return type;
     }
@@ -45,8 +47,6 @@ public class Resource implements Serializable {
         this.type = type;
     }
 
-    @Basic
-    @Column(name = "url")
     public String getUrl() {
         return url;
     }

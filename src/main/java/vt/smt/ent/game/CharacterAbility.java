@@ -8,13 +8,34 @@ import java.sql.Date;
 @Table(name = "character_ability")
 @IdClass(CharacterAbilityPK.class)
 public class CharacterAbility {
-    private Integer abilityId;
-    private Integer characterId;
-    private Integer powerLevel;
-    private Date lastUseed;
-
     @Id
     @Column(name = "ability_id")
+    private Integer abilityId;
+    @Id
+    @Column(name = "character_id")
+    private Integer characterId;
+    @Basic
+    @Column(name = "power_level")
+    private Integer powerLevel;
+    @Basic
+    @Column(name = "last_useed")
+    private Date lastUseed;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "character_id", nullable = false)
+    private Character character;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "ability_id", nullable = false)
+    private Ability ability;
+    
+    public Ability getAbility() {
+        return ability;
+    }
+
+    public void setAbility(Ability ability) {
+        this.ability = ability;
+    }
+
     public Integer getAbilityId() {
         return abilityId;
     }
@@ -23,8 +44,6 @@ public class CharacterAbility {
         this.abilityId = abilityId;
     }
 
-    @Id
-    @Column(name = "character_id")
     public Integer getCharacterId() {
         return characterId;
     }
@@ -33,8 +52,6 @@ public class CharacterAbility {
         this.characterId = characterId;
     }
 
-    @Basic
-    @Column(name = "power_level")
     public Integer getPowerLevel() {
         return powerLevel;
     }
@@ -43,8 +60,6 @@ public class CharacterAbility {
         this.powerLevel = powerLevel;
     }
 
-    @Basic
-    @Column(name = "last_useed")
     public Date getLastUseed() {
         return lastUseed;
     }

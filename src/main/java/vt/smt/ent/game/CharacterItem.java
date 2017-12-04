@@ -10,19 +10,26 @@ import javax.persistence.*;
 @Table(name = "character_item")
 @IdClass(CharacterItemPK.class)
 public class CharacterItem {
-
+	@Id
+	@Column(name = "item_id")
     private Integer itemId;
+    @Id
+    @Column(name = "character_id")
     private Integer characterId;
+    @Basic
+    @Column(name = "number")
     private Integer number;
+    @Basic
+    @Column(name = "slot")
     private Short slot;
 
-    /// many to one
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "item_id", nullable = false)
     private Item item;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "character_id", nullable = false)
     private Character character;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name="item_id")
     public Item getItem() {
         return item;
     }
@@ -31,9 +38,6 @@ public class CharacterItem {
         this.item = item;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name="character_id")
     public Character getCharacter() {
         return character;
     }
@@ -58,28 +62,6 @@ public class CharacterItem {
         this.characterId = characterId;
     }
 
-    //    @Id
-//    @Column(name = "item_id")
-//    public Integer getItemId() {
-//        return itemId;
-//    }
-//
-//    public void setItemId(Integer itemId) {
-//        this.itemId = itemId;
-//    }
-
-//    @Id
-//    @Column(name = "character_id")
-//    public Integer getCharacterId() {
-//        return characterId;
-//    }
-//
-//    public void setCharacterId(Integer characterId) {
-//        this.characterId = characterId;
-//    }
-
-    @Basic
-    @Column(name = "number")
     public Integer getNumber() {
         return number;
     }
@@ -88,8 +70,6 @@ public class CharacterItem {
         this.number = number;
     }
 
-    @Basic
-    @Column(name = "slot")
     public Short getSlot() {
         return slot;
     }
@@ -105,21 +85,20 @@ public class CharacterItem {
 
         CharacterItem that = (CharacterItem) o;
 
-//        if (itemId != null ? !itemId.equals(that.itemId) : that.itemId != null) return false;
-//        if (characterId != null ? !characterId.equals(that.characterId) : that.characterId != null) return false;
-//        if (number != null ? !number.equals(that.number) : that.number != null) return false;
-//        if (slot != null ? !slot.equals(that.slot) : that.slot != null) return false;
+        if (itemId != null ? !itemId.equals(that.itemId) : that.itemId != null) return false;
+        if (characterId != null ? !characterId.equals(that.characterId) : that.characterId != null) return false;
+        if (number != null ? !number.equals(that.number) : that.number != null) return false;
+        if (slot != null ? !slot.equals(that.slot) : that.slot != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-//        int result = itemId != null ? itemId.hashCode() : 0;
-//        result = 31 * result + (characterId != null ? characterId.hashCode() : 0);
-//        result = 31 * result + (number != null ? number.hashCode() : 0);
-//        result = 31 * result + (slot != null ? slot.hashCode() : 0);
-        int result = (int)Math.random()*1000;
+        int result = itemId != null ? itemId.hashCode() : 0;
+        result = 31 * result + (characterId != null ? characterId.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (slot != null ? slot.hashCode() : 0);
         return result;
     }
 }

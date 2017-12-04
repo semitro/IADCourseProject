@@ -8,15 +8,23 @@ import java.util.List;
  */
 @Entity
 public class Item {
-    private Integer itemId;
-    private Integer typeId;
-    private Integer price;
-    private String name;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
+    private Integer itemId;
+    @Column(name = "type_id")
+    private Integer typeId;
+    @Basic
+    @Column(name = "price")
+    private Integer price;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "type_id", nullable = false)
+    private ItemType type;
+
     public Integer getItemId() {
         return itemId;
     }
@@ -25,8 +33,6 @@ public class Item {
         this.itemId = itemId;
     }
 
-    @Basic
-    @Column(name = "type_id")
     public Integer getTypeId() {
         return typeId;
     }
@@ -35,8 +41,6 @@ public class Item {
         this.typeId = typeId;
     }
 
-    @Basic
-    @Column(name = "price")
     public Integer getPrice() {
         return price;
     }
@@ -45,8 +49,6 @@ public class Item {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -55,6 +57,14 @@ public class Item {
         this.name = name;
     }
 
+    public ItemType getType() {
+        return type;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

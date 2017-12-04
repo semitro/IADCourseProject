@@ -9,13 +9,17 @@ import java.io.Serializable;
  */
 @Entity
 public class Script implements Serializable {
-    private Integer scriptId;
-    private String name;
-    private String script;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "script_id")
+    private Integer scriptId;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
+    @Column(name ="script")
+    private String script;
+
     public Integer getScriptId() {
         return scriptId;
     }
@@ -24,8 +28,6 @@ public class Script implements Serializable {
         this.scriptId = scriptId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -34,8 +36,6 @@ public class Script implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name ="script")
     public String getScript() {
         return script;
     }

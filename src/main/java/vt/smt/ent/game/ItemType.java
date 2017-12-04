@@ -2,6 +2,7 @@ package vt.smt.ent.game;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import vt.smt.ent.net.Resource;
 
 /**
  * Created by semitro on 03.12.17.
@@ -9,14 +10,46 @@ import java.io.Serializable;
 @Entity
 @Table(name = "item_type")
 public class ItemType implements Serializable {
-    private Integer typeId;
-    private Integer parentId;
-    private String name;
-    private Integer imageResourceId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_id")
+    private Integer typeId;
+    @Basic
+    @Column(name = "parent_id")
+    private Integer parentId;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
+    @Column(name = "image_resource_id")
+    private Integer imageResourceId;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
+			nullable = false)
+    private Resource imageResource;
+    
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "parent_id", referencedColumnName = "type_id",
+			nullable = true)
+	private ItemType parent;
+    
+    public ItemType getParent() {
+		return parent;
+	}
+	
+	public void setParent(ItemType parent) {
+		this.parent = parent;
+	}
+
+    public Resource getImageResource() {
+		return imageResource;
+	}
+	
+	public void setImageResource(Resource imageResource) {
+		this.imageResource = imageResource;
+	}
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -25,8 +58,6 @@ public class ItemType implements Serializable {
         this.typeId = typeId;
     }
 
-    @Basic
-    @Column(name = "parent_id")
     public Integer getParentId() {
         return parentId;
     }
@@ -35,8 +66,6 @@ public class ItemType implements Serializable {
         this.parentId = parentId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -45,8 +74,6 @@ public class ItemType implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "image_resource_id")
     public Integer getImageResourceId() {
         return imageResourceId;
     }

@@ -8,14 +8,32 @@ import java.io.Serializable;
  */
 @Entity
 public class Event implements Serializable {
-    private Integer eventId;
-    private String name;
-    private String description;
-    private Integer rewardScriptId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
+    private Integer eventId;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
+    @Column(name = "description")
+    private String description;
+    @Basic
+    @Column(name = "reward_script_id")
+    private Integer rewardScriptId;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "reward_script_id", referencedColumnName = "script_id")
+    private Script rewardScript;
+    
+    public Script getRewardScript() {
+        return rewardScript;
+    }
+
+    public void setRewardScript(Script rewardScript) {
+        this.rewardScript = rewardScript;
+    }
+
     public Integer getEventId() {
         return eventId;
     }
@@ -24,8 +42,6 @@ public class Event implements Serializable {
         this.eventId = eventId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -34,8 +50,6 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -44,8 +58,6 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "reward_script_id")
     public Integer getRewardScriptId() {
         return rewardScriptId;
     }

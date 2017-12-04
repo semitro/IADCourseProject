@@ -2,6 +2,7 @@ package vt.smt.ent.game;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import vt.smt.ent.net.Resource;
 
 /**
  *  Ability is a skill that the player can use in the battle
@@ -13,20 +14,63 @@ import java.io.Serializable;
  */
 @Entity
 public class Ability implements Serializable {
-    private Integer abilityId;
-    private String name;
-    private String description;
-    private Integer abilityScriptId;
-    private String forClass;
-    private Integer minExpToUse;
-    private Integer cooldown;
-    private Boolean onlyInBattle;
-    private Boolean passive;
-    private Integer imageResourceId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ability_id")
+    private Integer abilityId;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
+    @Column(name = "description")
+    private String description;
+    @Basic
+    @Column(name = "ability_script_id")
+    private Integer abilityScriptId;
+    @Basic
+    @Column(name = "for_class")
+    private String forClass;
+    @Basic
+    @Column(name = "min_exp_to_use")
+    private Integer minExpToUse;
+    @Basic
+    @Column(name = "cooldown")
+    private Integer cooldown;
+    @Basic
+    @Column(name = "only_in_battle")
+    private Boolean onlyInBattle;
+    @Basic
+    @Column(name = "passive")
+    private Boolean passive;
+    @Basic
+    @Column(name = "image_resource_id")
+    private Integer imageResourceId;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
+			nullable = false)
+    private Resource imageResource;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ability_script_id", referencedColumnName = "script_id")
+    private Script abilityScript;
+
+    public Resource getImageResource() {
+		return imageResource;
+	}
+	
+	public void setImageResource(Resource imageResource) {
+		this.imageResource = imageResource;
+	}
+    
+    public Script getAbilityScript() {
+        return abilityScript;
+    }
+
+    public void setAbilityScript(Script abilityScript) {
+        this.abilityScript = abilityScript;
+    }
+
     public Integer getAbilityId() {
         return abilityId;
     }
@@ -35,8 +79,6 @@ public class Ability implements Serializable {
         this.abilityId = abilityId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -45,8 +87,6 @@ public class Ability implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -55,8 +95,6 @@ public class Ability implements Serializable {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "ability_script_id")
     public Integer getAbilityScriptId() {
         return abilityScriptId;
     }
@@ -65,8 +103,6 @@ public class Ability implements Serializable {
         this.abilityScriptId = abilityScriptId;
     }
 
-    @Basic
-    @Column(name = "for_class")
     public String getForClass() {
         return forClass;
     }
@@ -75,8 +111,6 @@ public class Ability implements Serializable {
         this.forClass = forClass;
     }
 
-    @Basic
-    @Column(name = "min_exp_to_use")
     public Integer getMinExpToUse() {
         return minExpToUse;
     }
@@ -85,8 +119,6 @@ public class Ability implements Serializable {
         this.minExpToUse = minExpToUse;
     }
 
-    @Basic
-    @Column(name = "cooldown")
     public Integer getCooldown() {
         return cooldown;
     }
@@ -95,8 +127,6 @@ public class Ability implements Serializable {
         this.cooldown = cooldown;
     }
 
-    @Basic
-    @Column(name = "only_in_battle")
     public Boolean getOnlyInBattle() {
         return onlyInBattle;
     }
@@ -105,8 +135,6 @@ public class Ability implements Serializable {
         this.onlyInBattle = onlyInBattle;
     }
 
-    @Basic
-    @Column(name = "passive")
     public Boolean getPassive() {
         return passive;
     }
@@ -115,8 +143,6 @@ public class Ability implements Serializable {
         this.passive = passive;
     }
 
-    @Basic
-    @Column(name = "image_resource_id")
     public Integer getImageResourceId() {
         return imageResourceId;
     }

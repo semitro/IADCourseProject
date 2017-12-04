@@ -10,26 +10,57 @@ import java.util.List;
  */
 @Entity
 public class Character implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "character_id")
     private Integer characterId;
+    @Basic
+    @Column(name = "name")
     private String name;
+    @Basic
+    @Column(name = "class")
     private String clazz;
+    @Basic
+    @Column(name = "health")
     private Integer health;
+    @Basic
+    @Column(name = "roses")
     private Integer roses;
+    @Basic
+    @Column(name = "d_roses")
     private Integer dRoses;
+    @Basic
+    @Column(name = "defence")
     private Integer defence;
+    @Basic
+    @Column(name = "attack")
     private Integer attack;
+    @Basic
+    @Column(name = "rhythm")
     private Integer rhythm;
+    @Basic
+    @Column(name = "experience")
     private Integer experience;
+    @Basic
+    @Column(name = "adventuring_since")
     private Date adventuringSince;
+    @Basic
+    @Column(name = "image_resource_id")
     private Integer imageResourceId;
 
-    /// Связь с ассоциативной таблицей Character_item
+    /// Двунаправленная связь с ассоциативной таблицей Character_Item
+    @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
     private List<CharacterItem> items;
+    
+    /// Двунаправленная связь с ассоциативной таблицей Character_Ability
+    @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
+    private List<CharacterAbility> abilities;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
+			nullable = false)
+    private Resource imageResource;
 
-    @OneToMany
-    @JoinTable(name = "Character_Item",
-                joinColumns=@JoinColumn(name = "character_id"), // direct - владелец
-                inverseJoinColumns=@JoinColumn(name = "item_id")) // inverse - владеемое
     public List<CharacterItem> getItems() {
         return items;
     }
@@ -37,10 +68,23 @@ public class Character implements Serializable {
     public void setItems(List<CharacterItem> items) {
         this.items = items;
     }
+    
+    public List<CharacterAbility> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<CharacterAbility> abilities) {
+        this.abilities = abilities;
+    }
+
+    public Resource getImageResource() {
+		return imageResource;
+	}
+	
+	public void setImageResource(Resource imageResource) {
+		this.imageResource = imageResource;
+	}
     ///
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "character_id")
     public Integer getCharacterId() {
         return characterId;
     }
@@ -49,8 +93,6 @@ public class Character implements Serializable {
         this.characterId = characterId;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -59,8 +101,6 @@ public class Character implements Serializable {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "class")
     public String getClazz() {
         return clazz;
     }
@@ -69,8 +109,6 @@ public class Character implements Serializable {
         this.clazz = clazz;
     }
 
-    @Basic
-    @Column(name = "health")
     public Integer getHealth() {
         return health;
     }
@@ -79,8 +117,6 @@ public class Character implements Serializable {
         this.health = health;
     }
 
-    @Basic
-    @Column(name = "roses")
     public Integer getRoses() {
         return roses;
     }
@@ -89,8 +125,6 @@ public class Character implements Serializable {
         this.roses = roses;
     }
 
-    @Basic
-    @Column(name = "d_roses")
     public Integer getdRoses() {
         return dRoses;
     }
@@ -99,8 +133,6 @@ public class Character implements Serializable {
         this.dRoses = dRoses;
     }
 
-    @Basic
-    @Column(name = "defence")
     public Integer getDefence() {
         return defence;
     }
@@ -109,8 +141,6 @@ public class Character implements Serializable {
         this.defence = defence;
     }
 
-    @Basic
-    @Column(name = "attack")
     public Integer getAttack() {
         return attack;
     }
@@ -119,8 +149,6 @@ public class Character implements Serializable {
         this.attack = attack;
     }
 
-    @Basic
-    @Column(name = "rhythm")
     public Integer getRhythm() {
         return rhythm;
     }
@@ -129,8 +157,6 @@ public class Character implements Serializable {
         this.rhythm = rhythm;
     }
 
-    @Basic
-    @Column(name = "experience")
     public Integer getExperience() {
         return experience;
     }
@@ -139,8 +165,6 @@ public class Character implements Serializable {
         this.experience = experience;
     }
 
-    @Basic
-    @Column(name = "adventuring_since")
     public Date getAdventuringSince() {
         return adventuringSince;
     }
@@ -149,8 +173,6 @@ public class Character implements Serializable {
         this.adventuringSince = adventuringSince;
     }
 
-    @Basic
-    @Column(name = "image_resource_id")
     public Integer getImageResourceId() {
         return imageResourceId;
     }
