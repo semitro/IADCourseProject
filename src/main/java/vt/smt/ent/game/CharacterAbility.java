@@ -1,33 +1,43 @@
 package vt.smt.ent.game;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 
 @Entity
 @Table(name = "character_ability")
-@IdClass(CharacterAbilityPK.class)
-public class CharacterAbility {
+public class CharacterAbility implements Serializable {
+
     @Id
-    @Column(name = "ability_id")
-    private Integer abilityId;
-    @Id
-    @Column(name = "character_id")
-    private Integer characterId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "character_ability_id")
+    private Integer characterAbilityId;
+
     @Basic
     @Column(name = "power_level")
     private Integer powerLevel;
     @Basic
     @Column(name = "last_useed")
-    private Date lastUseed;
+    private Date lastUsed;
 
-	@ManyToOne(optional = false)
+
+	@ManyToOne(optional = false )
 	@JoinColumn(name = "character_id", nullable = false)
     private Character character;
+
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "ability_id", nullable = false)
+	@JoinColumn(name = "ability_id")
     private Ability ability;
-    
+
+    public Integer getCharacterAbilityId() {
+        return characterAbilityId;
+    }
+
+    public void setCharacterAbilityId(Integer characterAbilityId) {
+        this.characterAbilityId = characterAbilityId;
+    }
+
     public Ability getAbility() {
         return ability;
     }
@@ -36,20 +46,13 @@ public class CharacterAbility {
         this.ability = ability;
     }
 
-    public Integer getAbilityId() {
-        return abilityId;
+
+    public Character getCharacter() {
+        return character;
     }
 
-    public void setAbilityId(Integer abilityId) {
-        this.abilityId = abilityId;
-    }
-
-    public Integer getCharacterId() {
-        return characterId;
-    }
-
-    public void setCharacterId(Integer characterId) {
-        this.characterId = characterId;
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
     public Integer getPowerLevel() {
@@ -60,12 +63,12 @@ public class CharacterAbility {
         this.powerLevel = powerLevel;
     }
 
-    public Date getLastUseed() {
-        return lastUseed;
+    public Date getLastUsed() {
+        return lastUsed;
     }
 
-    public void setLastUseed(Date lastUseed) {
-        this.lastUseed = lastUseed;
+    public void setLastUsed(Date lastUsed) {
+        this.lastUsed = lastUsed;
     }
 
     @Override
@@ -75,20 +78,17 @@ public class CharacterAbility {
 
         CharacterAbility that = (CharacterAbility) o;
 
-        if (abilityId != null ? !abilityId.equals(that.abilityId) : that.abilityId != null) return false;
-        if (characterId != null ? !characterId.equals(that.characterId) : that.characterId != null) return false;
         if (powerLevel != null ? !powerLevel.equals(that.powerLevel) : that.powerLevel != null) return false;
-        if (lastUseed != null ? !lastUseed.equals(that.lastUseed) : that.lastUseed != null) return false;
+        if (lastUsed != null ? !lastUsed.equals(that.lastUsed) : that.lastUsed != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = abilityId != null ? abilityId.hashCode() : 0;
-        result = 31 * result + (characterId != null ? characterId.hashCode() : 0);
+        int result = 1;
         result = 31 * result + (powerLevel != null ? powerLevel.hashCode() : 0);
-        result = 31 * result + (lastUseed != null ? lastUseed.hashCode() : 0);
+        result = 31 * result + (lastUsed != null ? lastUsed.hashCode() : 0);
         return result;
     }
 }

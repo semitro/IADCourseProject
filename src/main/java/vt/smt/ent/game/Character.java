@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
-
+import vt.smt.ent.net.Resource;
 /**
  * It's what the player has
  */
@@ -44,9 +44,6 @@ public class Character implements Serializable {
     @Basic
     @Column(name = "adventuring_since")
     private Date adventuringSince;
-    @Basic
-    @Column(name = "image_resource_id")
-    private Integer imageResourceId;
 
     /// Двунаправленная связь с ассоциативной таблицей Character_Item
     @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
@@ -173,14 +170,6 @@ public class Character implements Serializable {
         this.adventuringSince = adventuringSince;
     }
 
-    public Integer getImageResourceId() {
-        return imageResourceId;
-    }
-
-    public void setImageResourceId(Integer imageResourceId) {
-        this.imageResourceId = imageResourceId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -201,8 +190,6 @@ public class Character implements Serializable {
         if (experience != null ? !experience.equals(character.experience) : character.experience != null) return false;
         if (adventuringSince != null ? !adventuringSince.equals(character.adventuringSince) : character.adventuringSince != null)
             return false;
-        if (imageResourceId != null ? !imageResourceId.equals(character.imageResourceId) : character.imageResourceId != null)
-            return false;
 
         return true;
     }
@@ -220,7 +207,6 @@ public class Character implements Serializable {
         result = 31 * result + (rhythm != null ? rhythm.hashCode() : 0);
         result = 31 * result + (experience != null ? experience.hashCode() : 0);
         result = 31 * result + (adventuringSince != null ? adventuringSince.hashCode() : 0);
-        result = 31 * result + (imageResourceId != null ? imageResourceId.hashCode() : 0);
         return result;
     }
 }

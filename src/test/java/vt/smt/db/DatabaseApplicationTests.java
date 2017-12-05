@@ -25,6 +25,7 @@ public class DatabaseApplicationTests {
 	@Test
 	public void contextLoads() {
 		Alias a = new Alias();
+		a.setAlias("Крылатый синеглаз");
 		a.setPersonId(1);
 
 		aliasRepository.save(a);
@@ -44,6 +45,7 @@ public class DatabaseApplicationTests {
 	public void oneToManyViaList(){
 		Person 	p = new Person();
 		p.setName("Жанна");
+		p.setSex("f");
 		Place place = new Place();
 		place.setName("Там где мы");
 		place.setAddr("Фонтанка");
@@ -72,6 +74,14 @@ public class DatabaseApplicationTests {
 		character = new Character();
 		character.setName("ГРОЗА ВОРОВ");
 		character.setdRoses(14);
+		// because there are so many not-null constraints
+		character.setAttack(12);
+		character.setDefence(12);
+		character.setExperience(14);
+		character.setHealth(14);
+		character.setRoses(14);
+		character.setRhythm(24);
+
 		item1 = new Item();
 		item1.setName("ПАЛКА_КОПАЛКА");
 		item2 = new Item();
@@ -80,22 +90,28 @@ public class DatabaseApplicationTests {
 		c_i_relation1 = new CharacterItem();
 		c_i_relation1.setItem(item1);
 		c_i_relation1.setSlot((short)1);
+		c_i_relation1.setCharacter(character);
 
 		c_i_relation2 = new CharacterItem();
 		c_i_relation2.setItem(item2);
 		c_i_relation2.setSlot((short)2);
-
-		List<CharacterItem> l = new LinkedList<>();
+		c_i_relation2.setCharacter(character);
+		c_i_relation1.setNumber(1);
+		c_i_relation2.setCharacter(character);
+		c_i_relation2.setNumber(24);
+		item1.setPrice(12);
+		item2.setPrice(244);
+    	List<CharacterItem> l = new LinkedList<>();
 		l.add(c_i_relation1);
 		l.add(c_i_relation2);
 		character.setItems(l);
 
+		characterRepository.save(character);
 		itemRepository.save(item1);
 		itemRepository.save(item2);
 
 		characterItemRepository.save(c_i_relation1);
 		characterItemRepository.save(c_i_relation2);
 
-		characterRepository.save(character);
 	}
 }

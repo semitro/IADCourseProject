@@ -3,7 +3,7 @@ package vt.smt.ent.game;
 import javax.persistence.*;
 import java.io.Serializable;
 import vt.smt.ent.net.Resource;
-
+import vt.smt.ent.Script;
 /**
  *  Ability is a skill that the player can use in the battle
  *  <p>
@@ -24,9 +24,7 @@ public class Ability implements Serializable {
     @Basic
     @Column(name = "description")
     private String description;
-    @Basic
-    @Column(name = "ability_script_id")
-    private Integer abilityScriptId;
+
     @Basic
     @Column(name = "for_class")
     private String forClass;
@@ -42,10 +40,7 @@ public class Ability implements Serializable {
     @Basic
     @Column(name = "passive")
     private Boolean passive;
-    @Basic
-    @Column(name = "image_resource_id")
-    private Integer imageResourceId;
-    
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
@@ -95,13 +90,8 @@ public class Ability implements Serializable {
         this.description = description;
     }
 
-    public Integer getAbilityScriptId() {
-        return abilityScriptId;
-    }
 
-    public void setAbilityScriptId(Integer abilityScriptId) {
-        this.abilityScriptId = abilityScriptId;
-    }
+
 
     public String getForClass() {
         return forClass;
@@ -143,13 +133,7 @@ public class Ability implements Serializable {
         this.passive = passive;
     }
 
-    public Integer getImageResourceId() {
-        return imageResourceId;
-    }
 
-    public void setImageResourceId(Integer imageResourceId) {
-        this.imageResourceId = imageResourceId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -161,16 +145,12 @@ public class Ability implements Serializable {
         if (abilityId != null ? !abilityId.equals(ability.abilityId) : ability.abilityId != null) return false;
         if (name != null ? !name.equals(ability.name) : ability.name != null) return false;
         if (description != null ? !description.equals(ability.description) : ability.description != null) return false;
-        if (abilityScriptId != null ? !abilityScriptId.equals(ability.abilityScriptId) : ability.abilityScriptId != null)
-            return false;
         if (forClass != null ? !forClass.equals(ability.forClass) : ability.forClass != null) return false;
         if (minExpToUse != null ? !minExpToUse.equals(ability.minExpToUse) : ability.minExpToUse != null) return false;
         if (cooldown != null ? !cooldown.equals(ability.cooldown) : ability.cooldown != null) return false;
         if (onlyInBattle != null ? !onlyInBattle.equals(ability.onlyInBattle) : ability.onlyInBattle != null)
             return false;
         if (passive != null ? !passive.equals(ability.passive) : ability.passive != null) return false;
-        if (imageResourceId != null ? !imageResourceId.equals(ability.imageResourceId) : ability.imageResourceId != null)
-            return false;
 
         return true;
     }
@@ -180,13 +160,11 @@ public class Ability implements Serializable {
         int result = abilityId != null ? abilityId.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (abilityScriptId != null ? abilityScriptId.hashCode() : 0);
         result = 31 * result + (forClass != null ? forClass.hashCode() : 0);
         result = 31 * result + (minExpToUse != null ? minExpToUse.hashCode() : 0);
         result = 31 * result + (cooldown != null ? cooldown.hashCode() : 0);
         result = 31 * result + (onlyInBattle != null ? onlyInBattle.hashCode() : 0);
         result = 31 * result + (passive != null ? passive.hashCode() : 0);
-        result = 31 * result + (imageResourceId != null ? imageResourceId.hashCode() : 0);
         return result;
     }
 }

@@ -2,6 +2,7 @@ package vt.smt.ent.game;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import vt.smt.ent.Script;
 
 /**
  * Created by semitro on 03.12.17.
@@ -18,9 +19,7 @@ public class Event implements Serializable {
     @Basic
     @Column(name = "description")
     private String description;
-    @Basic
-    @Column(name = "reward_script_id")
-    private Integer rewardScriptId;
+
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "reward_script_id", referencedColumnName = "script_id")
@@ -58,13 +57,7 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public Integer getRewardScriptId() {
-        return rewardScriptId;
-    }
 
-    public void setRewardScriptId(Integer rewardScriptId) {
-        this.rewardScriptId = rewardScriptId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -76,8 +69,6 @@ public class Event implements Serializable {
         if (eventId != null ? !eventId.equals(event.eventId) : event.eventId != null) return false;
         if (name != null ? !name.equals(event.name) : event.name != null) return false;
         if (description != null ? !description.equals(event.description) : event.description != null) return false;
-        if (rewardScriptId != null ? !rewardScriptId.equals(event.rewardScriptId) : event.rewardScriptId != null)
-            return false;
 
         return true;
     }
@@ -87,7 +78,6 @@ public class Event implements Serializable {
         int result = eventId != null ? eventId.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (rewardScriptId != null ? rewardScriptId.hashCode() : 0);
         return result;
     }
 }

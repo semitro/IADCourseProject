@@ -12,8 +12,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Integer itemId;
-    @Column(name = "type_id")
-    private Integer typeId;
+
     @Basic
     @Column(name = "price")
     private Integer price;
@@ -31,14 +30,6 @@ public class Item {
 
     public void setItemId(Integer itemId) {
         this.itemId = itemId;
-    }
-
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
     }
 
     public Integer getPrice() {
@@ -73,7 +64,6 @@ public class Item {
         Item item = (Item) o;
 
         if (itemId != null ? !itemId.equals(item.itemId) : item.itemId != null) return false;
-        if (typeId != null ? !typeId.equals(item.typeId) : item.typeId != null) return false;
         if (price != null ? !price.equals(item.price) : item.price != null) return false;
         if (name != null ? !name.equals(item.name) : item.name != null) return false;
 
@@ -83,7 +73,6 @@ public class Item {
     @Override
     public int hashCode() {
         int result = itemId != null ? itemId.hashCode() : 0;
-        result = 31 * result + (typeId != null ? typeId.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;

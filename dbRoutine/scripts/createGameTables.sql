@@ -60,6 +60,7 @@ create table Item(
 );
 
 create table Character_Item(
+	character_item_id serial primary key,
 	item_id      integer references Item(item_id)
 				on update cascade
 				on delete cascade, -- ??
@@ -67,8 +68,7 @@ create table Character_Item(
 				on update cascade
 				on delete cascade,
 	number integer default 1 not null,
-	slot smallint default null,
-	primary key(item_id, character_id)
+	slot smallint default null
 );
 
 create table Script(
@@ -111,6 +111,7 @@ create table Ability(
 );
 
 create table Character_Ability(
+	character_ability_id serial primary key,
 	ability_id integer references Ability(ability_id)
 					on update cascade 
 					on delete set null, -- ??
@@ -119,8 +120,7 @@ create table Character_Ability(
 					on delete cascade,
 
 	power_level integer default 0,
-	last_useed  date default null,
-	primary key(ability_id, character_id)
+	last_used  date default null
 );
 -- THEORY --
 create table Question(
