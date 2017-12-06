@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+
+import com.sun.istack.internal.Nullable;
 import vt.smt.ent.net.Resource;
 /**
  * It's what the player has
@@ -56,6 +58,7 @@ public class Character implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
+    @Nullable
     private Resource imageResource;
 
     public List<CharacterItem> getItems() {

@@ -11,7 +11,8 @@ import vt.smt.ent.bands.Person;
 import vt.smt.ent.bands.Place;
 import vt.smt.ent.game.Character;
 import vt.smt.ent.game.CharacterItem;
-import vt.smt.ent.game.Item;
+import vt.smt.ent.game.*;
+import vt.smt.ent.theory.Question;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -62,6 +63,8 @@ public class DatabaseApplicationTests {
 	CharacterItemRepository characterItemRepository;
 	@Autowired
 	ItemRepository itemRepository;
+	@Autowired
+	ItemTypeRepository itemTypeRepository;
 
 	vt.smt.ent.game.Character character;
 	vt.smt.ent.game.Item 	  item1;
@@ -101,10 +104,17 @@ public class DatabaseApplicationTests {
 		c_i_relation2.setNumber(24);
 		item1.setPrice(12);
 		item2.setPrice(244);
+		ItemType itemType = new ItemType();
+		itemType.setName("ТИП ПРЕДМЕТА");
+		item1.setType(itemType);
+
+		item2.setType(itemType);
     	List<CharacterItem> l = new LinkedList<>();
 		l.add(c_i_relation1);
 		l.add(c_i_relation2);
 		character.setItems(l);
+
+		itemTypeRepository.save(itemType);
 
 		characterRepository.save(character);
 		itemRepository.save(item1);
@@ -113,5 +123,53 @@ public class DatabaseApplicationTests {
 		characterItemRepository.save(c_i_relation1);
 		characterItemRepository.save(c_i_relation2);
 
+	}
+
+	@Autowired
+	private QuestionRepository questionRepository;
+	@Autowired
+	private TestRepository testRepository;
+	private vt.smt.ent.theory.Test theTest;
+
+	@Test
+	public void oneToMany(){
+		Question q = new Question();
+		q.setAnswer("Верный ответ");
+		q.setContent("Что такое жизнь?");
+		Question q1 = new Question();
+		q1.setAnswer("Да");
+		q1.setContent("Ожерелье есть не рыба?");
+
+		List<Question> l_of_q = new LinkedList<>();
+		l_of_q.add(q);
+		l_of_q.add(q1);
+		theTest = new vt.smt.ent.theory.Test();
+		theTest.setTitle("Тест века");
+		theTest.setDescription("Описание теста");
+		theTest.setQuestions(l_of_q);
+		questionRepository.save(q1);
+		questionRepository.save(q);
+
+		testRepository.save(theTest);
+ 	}
+
+ 	@Test
+	public void deleteQUERY(){
+		Question q = new Question();
+		q.setContent("Если я есть в бд, тест не пройден");
+		q.setAnswer("You don't exist");
+		questionRepository.save(q);
+		questionRepository.delete(q);
+	}
+
+	@Test
+	public void updateQUERY(){
+		Question q = new Question();
+		q.setContent("Я был такой");
+		q.setAnswer("Молодец");
+		q.setWrong1("Ne молодец");
+		questionRepository.save(q);
+		q.setContent("А стал такой");
+		questionRepository.save(q);
 	}
 }

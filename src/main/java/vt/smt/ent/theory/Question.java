@@ -6,6 +6,7 @@ import java.io.Serializable;
 /**
  * Created by semitro on 03.12.17.
  */
+
 @Entity
 public class Question implements Serializable {
     private Integer questionId;
@@ -14,6 +15,18 @@ public class Question implements Serializable {
     private String wrong1;
     private String wrong2;
     private String wrong3;
+
+    @ManyToOne(optional=true)
+    @JoinColumn(name="test_id")
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
+    private Test test;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,20 +2,43 @@ package vt.smt.ent.theory;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
+import vt.smt.ent.Script;
 /**
  * Created by semitro on 03.12.17.
  */
 @Entity
 public class Test implements Serializable {
-    private Integer testId;
-    private String title;
-    private String description;
-    private Integer rewardScriptId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "test_id")
+    private Integer testId;
+    @Basic
+    @Column(name = "title")
+    private String title;
+    @Basic
+    @Column(name = "description")
+    private String description;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="reward_script_id", referencedColumnName = "script_id")
+    private Script script;
+//    private Integer rewardScriptId;
+
+    @OneToMany(mappedBy ="test",fetch=FetchType.LAZY)
+//    @ElementCollection(targetClass = Integer.class)
+    private List<Question> questions;
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+
     public Integer getTestId() {
         return testId;
     }
@@ -24,8 +47,7 @@ public class Test implements Serializable {
         this.testId = testId;
     }
 
-    @Basic
-    @Column(name = "title")
+
     public String getTitle() {
         return title;
     }
@@ -34,8 +56,7 @@ public class Test implements Serializable {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "description")
+
     public String getDescription() {
         return description;
     }
@@ -44,15 +65,7 @@ public class Test implements Serializable {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "reward_script_id")
-    public Integer getRewardScriptId() {
-        return rewardScriptId;
-    }
 
-    public void setRewardScriptId(Integer rewardScriptId) {
-        this.rewardScriptId = rewardScriptId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -64,8 +77,6 @@ public class Test implements Serializable {
         if (testId != null ? !testId.equals(test.testId) : test.testId != null) return false;
         if (title != null ? !title.equals(test.title) : test.title != null) return false;
         if (description != null ? !description.equals(test.description) : test.description != null) return false;
-        if (rewardScriptId != null ? !rewardScriptId.equals(test.rewardScriptId) : test.rewardScriptId != null)
-            return false;
 
         return true;
     }
@@ -75,7 +86,6 @@ public class Test implements Serializable {
         int result = testId != null ? testId.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (rewardScriptId != null ? rewardScriptId.hashCode() : 0);
         return result;
     }
 }
