@@ -1,5 +1,6 @@
 package vt.smt.ent.theory;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 

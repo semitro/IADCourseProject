@@ -11,7 +11,9 @@ import vt.smt.ent.bands.Person;
 import vt.smt.ent.bands.Place;
 import vt.smt.ent.game.Character;
 import vt.smt.ent.game.CharacterItem;
-import vt.smt.ent.game.*;
+import vt.smt.ent.game.Item;
+import vt.smt.ent.game.ItemType;
+import vt.smt.ent.net.Users;
 import vt.smt.ent.theory.Question;
 
 import java.util.LinkedList;
@@ -171,5 +173,22 @@ public class DatabaseApplicationTests {
 		questionRepository.save(q);
 		q.setContent("А стал такой");
 		questionRepository.save(q);
+	}
+
+	@Autowired
+	private UsersRepository usersRepository;
+
+	@Test
+	public void userTest(){
+		Users u = new Users();
+		u.setAccessLevel(1);
+		u.setLogin("Vasya");
+
+		usersRepository.save(u);
+		u = new Users();
+		u.setAccessLevel(1);
+		u.setLogin("Misha");
+
+		usersRepository.save(u);
 	}
 }

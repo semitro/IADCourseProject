@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>MuzzFight</name>
-	<description>CP - course project</description>
+	<description>Course project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -26,6 +26,43 @@
 	</properties>
 
 	<dependencies>
+		<!--jsf integration-->
+		<dependency>
+			<groupId>org.apache.myfaces.core</groupId>
+			<artifactId>myfaces-impl</artifactId>
+			<version>2.2.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.core</groupId>
+			<artifactId>myfaces-api</artifactId>
+			<version>2.2.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-integration-faces</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.1</version>
+		</dependency>
+		<!--/jsf integration-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
@@ -94,7 +131,11 @@
 	</dependencyManagement>
 
 	<build>
-		<plugins>
+		<!--This configuration is important because Rewrite isn't prepared to scan for configurations on non-classical web applications (i.e. on embedded applications like Spring Boot). So we need to tweak the build process a little to help Rewrite fulfill its purpose.-->
+		<!--https://auth0.com/blog/developing-jsf-applications-with-spring-boot/-->
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+
+        <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -119,6 +160,8 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+
 	</repositories>
 
 	<pluginRepositories>
