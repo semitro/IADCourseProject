@@ -3,26 +3,41 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
+    <h:head>
         <title>
-            BEAUTY
+            MuzzFight!
         </title>
-    </head>
+        <!--<script type="text/javascript" src="//vk.com/js/api/openapi.js?151"></script>-->
+        <h:outputStylesheet name="css/HelloPage.css"/>
+
+    </h:head>
+
+    <h:body>
+    <!--<body background="resources/img/guitarPillar.jpg" onload="VK.init({apiId: API_ID});">-->
+        <div class="floatToRight">
+                <H2>Добро пожаловать!</H2>
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Логин"/>
+                        <p:inputText label="Логин" value="#{helloPageController.username}"/>
+                        <p:outputLabel value="Пароль"/>
+                        <p:password label="Пароль" value="#{helloPageController.password}"/>
+                    </p:panelGrid>
+                    <p:panelGrid columns="1">
+                        <p:commandButton value="Войти" action="#{helloPageController.signIn()}"/>
+                        <p:commandButton value="Зарегистрироваться"/>
+                    </p:panelGrid>
+                </h:form>
+            </div>
+        <H1 class="bigLabelOnTop"> MuzzFights</H1>
+
+    <!-- VK Widget -->
+    <!--<div id="vk_auth"></div>-->
+    <!--<script type="text/javascript">-->
+        <!--VK.Widgets.Auth("vk_auth", {"authUrl":"/user/login"});-->
+    <!--</script>-->
 
 
-    <body background="resources/img/guitarPillar.jpg" >
-
-        <div id="hat">
-            <p>Muzz fight!</p>
-            <p> Хоп-хоп и в долгашен</p>
-            <p>Длинннноооое уописание</p>
-            <h:form>
-            <p:commandButton value="Ajax Submit" id="ajax" update="growl" styleClass="ui-priority-primary" />
-            </h:form>
-
-        </div>
-
-
-    </body>
+    </h:body>
 
 </html>

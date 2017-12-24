@@ -1,0 +1,28 @@
+.floatToRight{
+    float: right;
+    padding: 20px;
+    font-size: large;
+    margin: 10px;
+    margin-right: 80px;
+    border: 20px;
+    color: gold;
+
+}
+
+.floatToRight *{
+    background: transparent;
+}
+
+.bigLabelOnTop{
+    /*font-size: xx-large;*/
+    font-style: normal;
+    font-size: 54px;
+    margin-top: 40px;
+    margin-left: 27px;
+}
+
+body{
+    background-image: url("/resources/img/guitarPillar.jpg");
+    background-size: 100%;
+    font-family: Atavyros;
+}
