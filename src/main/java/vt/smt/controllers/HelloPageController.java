@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Scope(value = "session")
 @Join(path = "/", to = "/index.jsf")
@@ -35,8 +38,10 @@ public class HelloPageController {
     public void setPassword(String password) {
         this.password = password;
     }
+
     // It invoked when user presses Войти button
-    public void signIn(){
+    public String signIn(){
         System.out.println(username + "-" + password);
+            return "main";
     }
 }
