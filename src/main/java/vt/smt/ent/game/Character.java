@@ -1,24 +1,41 @@
 package vt.smt.ent.game;
 
+import com.sun.istack.internal.Nullable;
+import vt.smt.ent.net.Resource;
+import vt.smt.ent.net.Users;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
-
-import com.sun.istack.internal.Nullable;
-import vt.smt.ent.net.Resource;
 /**
  * It's what the player has
  */
 @Entity
 public class Character implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id")
     private Integer characterId;
+
+
+    public Users getOwnerId() {
+        return owner;
+    }
+
+    public void setOwnerId(Users ownerId) {
+        this.owner = ownerId;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="owner_id")
+    private Users owner;
+
     @Basic
     @Column(name = "name")
     private String name;
+
     @Basic
     @Column(name = "class")
     private String clazz;
@@ -46,15 +63,13 @@ public class Character implements Serializable {
     @Basic
     @Column(name = "adventuring_since")
     private Date adventuringSince;
-
     /// Двунаправленная связь с ассоциативной таблицей Character_Item
     @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
     private List<CharacterItem> items;
-    
+
     /// Двунаправленная связь с ассоциативной таблицей Character_Ability
     @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
     private List<CharacterAbility> abilities;
-    
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
@@ -68,7 +83,7 @@ public class Character implements Serializable {
     public void setItems(List<CharacterItem> items) {
         this.items = items;
     }
-    
+
     public List<CharacterAbility> getAbilities() {
         return abilities;
     }
@@ -80,11 +95,11 @@ public class Character implements Serializable {
     public Resource getImageResource() {
 		return imageResource;
 	}
-	
+
 	public void setImageResource(Resource imageResource) {
 		this.imageResource = imageResource;
 	}
-    ///
+
     public Integer getCharacterId() {
         return characterId;
     }
@@ -193,8 +208,9 @@ public class Character implements Serializable {
         if (experience != null ? !experience.equals(character.experience) : character.experience != null) return false;
         if (adventuringSince != null ? !adventuringSince.equals(character.adventuringSince) : character.adventuringSince != null)
             return false;
-
-        return true;
+        if (items != null ? !items.equals(character.items) : character.items != null) return false;
+        if (abilities != null ? !abilities.equals(character.abilities) : character.abilities != null) return false;
+        return imageResource != null ? imageResource.equals(character.imageResource) : character.imageResource == null;
     }
 
     @Override
@@ -210,6 +226,10 @@ public class Character implements Serializable {
         result = 31 * result + (rhythm != null ? rhythm.hashCode() : 0);
         result = 31 * result + (experience != null ? experience.hashCode() : 0);
         result = 31 * result + (adventuringSince != null ? adventuringSince.hashCode() : 0);
+        result = 31 * result + (items != null ? items.hashCode() : 0);
+        result = 31 * result + (abilities != null ? abilities.hashCode() : 0);
+        result = 31 * result + (imageResource != null ? imageResource.hashCode() : 0);
         return result;
     }
+
 }

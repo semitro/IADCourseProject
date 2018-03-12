@@ -3,6 +3,8 @@ package vt.smt.ent.net;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * Created by semitro on 03.12.17.
@@ -15,6 +17,17 @@ public class Users implements Serializable {
     private String idExternal;
     private byte[] password;
     private Integer accessLevel;
+
+    @OneToMany(mappedBy = "owner")
+    public List<vt.smt.ent.game.Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<vt.smt.ent.game.Character> characters) {
+        this.characters = characters;
+    }
+
+    private List<vt.smt.ent.game.Character> characters;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

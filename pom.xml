@@ -11,10 +11,16 @@
 	<name>MuzzFight</name>
 	<description>Course project</description>
 
+	<!--<parent>-->
+		<!--<groupId>org.springframework.boot</groupId>-->
+		<!--<artifactId>spring-boot-starter-parent</artifactId>-->
+		<!--<version>2.0.0.BUILD-SNAPSHOT</version>-->
+		<!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+	<!--</parent>-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<version>1.5.8.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,7 +28,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>
+		<!--<spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>-->
 	</properties>
 
 	<dependencies>
@@ -112,76 +118,72 @@
 			<!--<artifactId>spring-security-test</artifactId>-->
 			<!--<scope>test</scope>-->
 		<!--</dependency>-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
 	</dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+	<!--<dependencyManagement>-->
+		<!--<dependencies>-->
+			<!--<dependency>-->
+				<!--<groupId>org.springframework.cloud</groupId>-->
+				<!--<artifactId>spring-cloud-dependencies</artifactId>-->
+				<!--<version>${spring-cloud.version}</version>-->
+				<!--<type>pom</type>-->
+				<!--<scope>import</scope>-->
+			<!--</dependency>-->
+		<!--</dependencies>-->
+	<!--</dependencyManagement>-->
 
-	<build>
-		<!--This configuration is important because Rewrite isn't prepared to scan for configurations on non-classical web applications (i.e. on embedded applications like Spring Boot). So we need to tweak the build process a little to help Rewrite fulfill its purpose.-->
-		<!--https://auth0.com/blog/developing-jsf-applications-with-spring-boot/-->
-        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+	<!--<build>-->
+		<!--&lt;!&ndash;This configuration is important because Rewrite isn't prepared to scan for configurations on non-classical web applications (i.e. on embedded applications like Spring Boot). So we need to tweak the build process a little to help Rewrite fulfill its purpose.&ndash;&gt;-->
+		<!--&lt;!&ndash;https://auth0.com/blog/developing-jsf-applications-with-spring-boot/&ndash;&gt;-->
+        <!--<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>-->
 
-        <plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+        <!--<plugins>-->
+			<!--<plugin>-->
+				<!--<groupId>org.springframework.boot</groupId>-->
+				<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+			<!--</plugin>-->
+		<!--</plugins>-->
+	<!--</build>-->
 
-	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+	<!--<repositories>-->
+		<!--<repository>-->
+			<!--<id>spring-snapshots</id>-->
+			<!--<name>Spring Snapshots</name>-->
+			<!--<url>https://repo.spring.io/snapshot</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>true</enabled>-->
+			<!--</snapshots>-->
+		<!--</repository>-->
+		<!--<repository>-->
+			<!--<id>spring-milestones</id>-->
+			<!--<name>Spring Milestones</name>-->
+			<!--<url>https://repo.spring.io/milestone</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>false</enabled>-->
+			<!--</snapshots>-->
+		<!--</repository>-->
 
 
-	</repositories>
+	<!--</repositories>-->
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+	<!--<pluginRepositories>-->
+		<!--<pluginRepository>-->
+			<!--<id>spring-snapshots</id>-->
+			<!--<name>Spring Snapshots</name>-->
+			<!--<url>https://repo.spring.io/snapshot</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>true</enabled>-->
+			<!--</snapshots>-->
+		<!--</pluginRepository>-->
+		<!--<pluginRepository>-->
+			<!--<id>spring-milestones</id>-->
+			<!--<name>Spring Milestones</name>-->
+			<!--<url>https://repo.spring.io/milestone</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>false</enabled>-->
+			<!--</snapshots>-->
+		<!--</pluginRepository>-->
+	<!--</pluginRepositories>-->
 
 
 </project>
