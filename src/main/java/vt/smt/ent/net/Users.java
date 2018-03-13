@@ -20,6 +20,8 @@ public class Users implements Serializable {
     private byte[] password;
     private Integer accessLevel;
 
+    private List<GameCharacter> gameCharacters;
+
     @OneToMany(mappedBy = "owner")
     public List<GameCharacter> getGameCharacters() {
         return gameCharacters;
@@ -28,8 +30,6 @@ public class Users implements Serializable {
     public void setGameCharacters(List<GameCharacter> gameCharacters) {
         this.gameCharacters = gameCharacters;
     }
-
-    private List<GameCharacter> gameCharacters;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
