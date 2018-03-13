@@ -4,10 +4,8 @@ import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vt.smt.db.repositories.UsersRepository;
 import vt.smt.db.repositories.CharacterRepository;
-
-import vt.smt.ent.game.GameCharacter;
+import vt.smt.db.repositories.UsersRepository;
 import vt.smt.ent.net.Users;
 
 import javax.faces.bean.ManagedBean;
@@ -20,6 +18,7 @@ import javax.faces.context.FacesContext;
 @Join(path = "/", to = "/index.jsf")
 @Component(value = "helloPageController")
 @ELBeanName(value = "helloPageController")
+
 public class HelloPageController {
 
     @ManagedProperty("username")
@@ -56,15 +55,17 @@ public class HelloPageController {
         FacesContext context = FacesContext.getCurrentInstance();
 
         Users user = usersRepository.findByLogin(username);
+        System.out.println(user.getUserId() + " -id");
         if(user == null){
             System.err.println("Пользователь " + username + " не найден в базе");
         }
         else {
             try {
-                GameCharacter character = characterRepository.findAllGameCharactersByOwner(user).get(0);
-                context.getExternalContext().getSessionMap().put("GameCharacter", character);
+                System.out.print(new String());
+                context.getExternalContext().getSessionMap().put("GameCharacter", user.getGameCharacters().get(0));
             }
             catch (RuntimeException e){
+                e.printStackTrace();
                 System.err.println("У пользователя " + username + " нет персонажей!");
             }
         }

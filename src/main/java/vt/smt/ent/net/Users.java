@@ -22,7 +22,7 @@ public class Users implements Serializable {
 
     private List<GameCharacter> gameCharacters;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     public List<GameCharacter> getGameCharacters() {
         return gameCharacters;
     }
