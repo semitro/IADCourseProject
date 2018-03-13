@@ -1,8 +1,8 @@
 package vt.smt.db.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import vt.smt.ent.game.Character;
+import vt.smt.ent.game.GameCharacter;
 
-public interface CharacterRepository extends JpaRepository<Character, Integer> {
+public interface CharacterRepository extends JpaRepository<GameCharacter, Integer> {
 
 }

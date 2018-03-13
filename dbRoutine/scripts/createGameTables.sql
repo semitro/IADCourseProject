@@ -34,7 +34,7 @@ create table Character(
 	                references Resource(resource_id)  
 					on update cascade
 					on delete set default
-					default 0 -- id of character image
+					default 0 -- id of gameCharacter image
 );
 
 create table Item_Type(

@@ -12,7 +12,7 @@ import java.util.List;
  * It's what the player has
  */
 @Entity
-public class Character implements Serializable {
+public class GameCharacter implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,11 +64,11 @@ public class Character implements Serializable {
     @Column(name = "adventuring_since")
     private Date adventuringSince;
     /// Двунаправленная связь с ассоциативной таблицей Character_Item
-    @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="gameCharacter", fetch=FetchType.LAZY)
     private List<CharacterItem> items;
 
     /// Двунаправленная связь с ассоциативной таблицей Character_Ability
-    @OneToMany(mappedBy="character", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="gameCharacter", fetch=FetchType.LAZY)
     private List<CharacterAbility> abilities;
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
@@ -193,24 +193,24 @@ public class Character implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Character character = (Character) o;
+        GameCharacter gameCharacter = (GameCharacter) o;
 
-        if (characterId != null ? !characterId.equals(character.characterId) : character.characterId != null)
+        if (characterId != null ? !characterId.equals(gameCharacter.characterId) : gameCharacter.characterId != null)
             return false;
-        if (name != null ? !name.equals(character.name) : character.name != null) return false;
-        if (clazz != null ? !clazz.equals(character.clazz) : character.clazz != null) return false;
-        if (health != null ? !health.equals(character.health) : character.health != null) return false;
-        if (roses != null ? !roses.equals(character.roses) : character.roses != null) return false;
-        if (dRoses != null ? !dRoses.equals(character.dRoses) : character.dRoses != null) return false;
-        if (defence != null ? !defence.equals(character.defence) : character.defence != null) return false;
-        if (attack != null ? !attack.equals(character.attack) : character.attack != null) return false;
-        if (rhythm != null ? !rhythm.equals(character.rhythm) : character.rhythm != null) return false;
-        if (experience != null ? !experience.equals(character.experience) : character.experience != null) return false;
-        if (adventuringSince != null ? !adventuringSince.equals(character.adventuringSince) : character.adventuringSince != null)
+        if (name != null ? !name.equals(gameCharacter.name) : gameCharacter.name != null) return false;
+        if (clazz != null ? !clazz.equals(gameCharacter.clazz) : gameCharacter.clazz != null) return false;
+        if (health != null ? !health.equals(gameCharacter.health) : gameCharacter.health != null) return false;
+        if (roses != null ? !roses.equals(gameCharacter.roses) : gameCharacter.roses != null) return false;
+        if (dRoses != null ? !dRoses.equals(gameCharacter.dRoses) : gameCharacter.dRoses != null) return false;
+        if (defence != null ? !defence.equals(gameCharacter.defence) : gameCharacter.defence != null) return false;
+        if (attack != null ? !attack.equals(gameCharacter.attack) : gameCharacter.attack != null) return false;
+        if (rhythm != null ? !rhythm.equals(gameCharacter.rhythm) : gameCharacter.rhythm != null) return false;
+        if (experience != null ? !experience.equals(gameCharacter.experience) : gameCharacter.experience != null) return false;
+        if (adventuringSince != null ? !adventuringSince.equals(gameCharacter.adventuringSince) : gameCharacter.adventuringSince != null)
             return false;
-        if (items != null ? !items.equals(character.items) : character.items != null) return false;
-        if (abilities != null ? !abilities.equals(character.abilities) : character.abilities != null) return false;
-        return imageResource != null ? imageResource.equals(character.imageResource) : character.imageResource == null;
+        if (items != null ? !items.equals(gameCharacter.items) : gameCharacter.items != null) return false;
+        if (abilities != null ? !abilities.equals(gameCharacter.abilities) : gameCharacter.abilities != null) return false;
+        return imageResource != null ? imageResource.equals(gameCharacter.imageResource) : gameCharacter.imageResource == null;
     }
 
     @Override

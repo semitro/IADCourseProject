@@ -1,8 +1,5 @@
 package vt.smt.ent.game;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
-
 import javax.persistence.*;
 
 
@@ -27,7 +24,7 @@ public class CharacterItem {
     private Item item;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "character_id", nullable = false)
-    private Character character;
+    private GameCharacter gameCharacter;
 
     public Integer getCharacterItemId() {
         return characterItemId;
@@ -45,12 +42,12 @@ public class CharacterItem {
         this.item = item;
     }
 
-    public Character getCharacter() {
-        return character;
+    public GameCharacter getGameCharacter() {
+        return gameCharacter;
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
+    public void setGameCharacter(GameCharacter gameCharacter) {
+        this.gameCharacter = gameCharacter;
     }
 
     public Integer getNumber() {

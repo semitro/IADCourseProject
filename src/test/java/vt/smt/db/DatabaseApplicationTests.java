@@ -9,7 +9,7 @@
 //import vt.smt.ent.bands.Alias;
 //import vt.smt.ent.bands.Person;
 //import vt.smt.ent.bands.Place;
-//import vt.smt.ent.game.Character;
+//import vt.smt.ent.game.GameCharacter;
 //import vt.smt.ent.game.CharacterItem;
 //import vt.smt.ent.game.Item;
 //import vt.smt.ent.game.ItemType;
@@ -68,7 +68,7 @@
 //	@Autowired
 //	ItemTypeRepository itemTypeRepository;
 //
-//	vt.smt.ent.game.Character character;
+//	vt.smt.ent.game.GameCharacter character;
 //	vt.smt.ent.game.Item 	  item1;
 //	vt.smt.ent.game.Item 	  item2;
 //	vt.smt.ent.game.CharacterItem c_i_relation1;
@@ -76,7 +76,7 @@
 //
 //	@Test
 //	public void complexManyToManyRelation(){
-//		character = new Character();
+//		character = new GameCharacter();
 //		character.setName("ГРОЗА ВОРОВ");
 //		character.setdRoses(14);
 //		// because there are so many not-null constraints
@@ -95,14 +95,14 @@
 //		c_i_relation1 = new CharacterItem();
 //		c_i_relation1.setItem(item1);
 //		c_i_relation1.setSlot((short)1);
-//		c_i_relation1.setCharacter(character);
+//		c_i_relation1.setGameCharacter(character);
 //
 //		c_i_relation2 = new CharacterItem();
 //		c_i_relation2.setItem(item2);
 //		c_i_relation2.setSlot((short)2);
-//		c_i_relation2.setCharacter(character);
+//		c_i_relation2.setGameCharacter(character);
 //		c_i_relation1.setNumber(1);
-//		c_i_relation2.setCharacter(character);
+//		c_i_relation2.setGameCharacter(character);
 //		c_i_relation2.setNumber(24);
 //		item1.setPrice(12);
 //		item2.setPrice(244);

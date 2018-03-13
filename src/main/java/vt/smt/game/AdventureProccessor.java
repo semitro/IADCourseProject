@@ -1,6 +1,6 @@
 package vt.smt.game;
 
-import vt.smt.ent.game.Character;
+import vt.smt.ent.game.GameCharacter;
 
 import java.util.Random;
 
@@ -26,18 +26,18 @@ public class AdventureProccessor implements AdventureInterface {
         switch (random.nextInt(1)){
             case 0: {
                 int newRoses = random.nextInt(50);
-                character.setRoses(character.getRoses() + newRoses);
+                gameCharacter.setRoses(gameCharacter.getRoses() + newRoses);
                 return "Вы нашли" + newRoses + "роз!";
             }
 
             case 1:{
-                character.setName("репей");
+                gameCharacter.setName("репей");
                 return "Теперь вас зовут репей!";
             }
         }
         return "Ничего не произошло";
     }
-    private Character character;
+    private GameCharacter gameCharacter;
     private boolean inAdventure = false;
 //    private ScheduledExecutorService executor = new ScheduledThreadPoolExecutor(1);
 //    private int maxDelayToEvent = 100;

@@ -24,7 +24,7 @@ public class CharacterAbility implements Serializable {
 
 	@ManyToOne(optional = false )
 	@JoinColumn(name = "character_id", nullable = false)
-    private Character character;
+    private GameCharacter gameCharacter;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "ability_id")
@@ -47,12 +47,12 @@ public class CharacterAbility implements Serializable {
     }
 
 
-    public Character getCharacter() {
-        return character;
+    public GameCharacter getGameCharacter() {
+        return gameCharacter;
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
+    public void setGameCharacter(GameCharacter gameCharacter) {
+        this.gameCharacter = gameCharacter;
     }
 
     public Integer getPowerLevel() {

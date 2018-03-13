@@ -10,7 +10,7 @@
         <class>vt.smt.ent.theory.Article</class>
         <class>vt.smt.ent.bands.Author</class>
         <class>vt.smt.ent.bands.Band</class>
-        <class>vt.smt.ent.game.Character</class>
+        <class>vt.smt.ent.game.GameCharacter</class>
         <class>vt.smt.ent.game.CharacterAbility</class>
         <class>vt.smt.ent.game.CharacterItem</class>
         <class>vt.smt.ent.bands.Composition</class>

@@ -1,5 +1,7 @@
 package vt.smt.ent.net;
 
+import vt.smt.ent.game.GameCharacter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -19,15 +21,15 @@ public class Users implements Serializable {
     private Integer accessLevel;
 
     @OneToMany(mappedBy = "owner")
-    public List<vt.smt.ent.game.Character> getCharacters() {
-        return characters;
+    public List<GameCharacter> getGameCharacters() {
+        return gameCharacters;
     }
 
-    public void setCharacters(List<vt.smt.ent.game.Character> characters) {
-        this.characters = characters;
+    public void setGameCharacters(List<GameCharacter> gameCharacters) {
+        this.gameCharacters = gameCharacters;
     }
 
-    private List<vt.smt.ent.game.Character> characters;
+    private List<GameCharacter> gameCharacters;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
