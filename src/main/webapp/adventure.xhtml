@@ -15,12 +15,12 @@
         <div>
                 <h:form>
                     <p:panelGrid columns="4">
-                        <p:commandButton value="Персонаж" action="main"/>
+                        <p:commandButton value="Персонаж" action="main?faces-redirect=true"/>
                         <p:commandButton value="Битва"/>
                         <p:commandButton value="Путешествия" action="#{adventurePageController.test()}"/>
                         <p:commandButton value="Теория"/>
                     </p:panelGrid>
-                    <p:dataList/
+                    <p:dataList/>
                 </h:form>
         </div>
         <div>

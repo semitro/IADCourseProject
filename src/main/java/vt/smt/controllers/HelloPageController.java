@@ -49,6 +49,6 @@ public class HelloPageController {
         gc.setName("Vasua");
             context.getExternalContext().getSessionMap().put("GameCharacter",gc);
 //            return "userhome?faces-redirect=true";
-            return "main";
+            return "main?faces-redirect=true";
     }
 }
