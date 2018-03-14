@@ -21,8 +21,12 @@
                         <p:commandButton value="Теория"/>
                     </p:panelGrid>
             </h:form>
-        </div>
 
+        </div>
+        <p:panelGrid columns="2">
+            <p:outputLabel value="Здоровье: "/>
+            <p:outputLabel value="#{characterPageController.character.health.toString()}"/>
+        </p:panelGrid>
     </h:body>
 
 </html>
