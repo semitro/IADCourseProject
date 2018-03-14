@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 @Entity
 public class Resource implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resource_id")
@@ -21,7 +22,7 @@ public class Resource implements Serializable {
     private String type;
     @Basic
     @Column(name = "url")
-    private String url;
+    private String url; //ex: /img/defaultCharacter.png
 
     public Integer getResourceId() {
         return resourceId;
