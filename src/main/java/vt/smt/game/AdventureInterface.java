@@ -1,10 +1,11 @@
 package vt.smt.game;
-
+import vt.smt.ent.game.GameCharacter;
 /**
  * Интерфейс путешествия игрока
  * Возвращает строку-сообщение о том, что собственно произошло
  */
 
 public interface AdventureInterface {
-    String go() throws AlreadyInAdventureException;
+    AdventureEvent go() throws AlreadyInAdventureException;
+    void setTraveler(GameCharacter character);
 }

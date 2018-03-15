@@ -22,7 +22,7 @@ public class Resource implements Serializable {
     private String type;
     @Basic
     @Column(name = "url")
-    private String url; //ex: /img/defaultCharacter.png
+    private String url; //(
 
     public Integer getResourceId() {
         return resourceId;

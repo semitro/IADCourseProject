@@ -29,7 +29,6 @@ public class CharacterPageController {
     private StreamedContent characterImage;
 
     public CharacterPageController(){
-//        character.getImageResource().getUrl()
         // take it from the session
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");

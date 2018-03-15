@@ -17,14 +17,16 @@
                     <p:panelGrid columns="4">
                         <p:commandButton value="Персонаж" action="main?faces-redirect=true"/>
                         <p:commandButton value="Битва"/>
-                        <p:commandButton value="Путешествия" action="#{adventurePageController.test()}"/>
+                        <p:commandButton value="Путешествия"/>
                         <p:commandButton value="Теория"/>
                     </p:panelGrid>
-                    <p:dataList/>
+                    <p:dataList value="#{adventurePageController.events}" var="events" type="ordered">
+                        #{events.date}: #{events.info}
+                    </p:dataList>
                 </h:form>
         </div>
         <div>
-            <p:commandButton value="Пойти дальше"/>
+            <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"/>
         </div>
 
     </h:body>
