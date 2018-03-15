@@ -9,16 +9,20 @@ import java.util.Random;
 @Component
 public class AdventureProcessor implements AdventureInterface {
 
+    private Integer progress = 0;
+
+    private GameCharacter gameCharacter;
+    private boolean inAdventure = false;
+
     @Override
     public AdventureEvent go(){
         if(inAdventure) throw new AlreadyInAdventureException();
         inAdventure = true;
-
+        progress = (progress + 20) % 125;
         String ans = makeSomethingWithCharacter();
         inAdventure = false;
         return new AdventureEvent(ans, new Date(System.currentTimeMillis()));
     }
-
 
     // С одной стороны, лучше передавать игрока прямо в метод go:
     // не храним состояние, избегаем ошибок и бла-бла-бла;
@@ -29,7 +33,6 @@ public class AdventureProcessor implements AdventureInterface {
     public void setTraveler(GameCharacter character) {
         this.gameCharacter = character;
     }
-
     private String makeSomethingWithCharacter(){
         Random random = new Random(System.currentTimeMillis());
 
@@ -47,7 +50,13 @@ public class AdventureProcessor implements AdventureInterface {
         }
         return "Ничего не произошло";
     }
-    private GameCharacter gameCharacter;
-    private boolean inAdventure = false;
 
+    @Override
+    public Integer getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
 }

@@ -13,20 +13,30 @@
 
     <h:body>
         <div>
-                <h:form>
+                <h:form id="topForm">
                     <p:panelGrid columns="4">
                         <p:commandButton value="Персонаж" action="main?faces-redirect=true"/>
                         <p:commandButton value="Битва"/>
                         <p:commandButton value="Путешествия"/>
                         <p:commandButton value="Теория"/>
                     </p:panelGrid>
-                    <p:dataList value="#{adventurePageController.events}" var="events" type="ordered">
+                    <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
                         #{events.date}: #{events.info}
                     </p:dataList>
                 </h:form>
         </div>
         <div>
-            <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"/>
+            <h:form>
+            <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"
+                update=":topForm:eventList"/>
+            <!--<h3>Ajax ProgressBar</h3>-->
+            <!--<p:commandButton value="Start" type="button" onclick="PF('pbAjax').start();PF('startButton2').disable();" widgetVar="startButton2" />-->
+            <!--<br /><br />-->
+            <!--<p:progressBar widgetVar="pbAjax" ajax="true" value="#{adventurePageController.adventure.getProgress()}"-->
+                           <!--labelTemplate="{value}%" global="false">-->
+                <!--<p:ajax update=":topForm:eventList" oncomplete="PF('startButton2').enable()"/>-->
+            <!--</p:progressBar>-->
+            </h:form>
         </div>
 
     </h:body>

@@ -8,4 +8,6 @@ import vt.smt.ent.game.GameCharacter;
 public interface AdventureInterface {
     AdventureEvent go() throws AlreadyInAdventureException;
     void setTraveler(GameCharacter character);
+    // В процентах пройденное путешествие
+    Integer getProgress();
 }
