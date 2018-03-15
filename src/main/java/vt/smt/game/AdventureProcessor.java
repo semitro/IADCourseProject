@@ -18,7 +18,13 @@ public class AdventureProcessor implements AdventureInterface {
     public AdventureEvent go(){
         if(inAdventure) throw new AlreadyInAdventureException();
         inAdventure = true;
-        progress = (progress + 20) % 125;
+        while(progress < 100) {
+            progress += 10;
+            int x = 2;
+            for(int i = 0; i < 10000; i++){
+                x *= 2;
+            }
+        }
         String ans = makeSomethingWithCharacter();
         inAdventure = false;
         return new AdventureEvent(ans, new Date(System.currentTimeMillis()));
