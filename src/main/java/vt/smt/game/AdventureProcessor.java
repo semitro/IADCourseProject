@@ -23,7 +23,6 @@ public class AdventureProcessor implements AdventureInterface {
 
     @Override
     public AdventureEvent go(){
-        System.err.println("Traveling..");
         if(inAdventure) throw new AlreadyInAdventureException();
         inAdventure = true;
 
@@ -35,7 +34,6 @@ public class AdventureProcessor implements AdventureInterface {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.err.println("eot");
         return new AdventureEvent(ans, new Date(System.currentTimeMillis()));
     }
 

@@ -20,15 +20,19 @@
                         <p:commandButton value="Путешествия"/>
                         <p:commandButton value="Теория"/>
                     </p:panelGrid>
-                    <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
-                        #{events.date}: #{events.info}
-                    </p:dataList>
                 </h:form>
+        </div>
+        <div style="height: 200px; overflow: auto;">
+            <h:form id="dataListForm">
+                <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
+                        #{events.date}: #{events.info}
+                </p:dataList>
+            </h:form>
         </div>
         <div>
             <h:form>
             <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"
-                update=":topForm:eventList"/>
+                update=":dataListForm:eventList"/>
 
             </h:form>
         </div>

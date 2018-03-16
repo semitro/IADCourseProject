@@ -26,10 +26,12 @@
         <p:graphicImage value="#{characterPageController.characterImage}"/>
         <p:outputLabel value="#{characterPageController.character.name}"/>
         <p:panelGrid columns="1">
+            <p:outputLabel value="Опыт: #{characterPageController.character.experience}"/>
             <p:outputLabel value="Здоровье: #{characterPageController.character.health}"/>
+            <p:outputLabel value="Атака: #{characterPageController.character.attack}"/>
+            <p:outputLabel value="Ритм: #{characterPageController.character.rhythm}" />
             <p:outputLabel value="Розы: #{characterPageController.character.roses}"/>
             <p:outputLabel value="Алмазные розы: #{characterPageController.character.dRoses}"/>
-            <p:outputLabel value="Розы: #{characterPageController.character.experience}"/>
         </p:panelGrid>
     </h:body>
 
