@@ -28,15 +28,33 @@ public class CharacterPageController {
 
     private StreamedContent characterImage;
 
+//    private StreamedContent itemImage1;
+//    private StreamedContent itemImage2;
+//    private StreamedContent itemImage3;
+//    private StreamedContent itemImage4;
+//    private StreamedContent itemImage5;
+//    private StreamedContent itemImage6;
+
     public CharacterPageController(){
         // take it from the session
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");
+        loadImages();
 
-        characterImage = new DefaultStreamedContent(
-                    ResourceManager.loadResource(character.getImageResource()),"image/png");
     }
 
+    private void loadImages(){
+        characterImage = new DefaultStreamedContent(
+                ResourceManager.loadResource(character.getImageResource()),"image/png");
+//        for (CharacterItem item : character.getItems()) {
+//            switch (item.getSlot()){
+//                case 1:{
+//                    itemImage1 =
+//                    break;
+//                }
+//            }
+//        }
+    }
     public GameCharacter getCharacter() {
         return character;
     }
