@@ -27,16 +27,9 @@
         </div>
         <div>
             <h:form>
-            <!--<p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"-->
-                <!--update=":topForm:eventList"/> the plain old ajax-button-->
-            <p:commandButton value="Пойти дальше" type="button"
-                             onclick="#{adventurePageController.letsTravel()};PF('pbAjax').start();PF('travelButton').disable();"
-                             widgetVar="travelButton" />
-            <br /><br />
-            <p:progressBar widgetVar="pbAjax" ajax="true" value="#{adventurePageController.adventure.getProgress()}"
-                           labelTemplate="{value}%" global="false">
-                <p:ajax update=":topForm:eventList" oncomplete="PF('travelButton').enable()"/>
-            </p:progressBar>
+            <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"
+                update=":topForm:eventList"/>
+
             </h:form>
         </div>
 

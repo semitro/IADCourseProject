@@ -1,32 +1,41 @@
 package vt.smt.game;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import vt.smt.db.repositories.CharacterRepository;
 import vt.smt.ent.game.GameCharacter;
 
 import java.util.Date;
 import java.util.Random;
 
-@Component
+@Component("adventureProcessor")
+@Scope(value = "session")
 public class AdventureProcessor implements AdventureInterface {
 
-    private Integer progress = 0;
+//    private Integer progress = 0;
 
     private GameCharacter gameCharacter;
     private boolean inAdventure = false;
 
+    @Autowired
+    private CharacterRepository characterRepository;
+
     @Override
     public AdventureEvent go(){
+        System.err.println("Traveling..");
         if(inAdventure) throw new AlreadyInAdventureException();
         inAdventure = true;
-        while(progress < 100) {
-            progress += 10;
-            int x = 2;
-            for(int i = 0; i < 10000; i++){
-                x *= 2;
-            }
-        }
+
+
         String ans = makeSomethingWithCharacter();
         inAdventure = false;
+        try {
+            characterRepository.saveAndFlush(gameCharacter);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.err.println("eot");
         return new AdventureEvent(ans, new Date(System.currentTimeMillis()));
     }
 
@@ -42,7 +51,7 @@ public class AdventureProcessor implements AdventureInterface {
     private String makeSomethingWithCharacter(){
         Random random = new Random(System.currentTimeMillis());
 
-        switch (random.nextInt(2)){
+        switch (random.nextInt(5)){
             case 0: {
                 int newRoses = random.nextInt(50);
                 gameCharacter.setRoses(gameCharacter.getRoses() + newRoses);
@@ -53,16 +62,29 @@ public class AdventureProcessor implements AdventureInterface {
                 gameCharacter.setName("репей");
                 return "Теперь вас зовут репей!";
             }
+            case 2:{
+                int health = random.nextInt(10);
+                gameCharacter.setAttack(gameCharacter.getAttack() + 1);
+                gameCharacter.setHealth(gameCharacter.getHealth() - health >= 0?
+                        gameCharacter.getHealth() - health : 0);
+
+                return "Вы попали в драку и победили. Атака + 1, здоровье - " + health;
+            }
+            case 3:{
+                int exp = random.nextInt(32);
+                gameCharacter.setExperience(gameCharacter.getExperience() + exp);
+                return "Вы прошли не одну дорогу.. опыт + " + exp;
+            }
         }
         return "Ничего не произошло";
     }
 
-    @Override
-    public Integer getProgress() {
-        return progress;
-    }
-
-    public void setProgress(Integer progress) {
-        this.progress = progress;
-    }
+//    @Override
+//    public Integer getProgress() {
+//        return progress;
+//    }
+//
+//    public void setProgress(Integer progress) {
+//        this.progress = progress;
+//    }
 }

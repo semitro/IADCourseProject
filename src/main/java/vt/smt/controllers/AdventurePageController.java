@@ -2,17 +2,18 @@ package vt.smt.controllers;
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vt.smt.ent.game.GameCharacter;
-import vt.smt.game.*;
+import vt.smt.game.AdventureEvent;
 import vt.smt.game.AdventureInterface;
 import vt.smt.game.AlreadyInAdventureException;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import java.util.LinkedList;
 import java.util.List;
-
 
 
 @Join(path = "/", to = "/adventure.jsf")
@@ -21,12 +22,13 @@ import java.util.List;
 @ELBeanName(value = "adventurePageController")
 public class AdventurePageController {
 
-    //@Autowired -- why doesn't it work?! Fix me!
-    private AdventureInterface adventure = new AdventureProcessor();
+    @Autowired
+    private AdventureInterface adventure;
 
     private List<AdventureEvent> events = new LinkedList<>();
 
-    public AdventurePageController(){
+    @PostConstruct
+    public void loadCharacterFromSession(){
         adventure.setTraveler((GameCharacter)FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter"));
     }

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
@@ -14,7 +15,7 @@ import java.util.EnumSet;
 @SpringBootApplication
 //@Configuration
 //@SpringBootApplication
-//@ComponentScan("vt.smt")
+@ComponentScan("vt.smt")
 //@EnableJpaRepositories(basePackages="vt.smt.db.repositories")
 //@EnableTransactionManagement
 //@EntityScan(basePackages="vt.smt.ent")
