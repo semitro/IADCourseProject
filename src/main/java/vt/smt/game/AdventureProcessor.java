@@ -77,7 +77,7 @@ public class AdventureProcessor implements AdventureInterface {
                 gameCharacter.setRoses(gameCharacter.getRoses() - roses >= 0?
                         gameCharacter.getRoses() - roses : 0);
                 return "Вы попали в драку и проиграли. Навык защиты +1, здоровье -" + health +
-                        " " + roses + " отжато";
+                        " роз " + roses + " отжато";
             }
             case 4:{
                 int health = random.nextInt(120);
