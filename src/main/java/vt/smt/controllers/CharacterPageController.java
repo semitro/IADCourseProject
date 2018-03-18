@@ -1,6 +1,5 @@
 package vt.smt.controllers;
 
-import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -16,7 +15,6 @@ import javax.faces.context.FacesContext;
  */
 //@ManagedBean(eager = true)
 //@ApplicationScoped - не нужны
-@Join(path = "/", to = "/main.jsf")
 @Component(value = "characterPageController") // Indicates that an annotated class is a "component".
 // Such classes are considered as candidates for auto-detection
 // when using annotation-based configuration and classpath scanning. (spring)

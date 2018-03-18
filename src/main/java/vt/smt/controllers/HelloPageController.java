@@ -12,7 +12,6 @@ import javax.faces.context.FacesContext;
 
 //@ManagedBean
 //@SessionScoped
-@Join(path = "/", to = "/index.jsf")
 @Component(value = "helloPageController" )
 @Scope(value = "session")
 @ELBeanName(value = "helloPageController")

@@ -16,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-@Join(path = "/", to = "/adventure.jsf")
 @Component(value = "adventurePageController")
 @Scope(value = "session")
 @ELBeanName(value = "adventurePageController")
