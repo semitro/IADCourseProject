@@ -1,6 +1,5 @@
 package vt.smt.ent.game;
 
-import com.sun.istack.internal.Nullable;
 import vt.smt.ent.net.Resource;
 import vt.smt.ent.net.Users;
 
@@ -73,7 +72,6 @@ public class GameCharacter implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
-    @Nullable
     private Resource imageResource;
 
     public List<CharacterItem> getItems() {

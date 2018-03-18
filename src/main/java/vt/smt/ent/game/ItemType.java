@@ -3,7 +3,6 @@ package vt.smt.ent.game;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import com.sun.istack.internal.Nullable;
 import vt.smt.ent.net.Resource;
 
 /**
@@ -23,7 +22,6 @@ public class ItemType implements Serializable {
     
     @ManyToOne()
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id")
-    @Nullable
     private Resource imageResource;
     
     @ManyToOne(optional = true)
