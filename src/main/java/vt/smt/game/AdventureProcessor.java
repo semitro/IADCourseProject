@@ -49,11 +49,11 @@ public class AdventureProcessor implements AdventureInterface {
     private String makeSomethingWithCharacter(){
         Random random = new Random(System.currentTimeMillis());
 
-        switch (random.nextInt(5)){
+        switch (random.nextInt(6)){
             case 0: {
                 int newRoses = random.nextInt(50);
                 gameCharacter.setRoses(gameCharacter.getRoses() + newRoses);
-                return "Вы нашли" + newRoses + "роз!";
+                return "Вы нашли " + newRoses + " роз!";
             }
 
             case 1:{
@@ -69,6 +69,22 @@ public class AdventureProcessor implements AdventureInterface {
                 return "Вы попали в драку и победили. Атака + 1, здоровье - " + health;
             }
             case 3:{
+                int health = random.nextInt(10);
+                int roses  = random.nextInt(32);
+                gameCharacter.setDefence(gameCharacter.getDefence() + 1);
+                gameCharacter.setHealth(gameCharacter.getHealth() - health >= 0?
+                        gameCharacter.getHealth() - health : 0);
+                gameCharacter.setRoses(gameCharacter.getRoses() - roses >= 0?
+                        gameCharacter.getRoses() - roses : 0);
+                return "Вы попали в драку и проиграли. Навык защиты +1, здоровье -" + health +
+                        " " + roses + " отжато";
+            }
+            case 4:{
+                int health = random.nextInt(120);
+                gameCharacter.setHealth(gameCharacter.getHealth() + health);
+                return "Вы добрались до Бахчисарая. Здоровье +" + health;
+            }
+            case 5:{
                 int exp = random.nextInt(32);
                 gameCharacter.setExperience(gameCharacter.getExperience() + exp);
                 return "Вы прошли не одну дорогу.. опыт + " + exp;
