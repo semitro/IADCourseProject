@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vt.smt.db.repositories.ArticleRepository;
 import vt.smt.db.repositories.CourseRepository;
+import vt.smt.ent.theory.Article;
+import vt.smt.ent.theory.Course;
 
 import javax.annotation.PostConstruct;
 
@@ -30,17 +32,15 @@ public class TheoryPageController {
     public void initMenu(){
         menu = new DefaultMenuModel();
 
-        //First submenu
-        DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
-
-        DefaultMenuItem item = new DefaultMenuItem("External");
-        item.setUrl("http://www.primefaces.org");
-        item.setIcon("ui-icon-home");
-        firstSubmenu.addElement(item);
-
-        menu.addElement(firstSubmenu);
-
-
+        for (Course course : courseRepository.findAll()) {
+            DefaultSubMenu currentMenu = new DefaultSubMenu(course.getTitle());
+            for (Article article : course.getArticles()) {
+                DefaultMenuItem item = new DefaultMenuItem(article.getTitle());
+                item.setUrl("www.xui.com");
+                currentMenu.addElement(item);
+            }
+            menu.addElement(currentMenu);
+        }
     }
 
     public MenuModel getMenu() {

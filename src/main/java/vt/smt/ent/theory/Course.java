@@ -3,6 +3,7 @@ package vt.smt.ent.theory;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by semitro on 03.12.17.
@@ -12,6 +13,18 @@ public class Course implements Serializable {
     private Integer courseId;
     private String title;
     private String description;
+
+    private List<Article> articles;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
