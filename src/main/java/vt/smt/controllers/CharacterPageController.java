@@ -39,6 +39,7 @@ public class CharacterPageController {
                 getExternalContext().getSessionMap().get("GameCharacter");
         loadImages();
 
+
     }
 
     private void loadImages(){

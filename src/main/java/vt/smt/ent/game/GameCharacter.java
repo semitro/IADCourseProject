@@ -19,14 +19,6 @@ public class GameCharacter implements Serializable {
     private Integer characterId;
 
 
-    public Users getOwnerId() {
-        return owner;
-    }
-
-    public void setOwnerId(Users ownerId) {
-        this.owner = ownerId;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="owner_id")
     private Users owner;
@@ -38,6 +30,7 @@ public class GameCharacter implements Serializable {
     @Basic
     @Column(name = "class")
     private String clazz;
+
     @Basic
     @Column(name = "health")
     private Integer health;
@@ -65,15 +58,14 @@ public class GameCharacter implements Serializable {
     /// Двунаправленная связь с ассоциативной таблицей Character_Item
     @OneToMany(mappedBy="gameCharacter", fetch=FetchType.LAZY)
     private List<CharacterItem> items;
-
     /// Двунаправленная связь с ассоциативной таблицей Character_Ability
-    @OneToMany(mappedBy="gameCharacter", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="gameCharacter", fetch=FetchType.EAGER)
     private List<CharacterAbility> abilities;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
     private Resource imageResource;
-
     public List<CharacterItem> getItems() {
         return items;
     }
@@ -97,6 +89,14 @@ public class GameCharacter implements Serializable {
 	public void setImageResource(Resource imageResource) {
 		this.imageResource = imageResource;
 	}
+
+    public Users getOwnerId() {
+        return owner;
+    }
+
+    public void setOwnerId(Users ownerId) {
+        this.owner = ownerId;
+    }
 
     public Integer getCharacterId() {
         return characterId;

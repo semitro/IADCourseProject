@@ -13,3 +13,8 @@ values
 	(select script_id from script where name = 'emptyScript')),
 ('Выкрутить Gain', false, 'Выкрутить ручку Gain на всю!', 200, (select resource_id from resource where name = 'gainOverload'),
 	(select script_id from script where name = 'emptyScript'));
+
+insert into character_ability(ability_id, character_id, power_level)
+values((select ability_id from ability where name = 'Экстрим вокал'), (select character_id from game_character where name = 'репей'), 1),
+((select ability_id from ability where name = 'Кровь на рукаве'), (select character_id from game_character where name = 'репей'), 2),
+((select ability_id from ability where name = 'Выкрутить Gain'), (select character_id from game_character where name = 'репей'), 1);
