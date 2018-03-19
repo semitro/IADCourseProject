@@ -5,7 +5,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import vt.smt.ent.game.GameCharacter;
+import vt.smt.ent.game.*;
 import vt.smt.util.ResourceManager;
 
 import javax.faces.context.FacesContext;
@@ -24,17 +24,13 @@ public class CharacterPageController {
 
     private GameCharacter character;
 
-    private StreamedContent characterImage;
+    private CharacterAbility selectedAbility;
 
-//    private StreamedContent itemImage1;
-//    private StreamedContent itemImage2;
-//    private StreamedContent itemImage3;
-//    private StreamedContent itemImage4;
-//    private StreamedContent itemImage5;
-//    private StreamedContent itemImage6;
+    private StreamedContent characterImage;
 
     public CharacterPageController(){
         // take it from the session
+
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");
         loadImages();
@@ -54,10 +50,10 @@ public class CharacterPageController {
 //            }
 //        }
     }
+
     public GameCharacter getCharacter() {
         return character;
     }
-
     public StreamedContent getCharacterImage() {
         return characterImage;
     }
@@ -68,5 +64,13 @@ public class CharacterPageController {
 
     public void setCharacter(GameCharacter character) {
         this.character = character;
+    }
+
+    public CharacterAbility getSelectedAbility() {
+        return selectedAbility;
+    }
+
+    public void setSelectedAbility(CharacterAbility selectedAbility) {
+        this.selectedAbility = selectedAbility;
     }
 }

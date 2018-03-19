@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>
             Персонаж
@@ -36,28 +36,42 @@
     </h:body>
 
 
+    <h:form id="abil_form"> <!--навыки-->
     <p:repeat value="#{characterPageController.character.abilities}" var="char_ability">
         <h:panelGrid columns="2" style="width:100%" columnClasses="ability">
-            <!--<p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()">-->
-                <!--<f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />-->
+            <p:commandLink update=":abil_form:abilityDetail" oncomplete="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
+                <f:setPropertyActionListener value="#{char_ability}" target="#{characterPageController.selectedAbility}" />
                 <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
-                <p:outputLabel value="resources#{char_ability.ability.imageResource.url}" />
+            </p:commandLink>
 
-            <!--</p:commandLink>-->
+            <p:outputPanel style="floatToRight">
+                <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Навык" style="font-weight: bold"/>
+                <h:outputText value="#{char_ability.ability.name}" style="font-weight: bold"/>
+                <h:outputText value="Сила"/>
+                <h:outputText value="#{char_ability.powerLevel}"/>
 
-            <!--<p:outputPanel>-->
-                <!--<h:panelGrid columns="2" cellpadding="5">-->
-                    <!--<h:outputText value="Id:" />-->
-                    <!--<h:outputText value="#{car.id}" style="font-weight: bold"/>-->
-
-                    <!--<h:outputText value="Year:" />-->
-                    <!--<h:outputText value="#{car.year}" style="font-weight: bold"/>-->
-
-                    <!--<h:outputText value="Color:" />-->
-                    <!--<h:outputText value="#{car.color}" style="font-weight: bold"/>-->
-                <!--</h:panelGrid>-->
-            <!--</p:outputPanel>-->
+                </h:panelGrid>
+            </p:outputPanel>
         </h:panelGrid>
-        <!--<hr />-->
+        <hr />
     </p:repeat>
+    <!--Всплывающее инфо о навыках-->
+    <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="abilityDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty characterPageController.selectedAbility}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:graphicImage value="resources#{characterPageController.selectedAbility.ability.imageResource.url}"/>
+                </f:facet>
+                <h:outputText value="Навык" style="font-weight: bold"/>
+                <h:outputText value="#{characterPageController.selectedAbility.ability.name}" style="font-weight: bold"/>
+                <h:outputText value="Описание"/>
+                <h:outputText value="#{characterPageController.selectedAbility.ability.description}" style="font-weight: bold"/>
+                <h:outputText value="Сила"/>
+                <h:outputText value="#{characterPageController.selectedAbility.powerLevel}"/>
+
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+    </h:form>
 </html>
