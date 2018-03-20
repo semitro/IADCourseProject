@@ -14,7 +14,7 @@ create table Users(
 	access_level integer default 0 not null
 );
 
-create table Character(
+create table game_character(
 	character_id serial primary key,
 
 	name  varchar(80) default '',
@@ -31,7 +31,7 @@ create table Character(
 	adventuring_since date,
 
 	image_resource_id integer
-	                references Resource(resource_id)  
+	                references Resource(resource_id)
 					on update cascade
 					on delete set default
 					default 0 -- id of gameCharacter image
@@ -44,7 +44,7 @@ create table Item_Type(
 						on delete set null,
 	name varchar(80),
 	image_resource_id integer references Resource(resource_id)
-					   on update cascade 
+					   on update cascade
 					   on delete set default
 					   default 1 --# - предмет
 
@@ -64,7 +64,7 @@ create table Character_Item(
 	item_id      integer references Item(item_id)
 				on update cascade
 				on delete cascade, -- ??
-	character_id integer references Character(character_id)
+	character_id integer references game_character(character_id)
 				on update cascade
 				on delete cascade,
 	number integer default 1 not null,
@@ -85,7 +85,7 @@ create table Event(
 	reward_script_id integer references Script(script_id)
 						on update cascade
 						on delete set null
-); 
+);
 
 create table Ability(
 	ability_id serial primary key,
@@ -104,7 +104,7 @@ create table Ability(
 	passive 	   boolean default FALSE not null,
 
 	image_resource_id integer references Resource(resource_id)
-					   on update cascade 
+					   on update cascade
 					   on delete set default
 					   default 2 --# - навык
 
@@ -113,9 +113,9 @@ create table Ability(
 create table Character_Ability(
 	character_ability_id serial primary key,
 	ability_id integer references Ability(ability_id)
-					on update cascade 
+					on update cascade
 					on delete set null, -- ??
-	character_id integer references Character(character_id)
+	character_id integer references game_character(character_id)
 					on update cascade
 					on delete cascade,
 
