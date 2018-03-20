@@ -1,3 +1,4 @@
+\ir dropGameTables.sql
 \ir createMusTables.sql
 \ir createGameTables.sql
 \ir indexes.sql
