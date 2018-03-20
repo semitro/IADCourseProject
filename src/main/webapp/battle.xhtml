@@ -15,19 +15,19 @@
         <div>
                 <h:form id="topForm">
                     <p:panelGrid columns="4">
-                        <p:commandButton value="Персонаж" action="main?faces-redirect=true"/>
-                        <p:commandButton value="Битва"    action="battle?faces-redirect=true"/>
-                        <p:commandButton value="Путешествия"/>
-                        <p:commandButton value="Теория"   action="theory?faces-redirect=true"/>
+                        <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
+                        <p:commandButton value="Битва"/>
+                        <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
+                        <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
                     </p:panelGrid>
                 </h:form>
         </div>
         <div style="height: 200px; overflow: auto;">
-            <h:form id="dataListForm">
-                <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
-                        #{events.date}: #{events.info}
-                </p:dataList>
-            </h:form>
+            <!--<h:form id="dataListForm">-->
+                <!--<p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">-->
+                        <!--#{events.date}: #{events.info}-->
+                <!--</p:dataList>-->
+            <!--</h:form>-->
         </div>
         <div>
             <h:form>

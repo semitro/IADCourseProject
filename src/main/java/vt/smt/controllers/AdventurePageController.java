@@ -33,7 +33,7 @@ public class AdventurePageController {
 
     public void letsTravel(){
         try {
-            events.add(adventure.go());
+            events.add(0, adventure.go());
         }catch (AlreadyInAdventureException e){
 
         }
