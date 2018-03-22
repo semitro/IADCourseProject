@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>
             Персонаж
@@ -31,9 +31,37 @@
         </div>
         <div>
             <h:form>
-            <p:commandButton value="Show(24)" action="#{battlePageController.step('me.sayHello()')}"/>
+            <p:commandButton value="Обычная атака" action="#{battlePageController.step('me.normalAttack()')}"/>
             </h:form>
         </div>
+
+        <h:form id="abil_form"> <!--навыки-->
+            <p:repeat value="#{battlePageController.character.abilities}" var="char_ability">
+                <h:panelGrid columns="1" style="width:100%" columnClasses="ability">
+                    <p:commandLink update=":abil_form:abilityDetail" action="#{battlePageController.step()}" ondblclick="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
+                        <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
+                        <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
+                    </p:commandLink>
+                </h:panelGrid>
+            </p:repeat>
+            <!--Всплывающее инфо о навыках-->
+            <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                <p:outputPanel id="abilityDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty battlePageController.selectedAbility}" columnClasses="label,value">
+                        <f:facet name="header">
+                            <p:graphicImage value="resources#{battlePageController.selectedAbility.ability.imageResource.url}"/>
+                        </f:facet>
+                        <h:outputText value="Навык" style="font-weight: bold"/>
+                        <h:outputText value="#{battlePageController.selectedAbility.ability.name}" style="font-weight: bold"/>
+                        <h:outputText value="Описание"/>
+                        <h:outputText value="#{battlePageController.selectedAbility.ability.description}" style="font-weight: bold"/>
+                        <h:outputText value="Сила"/>
+                        <h:outputText value="#{battlePageController.selectedAbility.powerLevel}"/>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
 
     </h:body>
 
