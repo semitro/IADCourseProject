@@ -6,7 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by semitro on 21.03.18.
+ * Эта штука умеет парсить скрипт:
+ * выполнять по очереди все действия, разделённые ';'
+ * Вызывает методы переданного класса listOfActions.
+ * Можно передавать произвольное число параметров типа Integer или
+ * вызывать метод без аргументов
  */
 public class ScriptExecutor {
 
@@ -25,29 +29,47 @@ public class ScriptExecutor {
         }
     }
 
-    public void executeStatement(String statement){
+    public void executeStatement(String statement) throws IllegalArgumentException{
         String functionName = "";
         List<Integer> functionArgs = new LinkedList<>();
         //determine action
-        // Если действие (), оно особенное
-        functionName = statement.substring(
-                1+statement.indexOf('.'), statement.indexOf('('));
-
-        for (String arg : statement.substring(1+statement.indexOf('('), statement.indexOf(')')).split(",")) {
-            if(arg.equals(""))
-                break;
-            functionArgs.add(Integer.parseInt(arg.trim()));
+        try {
+            if(statement.indexOf('.') == -1)
+                functionName = statement.substring(0, statement.indexOf('('));
+                        else
+                functionName = statement.substring(
+                    1 + statement.indexOf('.'), statement.indexOf('('));
+        }catch (StringIndexOutOfBoundsException e){
+            throw  new IllegalArgumentException("Не могу выделить название метода в script: " + statement
+            + " '(' не обнаружена", e);
         }
 
+        try {
+            for (String arg : statement.substring(1 + statement.indexOf('('), statement.indexOf(')')).split(",")) {
+                if (arg.equals(""))
+                    break;
+                functionArgs.add(Integer.parseInt(arg.trim()));
+            }
+        }catch (StringIndexOutOfBoundsException e){
+            throw  new IllegalArgumentException("Не могу определить аргументы метода в script '"
+            + statement + "' ", e);
+        }
+
+        boolean thereIsSuchMethod = false;
         for (Method method : listOfActions.getClass().getMethods()) {
             if(method.getName().equals(functionName)){
+                thereIsSuchMethod = true;
                 try {
                     method.invoke(listOfActions, functionArgs.toArray());
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+                } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Не могу вызвать метод " + functionName
+                    + " в " + listOfActions.getClass() + " по скрипту '" + statement, e);
                 }
             }
         }
+        if(!thereIsSuchMethod)
+            throw new IllegalArgumentException("Метод " + functionName + " не найден. Script: '" +
+            statement + "' ");
     }
 
 

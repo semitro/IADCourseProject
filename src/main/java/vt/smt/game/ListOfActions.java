@@ -1,7 +1,9 @@
 package vt.smt.game;
 
 /**
- * Created by semitro on 22.03.18.
+ * Список действий, которые способен вызвать executor
+ * Для добавления новых достаточно создавать публичные методы
+ * с соответсвующими названиями
  */
 
 public abstract class ListOfActions {

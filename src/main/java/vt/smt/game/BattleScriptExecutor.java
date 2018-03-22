@@ -3,7 +3,8 @@ package vt.smt.game;
 import vt.smt.ent.game.GameCharacter;
 
 /**
- * Created by semitro on 22.03.18.
+ * Испольнитель специально для битвы.
+ * Поддерживает me.make() и enemy.do()
  */
 public class BattleScriptExecutor extends ScriptExecutor {
 
@@ -15,7 +16,10 @@ public class BattleScriptExecutor extends ScriptExecutor {
     }
 
     @Override
-    public void executeStatement(String statement) {
+    public void executeStatement(String statement) throws IllegalArgumentException {
+        if(statement.indexOf('.') == -1 ) throw new IllegalArgumentException("Не могу" +
+                "выполнить script '" + statement + "'. Отсутсвует '.'!");
+
         switch (statement.substring(0,statement.indexOf('.')).toUpperCase()){
             case "ME":
             case "SELF":
