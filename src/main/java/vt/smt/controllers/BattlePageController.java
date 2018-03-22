@@ -1,18 +1,19 @@
 package vt.smt.controllers;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vt.smt.ent.game.CharacterAbility;
 import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.Battle;
 import vt.smt.game.ActionResult;
+import vt.smt.db.repositories.CharacterRepository;
 
-
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import java.util.LinkedList;
 import java.util.List;
-
 
 @Component(value = "battlePageController")
 @Scope(value = "session")
@@ -26,9 +27,13 @@ public class BattlePageController {
     private CharacterAbility selectedAbility;
     private Battle battle;
 
+    @Autowired
+    private CharacterRepository characterRepository;
+
     private List<ActionResult> battleLog = new LinkedList<>();
 
-    public BattlePageController(){
+    @PostConstruct
+    public void BattlePageController(){
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");
         enemy = createEnemy();
@@ -49,11 +54,8 @@ public class BattlePageController {
     }
 
     private GameCharacter createEnemy(){
-        GameCharacter enemy = new GameCharacter();
-        enemy.setName("Опасный враг");
-        enemy.setHealth(12444);
-        enemy.setAttack(124);
-        enemy.setDefence(24);
+        System.err.println(characterRepository == null);
+        enemy = characterRepository.findByMemberOwnerIsNotNull().get(0);
 
         return enemy;
     }
@@ -69,10 +71,10 @@ public class BattlePageController {
     public GameCharacter getCharacter() {
         return character;
     }
+
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
-
     public List<ActionResult> getBattleLog() {
         return battleLog;
     }

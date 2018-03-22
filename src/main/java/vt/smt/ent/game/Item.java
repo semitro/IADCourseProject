@@ -1,13 +1,13 @@
 package vt.smt.ent.game;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Created by semitro on 03.12.17.
  */
 @Entity
-public class Item {
+public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")

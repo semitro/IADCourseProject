@@ -2,26 +2,20 @@ package vt.smt.ent.bands;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by semitro on 03.12.17.
  */
 @Entity
 public class Person implements Serializable {
+
     private Integer personId;
     private String name;
     private Date birthDate;
-
-//    @ManyToOne
-//    @JoinColumn(name="birth_place")
     private Place birthPlace;
-    //private Integer birthPlace;
     private Date deathDate;
-
-
     private Place deathPlace;
-//    private Integer deathPlace;
     private String sex;
 
     @Id
@@ -45,6 +39,7 @@ public class Person implements Serializable {
         this.name = name;
     }
 
+    @Temporal(TemporalType.DATE)
     @Basic
     @Column(name = "birth_date")
     public Date getBirthDate() {
@@ -55,16 +50,8 @@ public class Person implements Serializable {
         this.birthDate = birthDate;
     }
 
-//    @Basic
-//    @Column(name = "birth_place")
-//    public Integer getBirthPlace() {
-//        return birthPlace;
-//    }
-//
-//    public void setBirthPlace(Integer birthPlace) {
-//        this.birthPlace = birthPlace;
-//    }
 
+    @Temporal(TemporalType.DATE)
     @Basic
     @Column(name = "death_date")
     public Date getDeathDate() {
@@ -74,16 +61,6 @@ public class Person implements Serializable {
     public void setDeathDate(Date deathDate) {
         this.deathDate = deathDate;
     }
-
-//    @Basic
-//    @Column(name = "death_place")
-//    public Integer getDeathPlace() {
-//        return deathPlace;
-//    }
-//
-//    public void setDeathPlace(Integer deathPlace) {
-//        this.deathPlace = deathPlace;
-//    }
 
 
     @ManyToOne

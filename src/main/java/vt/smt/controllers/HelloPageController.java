@@ -9,12 +9,9 @@ import vt.smt.ent.net.Users;
 
 import javax.faces.context.FacesContext;
 
-//@ManagedBean
-//@SessionScoped
 @Component(value = "helloPageController" )
 @Scope(value = "session")
 @ELBeanName(value = "helloPageController")
-
 public class HelloPageController {
 
     //managedProperty - не нужно! Оно используется для DI с помощью JSF

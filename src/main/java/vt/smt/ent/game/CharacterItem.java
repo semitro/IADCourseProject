@@ -1,11 +1,12 @@
 package vt.smt.ent.game;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "character_item")
-public class CharacterItem {
+public class CharacterItem implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_item_id")

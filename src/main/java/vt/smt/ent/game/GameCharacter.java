@@ -2,6 +2,7 @@ package vt.smt.ent.game;
 
 import vt.smt.ent.net.Resource;
 import vt.smt.ent.net.Users;
+import vt.smt.ent.bands.Member;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,10 @@ public class GameCharacter implements Serializable {
     @JoinColumn(name="owner_id")
     private Users owner;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="member_owner_id" )  // Если персонаж относится к AI-музыканту
+    private Member memberOwner;
+
     @Basic
     @Column(name = "name")
     private String name;
@@ -34,9 +39,11 @@ public class GameCharacter implements Serializable {
     @Basic
     @Column(name = "health")
     private Integer health;
+
     @Basic
     @Column(name = "roses")
     private Integer roses;
+
     @Basic
     @Column(name = "d_roses")
     private Integer dRoses;
@@ -61,7 +68,6 @@ public class GameCharacter implements Serializable {
     /// Двунаправленная связь с ассоциативной таблицей Character_Ability
     @OneToMany(mappedBy="gameCharacter", fetch=FetchType.EAGER)
     private List<CharacterAbility> abilities;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
@@ -180,6 +186,22 @@ public class GameCharacter implements Serializable {
 
     public Date getAdventuringSince() {
         return adventuringSince;
+    }
+
+    public Member getMemberOwner() {
+        return memberOwner;
+    }
+
+    public void setMemberOwner(Member memberOwner) {
+        this.memberOwner = memberOwner;
+    }
+
+    public Users getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Users owner) {
+        this.owner = owner;
     }
 
     public void setAdventuringSince(Date adventuringSince) {

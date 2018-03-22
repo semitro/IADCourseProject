@@ -1,13 +1,14 @@
 package vt.smt.ent.bands;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by semitro on 03.12.17.
  */
 @Entity
 @IdClass(AuthorPK.class)
-public class Author {
+public class Author implements Serializable{
     private Integer compositionId;
     private Integer personId;
     private String ofWhat;

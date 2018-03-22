@@ -1,6 +1,7 @@
 package vt.smt.ent.bands;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by semitro on 03.12.17.
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "album_band")
 @IdClass(AlbumBandPK.class)
-public class AlbumBand {
+public class AlbumBand implements Serializable {
     private Integer albumId;
     private Integer bandId;
 
