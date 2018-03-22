@@ -54,9 +54,7 @@ public class BattlePageController {
     }
 
     private GameCharacter createEnemy(){
-        System.err.println(characterRepository == null);
         enemy = characterRepository.findByMemberOwnerIsNotNull().get(0);
-
         return enemy;
     }
 

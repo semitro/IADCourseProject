@@ -24,11 +24,11 @@ public class AdventureProcessor implements AdventureInterface {
     @Override
     public AdventureEvent go(){
         if(inAdventure) throw new AlreadyInAdventureException();
-        inAdventure = true;
+//        inAdventure = true;
 
 
         String ans = makeSomethingWithCharacter();
-        inAdventure = false;
+//        inAdventure = false;
         try {
             characterRepository.saveAndFlush(gameCharacter);
         }catch (Exception e){

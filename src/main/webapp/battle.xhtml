@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>
             Персонаж
@@ -25,7 +26,7 @@
         <div>
             <p:outputLabel value="#{battlePageController.character.name}"/>
             <p:outputLabel value=" vs "/>
-            <p:outputLabel value="who knows?"/>
+            <p:outputLabel value="#{battlePageController.enemy.name}"/>
         </div>
         <h:form id="paramsForm">
             <div>
@@ -40,15 +41,18 @@
             <!--</p:dataList>-->
             <!--</h:form>-->
         </div>
+        <div style="height: 112px; overflow: auto;">
+            <h:form id="dataListForm"> <!--лог битвы-->
+                <p:dataList id="eventList" value="#{battlePageController.battleLog}" var="events" type="ordered">
+                    #{events.message}
+                </p:dataList>
+            </h:form>
+        </div>
 
-        <h:form id="dataListForm"> <!--лог битвы-->
-            <p:dataList id="eventList" value="#{battlePageController.battleLog}" var="events" type="ordered">
-                #{events.message}
-            </p:dataList>
-        </h:form>
         <h:form id="abil_form"> <!--навыки-->
-            <p:repeat value="#{battlePageController.character.abilities}" var="char_ability">
-                <h:panelGrid columns="1" style="width:100%" columnClasses="ability">
+            <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
+                    style="text-align: center;" layout="block">
+                <h:panelGrid columns="4" style="width:100%" columnClasses="ability">
                     <p:commandLink update=":abil_form:abilityDetail dataListForm:eventList paramsForm"
                                    action="#{battlePageController.step()}"
                                    ondblclick="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
@@ -56,7 +60,7 @@
                         <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
                     </p:commandLink>
                 </h:panelGrid>
-            </p:repeat>
+            </p:ring>
             <!--Всплывающее инфо о навыках-->
             <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
                 <p:outputPanel id="abilityDetail" style="text-align:center;">

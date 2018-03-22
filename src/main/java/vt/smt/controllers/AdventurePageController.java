@@ -35,7 +35,7 @@ public class AdventurePageController {
         try {
             events.add(0, adventure.go());
         }catch (AlreadyInAdventureException e){
-
+            System.err.println("Already in an adventure!");
         }
     }
 
