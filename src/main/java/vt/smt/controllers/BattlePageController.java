@@ -1,13 +1,17 @@
 package vt.smt.controllers;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.Battle;
 
 import javax.faces.context.FacesContext;
-/**
- * Created by semitro on 20.03.18.
- */
 
+
+@Component(value = "battlePageController")
+@Scope(value = "session")
+@ELBeanName(value = "battlePageController")
 public class BattlePageController {
     private GameCharacter character;
 

@@ -13,8 +13,8 @@ public class Battle {
     private GameCharacter enemy;
 
 
-    private ScriptExecutor gamerAction = new ScriptExecutor();
-    private ScriptExecutor enemyAction = new ScriptExecutor();
+    private BattleScriptExecutor gamerAction;
+    private BattleScriptExecutor enemyAction;
 
     private Semaphore gamerStepLock;
     private Semaphore enemyStepLock;
@@ -31,6 +31,9 @@ public class Battle {
         turn = GAMERS.me;//= Math.random() > 0.25 ? GAMERS.me : GAMERS.enemy;
         gamerStepLock = new Semaphore(0);
         enemyStepLock = new Semaphore(0);
+
+        gamerAction = new BattleScriptExecutor(new GamerCharacterActions());
+        enemyAction = new BattleScriptExecutor(new GamerCharacterActions());
 
         gamerAction.setMe(gamer);
         gamerAction.setEnemy(enemy);
