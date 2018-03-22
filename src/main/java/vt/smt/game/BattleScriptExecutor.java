@@ -16,9 +16,11 @@ public class BattleScriptExecutor extends ScriptExecutor {
     }
 
     @Override
-    public void executeStatement(String statement) throws IllegalArgumentException {
+    public ActionResult executeStatement(String statement) throws IllegalArgumentException {
+
         if(statement.indexOf('.') == -1 ) throw new IllegalArgumentException("Не могу" +
                 "выполнить script '" + statement + "'. Отсутсвует '.'!");
+        ((GamerCharacterActions) getListOfActions()).setCaster(me);
 
         switch (statement.substring(0,statement.indexOf('.')).toUpperCase()){
             case "ME":
@@ -34,7 +36,7 @@ public class BattleScriptExecutor extends ScriptExecutor {
                 break;
             }
         }
-        super.executeStatement(statement);
+        return super.executeStatement(statement);
     }
     public GameCharacter getMe() {
         return me;

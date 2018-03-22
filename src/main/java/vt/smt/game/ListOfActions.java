@@ -8,6 +8,9 @@ package vt.smt.game;
 
 public abstract class ListOfActions {
 
+    // Нужно вести лог
+    private ActionResult result;
+
     public void sayHello(){
         System.err.println("Helllo");
     }
@@ -16,9 +19,16 @@ public abstract class ListOfActions {
         System.err.println(a);
     }
 
-
     void sum(Integer a, Integer b){
         System.err.println("sum");
         System.err.println(a + b);
+    }
+
+    public ActionResult getResult() {
+        return result;
+    }
+
+    public void setResult(ActionResult result) {
+        this.result = result;
     }
 }

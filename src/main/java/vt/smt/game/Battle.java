@@ -42,20 +42,22 @@ public class Battle {
         new Thread(this::start).start();
     }
 
-    public String step(String script, GAMERS who){
-        if(this.turn != who)
-            return "Сейчас Не Ваш ход";
+    public ActionResult step(String script, GAMERS who){
+        ActionResult result = new ActionResult();
+        if(this.turn != who) {
+            result.setMessage("Сейчас не Ваш ход!");
+            return result;
+        }
 
         if(who == GAMERS.me) {
-            gamerAction.executeStatement(script);
+            result = gamerAction.executeStatement(script);
             gamerStepLock.release();
-
         }
         else {
-            enemyAction.executeStatement(script);
+            result = enemyAction.executeStatement(script);
             enemyStepLock.release();
         }
-        return "Вы сходили:" + script;
+        return result;
     }
 
     private boolean itsOver(){

@@ -6,8 +6,12 @@ import org.springframework.stereotype.Component;
 import vt.smt.ent.game.CharacterAbility;
 import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.Battle;
+import vt.smt.game.ActionResult;
+
 
 import javax.faces.context.FacesContext;
+import java.util.LinkedList;
+import java.util.List;
 
 
 @Component(value = "battlePageController")
@@ -17,29 +21,43 @@ public class BattlePageController {
 
     private GameCharacter character;
 
-    private CharacterAbility selectedAbility;
+    private GameCharacter enemy;
 
+    private CharacterAbility selectedAbility;
     private Battle battle;
+
+    private List<ActionResult> battleLog = new LinkedList<>();
 
     public BattlePageController(){
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");
-        battle = new Battle(character, createEnemy());
+        enemy = createEnemy();
+        battle = new Battle(character, enemy);
 
     }
 
     public void step(){
         try {
-            battle.step(selectedAbility.getAbility().getAbilityScript().getScript(), Battle.GAMERS.me);
+            battleLog.add(battle.step(selectedAbility.getAbility().getAbilityScript().getScript(),
+                    Battle.GAMERS.me));
         }catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         battle.step("me.show(24)", Battle.GAMERS.enemy);
+
     }
 
     private GameCharacter createEnemy(){
-        return new GameCharacter();
+        GameCharacter enemy = new GameCharacter();
+        enemy.setName("Опасный враг");
+        enemy.setHealth(12444);
+        enemy.setAttack(124);
+        enemy.setDefence(24);
+
+        return enemy;
     }
+
     public CharacterAbility getSelectedAbility() {
         return selectedAbility;
     }
@@ -51,8 +69,25 @@ public class BattlePageController {
     public GameCharacter getCharacter() {
         return character;
     }
-
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
+
+    public List<ActionResult> getBattleLog() {
+        return battleLog;
+    }
+
+    public void setBattleLog(List<ActionResult> battleLog) {
+        this.battleLog = battleLog;
+    }
+
+    public GameCharacter getEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(GameCharacter enemy) {
+        this.enemy = enemy;
+    }
+
+
 }

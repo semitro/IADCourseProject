@@ -29,7 +29,9 @@ public class ScriptExecutor {
         }
     }
 
-    public void executeStatement(String statement) throws IllegalArgumentException{
+    public ActionResult executeStatement(String statement) throws IllegalArgumentException{
+        ActionResult result = new ActionResult();
+        getListOfActions().setResult(result);
         String functionName = "";
         List<Integer> functionArgs = new LinkedList<>();
         //determine action
@@ -70,6 +72,7 @@ public class ScriptExecutor {
         if(!thereIsSuchMethod)
             throw new IllegalArgumentException("Метод " + functionName + " не найден. Script: '" +
             statement + "' ");
+        return result;
     }
 
 
