@@ -1,10 +1,10 @@
 package vt.smt.ent.theory;
 
+import vt.smt.ent.Script;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import vt.smt.ent.Script;
 /**
  * Created by semitro on 03.12.17.
  */
@@ -24,10 +24,8 @@ public class Test implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="reward_script_id", referencedColumnName = "script_id")
     private Script script;
-//    private Integer rewardScriptId;
 
     @OneToMany(mappedBy ="test",fetch=FetchType.LAZY)
-//    @ElementCollection(targetClass = Integer.class)
     private List<Question> questions;
 
     public List<Question> getQuestions() {

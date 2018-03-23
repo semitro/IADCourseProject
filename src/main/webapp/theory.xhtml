@@ -28,9 +28,11 @@
         </div>
         <h:form>
             <p:menu model="#{theoryPageController.menu}" />
-            <p:outputLabel id="articleTitle"   value="#{theoryPageController.articleTitle}"/>
-            <p:outputLabel id="articleContent" value="#{theoryPageController.articleContent}"/>
         </h:form>
+        <p:outputLabel id="articleContent" styleClass="articleContent floatToRight"
+                       value="#{theoryPageController.articleContent}"/>
+        <p:outputLabel id="articleTitle"   styleClass="articleTitle floatToRight"
+                       value="#{theoryPageController.articleTitle}"/>
     </h:body>
 
 </html>
