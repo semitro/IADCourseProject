@@ -10,12 +10,18 @@ public class GamerCharacterActions extends ListOfActions {
         target.setHealth(target.getHealth() - damage);
     }
 
+
     public void regularAttack(){
-        hit(caster.getAttack() - target.getDefence());
-        getResult().addMessage("обычная атака: нанесено" +
-                (caster.getAttack() - target.getDefence()) + " урона ");
+        int damage = caster.getAttack() - target.getDefence();
+        damage = damage > 0 ? damage : 0;
+        hit(damage);
+        getResult().addMessage("обычная атака: нанесено " + damage + " урона ");
     }
 
+    // Хилка
+    public void groupOfBlood(){
+        caster.setHealth(caster.getHealth() + 100 + (int)(312*Math.random()));
+    }
     public GameCharacter getTarget() {
         return target;
     }

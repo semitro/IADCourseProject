@@ -52,6 +52,7 @@ public class BattlePageController {
         if(!battle.isItGoing()){
             return;
         }
+
         List<String> result = new LinkedList<>();
         try {
            result.addAll(battle.step(
@@ -63,11 +64,13 @@ public class BattlePageController {
         }
         Collections.reverse(result);
         battleLog.addAll(0, result);
+        if(!battle.isItGoing()) // if battle's over after gamer's step, enemy can't step
+            return;
         result.clear();
 
         result.addAll(0,battle.step("enemy.regularAttack()", Battle.GAMERS.enemy).getMessages());
         Collections.reverse(result); // Да, всё в такой странной последовательности
-        battleLog.addAll(result);
+        battleLog.addAll(0, result);
     }
 
     private GameCharacter createEnemy(){

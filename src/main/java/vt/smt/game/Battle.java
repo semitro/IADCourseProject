@@ -50,12 +50,12 @@ public class Battle {
 
         if(who == GAMERS.me) {
             result = gamerAction.executeStatement(script);
-            result.getMessages().replaceAll(s->gamer.getName() + s);
+            result.getMessages().replaceAll(s->gamer.getName() + " - " + s);
             turn = GAMERS.enemy;
         }
         else {
             result = enemyAction.executeStatement(script);
-            result.getMessages().replaceAll(s->enemy.getName() + s);
+            result.getMessages().replaceAll(s->enemy.getName() + " - " + s);
             turn = GAMERS.me;
         }
 
