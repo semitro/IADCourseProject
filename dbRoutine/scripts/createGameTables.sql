@@ -8,14 +8,17 @@ create table Resource(
 create table Users(
 	user_id     serial primary key,
 	login       varchar(80) unique not null,
-	auth_type   varchar(40)        not null,
+	auth_type   varchar(40) default 'password' not null,
 	id_external varchar(120), --#for data created by external auth-providers
-	password bytea not null,
+	--password bytea not null,
+	password bytea, -- for testing
 	access_level integer default 0 not null
 );
 
 create table game_character(
 	character_id serial primary key,
+	owner_id integer references Users(user_id) on update cascade on delete cascade,
+	member_owner_id integer,
 
 	name  varchar(80) default '',
 	class varchar(40) default 'plain',
@@ -150,7 +153,7 @@ create table Course(
 
 create table Article(
 	article_id serial primary key,
-	corse_id integer references Course(course_id)
+	course_id integer references Course(course_id)
 				on update cascade
 				on delete set null,
 	title varchar(80),
