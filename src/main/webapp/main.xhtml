@@ -27,20 +27,20 @@
                 </p:toolbar>
             </h:form>
         </div>
-        <div class="hcentered letThereBeSpace">
+        <div class="hcentered letThereBeSpace" style="max-width: 600px">
             <p:panelGrid columns="2">
                 <f:facet name="header">
                     <p:outputLabel styleClass="bolshe" value="#{characterPageController.character.name}"/>
                 </f:facet>
                 <p:graphicImage value="resources#{characterPageController.character.imageResource.url}"/>
-                <p:panelGrid columns="1" layout="grid">
+                <h:panelGrid columns="1">
                     <p:outputLabel value="Опыт: #{characterPageController.character.experience}"/>
                     <p:outputLabel value="Здоровье: #{characterPageController.character.health}"/>
                     <p:outputLabel value="Атака: #{characterPageController.character.attack}"/>
                     <p:outputLabel value="Ритм: #{characterPageController.character.rhythm}" />
                     <p:outputLabel value="Розы: #{characterPageController.character.roses}"/>
                     <p:outputLabel value="Алмазные розы: #{characterPageController.character.dRoses}"/>
-                </p:panelGrid>
+                </h:panelGrid>
             </p:panelGrid>        
         </div>
         <h:form id="abil_form"> <!--навыки-->
