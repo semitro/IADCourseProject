@@ -12,66 +12,80 @@
     </h:head>
 
     <h:body>
-        <div>
+        <div class="letThereBeSpace">
             <h:form>
-                    <p:panelGrid columns="4">
-                        <p:commandButton value="Персонаж"/>
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
                         <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
                         <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
                         <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
-                    </p:panelGrid>
+                    </f:facet>
+                    <f:facet name="right">
+                        <p:commandButton value="Выйти" action="index?faces-redirect=true"/>
+                    </f:facet>
+                </p:toolbar>
             </h:form>
-
         </div>
-        <p:graphicImage value="#{characterPageController.characterImage}"/>
-        <p:outputLabel value="#{characterPageController.character.name}"/>
-        <p:panelGrid columns="1">
-            <p:outputLabel value="Опыт: #{characterPageController.character.experience}"/>
-            <p:outputLabel value="Здоровье: #{characterPageController.character.health}"/>
-            <p:outputLabel value="Атака: #{characterPageController.character.attack}"/>
-            <p:outputLabel value="Ритм: #{characterPageController.character.rhythm}" />
-            <p:outputLabel value="Розы: #{characterPageController.character.roses}"/>
-            <p:outputLabel value="Алмазные розы: #{characterPageController.character.dRoses}"/>
-        </p:panelGrid>
+        <div class="hcentered">
+            <p:panelGrid columns="2">
+                <f:facet name="header">
+                    <p:outputLabel styleClass="bolshe" value="#{characterPageController.character.name}"/>
+                </f:facet>
+                <p:graphicImage value="#{characterPageController.characterImage}"/>
+                <p:panelGrid columns="1" layout="grid">
+                    <p:outputLabel value="Опыт: #{characterPageController.character.experience}"/>
+                    <p:outputLabel value="Здоровье: #{characterPageController.character.health}"/>
+                    <p:outputLabel value="Атака: #{characterPageController.character.attack}"/>
+                    <p:outputLabel value="Ритм: #{characterPageController.character.rhythm}" />
+                    <p:outputLabel value="Розы: #{characterPageController.character.roses}"/>
+                    <p:outputLabel value="Алмазные розы: #{characterPageController.character.dRoses}"/>
+                </p:panelGrid>
+            </p:panelGrid>        
+        </div>
+        <h:form id="abil_form"> <!--навыки-->
+            <p:panelGrid layout="grid" columns="2" style="width:100%" columnClasses="ability">
+                <f:facet name="header">
+                    <p:outputLabel value="Навыки" />
+                </f:facet>
+                <p:repeat value="#{characterPageController.character.abilities}" var="char_ability">
+                    <p:row>
+                        <h:panelGrid columns="2">
+                            <p:commandLink update=":abil_form:abilityDetail" oncomplete="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
+                                <f:setPropertyActionListener value="#{char_ability}" target="#{characterPageController.selectedAbility}" />
+                                <p:graphicImage width="100" value="resources#{char_ability.ability.imageResource.url}" />
+                            </p:commandLink>
+                            <h:panelGroup>
+                                <p:outputLabel value="#{char_ability.ability.name}" style="font-weight: bold"/>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Сила"/>
+                                    <p:outputLabel value="#{char_ability.powerLevel}"/>
+                                    <p:outputLabel value="Откат"/>
+                                    <p:outputLabel value="#{char_ability.ability.cooldown}"/>
+                                </h:panelGrid>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    <hr />
+                    </p:row>
+                </p:repeat>
+            </p:panelGrid>
+            <!--Всплывающее инфо о навыках-->
+            <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                <p:outputPanel id="abilityDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty characterPageController.selectedAbility}" columnClasses="label,value">
+                        <f:facet name="header">
+                            <p:graphicImage value="resources#{characterPageController.selectedAbility.ability.imageResource.url}"/>
+                        </f:facet>
+                        <p:outputLabel value="Навык" style="font-weight: bold"/>
+                        <p:outputLabel value="#{characterPageController.selectedAbility.ability.name}" style="font-weight: bold"/>
+                        <p:outputLabel value="Описание"/>
+                        <p:outputLabel value="#{characterPageController.selectedAbility.ability.description}" style="font-weight: bold"/>
+                        <p:outputLabel value="Сила"/>
+                        <p:outputLabel value="#{characterPageController.selectedAbility.powerLevel}"/>
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
     </h:body>
 
-
-    <h:form id="abil_form"> <!--навыки-->
-    <p:repeat value="#{characterPageController.character.abilities}" var="char_ability">
-        <h:panelGrid columns="2" style="width:100%" columnClasses="ability">
-            <p:commandLink update=":abil_form:abilityDetail" oncomplete="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
-                <f:setPropertyActionListener value="#{char_ability}" target="#{characterPageController.selectedAbility}" />
-                <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
-            </p:commandLink>
-
-            <p:outputPanel style="floatToRight">
-                <h:panelGrid columns="2" cellpadding="5">
-                <h:outputText value="Навык" style="font-weight: bold"/>
-                <h:outputText value="#{char_ability.ability.name}" style="font-weight: bold"/>
-                <h:outputText value="Сила"/>
-                <h:outputText value="#{char_ability.powerLevel}"/>
-
-                </h:panelGrid>
-            </p:outputPanel>
-        </h:panelGrid>
-        <hr />
-    </p:repeat>
-    <!--Всплывающее инфо о навыках-->
-    <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-        <p:outputPanel id="abilityDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty characterPageController.selectedAbility}" columnClasses="label,value">
-                <f:facet name="header">
-                    <p:graphicImage value="resources#{characterPageController.selectedAbility.ability.imageResource.url}"/>
-                </f:facet>
-                <h:outputText value="Навык" style="font-weight: bold"/>
-                <h:outputText value="#{characterPageController.selectedAbility.ability.name}" style="font-weight: bold"/>
-                <h:outputText value="Описание"/>
-                <h:outputText value="#{characterPageController.selectedAbility.ability.description}" style="font-weight: bold"/>
-                <h:outputText value="Сила"/>
-                <h:outputText value="#{characterPageController.selectedAbility.powerLevel}"/>
-
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
-    </h:form>
 </html>
