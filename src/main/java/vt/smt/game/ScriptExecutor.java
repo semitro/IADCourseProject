@@ -68,6 +68,7 @@ public class ScriptExecutor {
                     + " в " + listOfActions.getClass() + " по скрипту '" + statement, e);
                 }
             }
+            listOfActions.tick(1);
         }
         if(!thereIsSuchMethod)
             throw new IllegalArgumentException("Метод " + functionName + " не найден. Script: '" +

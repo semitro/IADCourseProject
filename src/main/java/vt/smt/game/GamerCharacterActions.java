@@ -20,8 +20,47 @@ public class GamerCharacterActions extends ListOfActions {
 
     // Хилка
     public void groupOfBlood(){
-        caster.setHealth(caster.getHealth() + 100 + (int)(312*Math.random()));
+        int health =  100 + (int)(312*Math.random());
+        caster.setHealth(caster.getHealth() + health);
+        getResult().addMessage("узнал свою группу крови. Здоровье " + health);
     }
+
+    // pure damage
+    public void extremeVocal(){
+        int damage = 100 + (int)(Math.random()*500);
+        hit(damage);
+        getResult().addMessage("поёт скримом. нанесено " + damage + " чистого урона");
+    }
+
+    // Увеличиваем атаку в два раза на три хода.
+    private int attackBufSteps = 0;
+    private int attackBufValue = 0;
+    public void gainOverload(){
+        if(attackBufSteps != 0) {
+            attackBufSteps = 3; // Если вызываем несколько раз, продлеваем эффект, но не усиливаем
+            getResult().addMessage("перегруз накручен на 3 хода");
+            return;
+        }
+        attackBufSteps = 3;
+        attackBufValue = caster.getAttack();
+        caster.setAttack(caster.getAttack() + attackBufValue);
+        getResult().addMessage("выкрутил ручку gain. На три хода атака x2");
+
+    }
+
+    // Каждый ход!
+    @Override
+    public void tick(Integer value) {
+        super.tick(value);
+
+        if(attackBufSteps == 1){
+            caster.setAttack(caster.getAttack() - attackBufValue);
+            getResult().getMessages().add("закончился эффект от выкручивания gain");
+            System.out.println("Атака уменьшена на" + attackBufValue);
+        }
+        if(attackBufSteps > 0) attackBufSteps--; // Не будет же в битве 2^32 ходов?
+    }
+
     public GameCharacter getTarget() {
         return target;
     }
