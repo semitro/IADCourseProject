@@ -1,22 +1,36 @@
 package vt.smt.game;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Результат выполнения скрипта.
  * Для ведения лога
  */
 public class ActionResult {
-    public String getMessage() {
-        return message;
+
+    private final List<String> messages = new LinkedList<>();
+
+    private boolean flag = false;
+
+    public List<String> getMessages() {
+        return messages;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void addMessage(String message) {
+        messages.add(message);
     }
-
-    private String message;
 
     @Override
     public String toString() {
-        return message;
+        return messages.toString();
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }

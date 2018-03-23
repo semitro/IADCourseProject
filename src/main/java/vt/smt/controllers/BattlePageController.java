@@ -4,11 +4,10 @@ import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import vt.smt.db.repositories.CharacterRepository;
 import vt.smt.ent.game.CharacterAbility;
 import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.Battle;
-import vt.smt.game.ActionResult;
-import vt.smt.db.repositories.CharacterRepository;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -30,7 +29,7 @@ public class BattlePageController {
     @Autowired
     private CharacterRepository characterRepository;
 
-    private List<ActionResult> battleLog = new LinkedList<>();
+    private List<String> battleLog = new LinkedList<>();
 
     @PostConstruct
     public void BattlePageController(){
@@ -43,13 +42,13 @@ public class BattlePageController {
 
     public void step(){
         try {
-            battleLog.add(battle.step(selectedAbility.getAbility().getAbilityScript().getScript(),
-                    Battle.GAMERS.me));
+            battleLog.addAll(battle.step(selectedAbility.getAbility().getAbilityScript().getScript(),
+                    Battle.GAMERS.me).getMessages());
         }catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
-        battle.step("me.show(24)", Battle.GAMERS.enemy);
+        battle.step("enemy.regularAttack()", Battle.GAMERS.enemy);
 
     }
 
@@ -73,11 +72,11 @@ public class BattlePageController {
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
-    public List<ActionResult> getBattleLog() {
+    public List<String> getBattleLog() {
         return battleLog;
     }
 
-    public void setBattleLog(List<ActionResult> battleLog) {
+    public void setBattleLog(List<String> battleLog) {
         this.battleLog = battleLog;
     }
 

@@ -44,7 +44,7 @@
         <div style="height: 112px; overflow: auto;">
             <h:form id="dataListForm"> <!--лог битвы-->
                 <p:dataList id="eventList" value="#{battlePageController.battleLog}" var="events" type="ordered">
-                    #{events.message}
+                    #{events}
                 </p:dataList>
             </h:form>
         </div>

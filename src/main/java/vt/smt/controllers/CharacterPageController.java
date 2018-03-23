@@ -26,41 +26,16 @@ public class CharacterPageController {
 
     private CharacterAbility selectedAbility;
 
-    private StreamedContent characterImage;
-
     public CharacterPageController(){
         // take it from the session
-
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");
-        loadImages();
-
-
-    }
-
-    private void loadImages(){
-        characterImage = new DefaultStreamedContent(
-                ResourceManager.loadResource(character.getImageResource()),"image/png");
-//        for (CharacterItem item : character.getItems()) {
-//            switch (item.getSlot()){
-//                case 1:{
-//                    itemImage1 =
-//                    break;
-//                }
-//            }
-//        }
     }
 
     public GameCharacter getCharacter() {
         return character;
     }
-    public StreamedContent getCharacterImage() {
-        return characterImage;
-    }
 
-    public void setCharacterImage(StreamedContent characterImage) {
-        this.characterImage = characterImage;
-    }
 
     public void setCharacter(GameCharacter character) {
         this.character = character;

@@ -12,7 +12,7 @@ public class GamerCharacterActions extends ListOfActions {
 
     public void regularAttack(){
         hit(caster.getAttack() - target.getDefence());
-        getResult().setMessage("Обычная атака: нанесено" +
+        getResult().addMessage("Обычная атака: нанесено" +
                 (caster.getAttack() - target.getDefence()) + " урона ");
     }
 
