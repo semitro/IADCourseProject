@@ -1,5 +1,7 @@
 \ir dropGameTables.sql
+\ir dropMusTables.sql
 \ir createMusTables.sql
+\ir insertMusicdata.sql
 \ir createGameTables.sql
 \ir indexes.sql
 \ir setUpCourses.sql
