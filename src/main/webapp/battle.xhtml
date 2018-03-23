@@ -23,7 +23,7 @@
                     </p:panelGrid>
                 </h:form>
         </div>
-        <div>
+        <div id="names">
             <p:outputLabel value="#{battlePageController.character.name}"/>
             <p:outputLabel value=" vs "/>
             <p:outputLabel value="#{battlePageController.enemy.name}"/>
@@ -35,25 +35,24 @@
             </div>
         </h:form>
         <div style="height: 200px; overflow: auto;">
-            <!--<h:form id="dataListForm">-->
-            <!--<p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">-->
-            <!--#{events.date}: #{events.info}-->
-            <!--</p:dataList>-->
-            <!--</h:form>-->
+
         </div>
         <div style="height: 112px; overflow: auto;">
             <h:form id="dataListForm"> <!--лог битвы-->
-                <p:dataList id="eventList" value="#{battlePageController.battleLog}" var="events" type="ordered">
+                <p:dataList id="eventList" value="#{battlePageController.battleLog}"
+                            var="events" type="ordered"
+                            rendered="#{!battlePageController.battleLog.isEmpty()}">
                     #{events}
                 </p:dataList>
             </h:form>
         </div>
 
         <h:form id="abil_form"> <!--навыки-->
+            <!--notify about the end of the battle-->
             <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
                     style="text-align: center;" layout="block">
                 <h:panelGrid columns="4" style="width:100%" columnClasses="ability">
-                    <p:commandLink update=":abil_form:abilityDetail dataListForm:eventList paramsForm"
+                    <p:commandLink update=":abil_form:abilityDetail dataListForm paramsForm"
                                    action="#{battlePageController.step()}"
                                    ondblclick="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
                         <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
@@ -74,10 +73,14 @@
                         <h:outputText value="#{battlePageController.selectedAbility.ability.description}" style="font-weight: bold"/>
                         <h:outputText value="Сила"/>
                         <h:outputText value="#{battlePageController.selectedAbility.powerLevel}"/>
-
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>
+        </h:form>
+
+        <h:form>
+            <h:commandButton value="В новый бой!"
+                             update="dataListForm names paramsForm" action="#{battlePageController.restart()}"/>
         </h:form>
 
     </h:body>

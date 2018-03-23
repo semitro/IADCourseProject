@@ -11,8 +11,10 @@ import vt.smt.game.Battle;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 @Component(value = "battlePageController")
 @Scope(value = "session")
@@ -24,6 +26,8 @@ public class BattlePageController {
     private GameCharacter enemy;
 
     private CharacterAbility selectedAbility;
+
+    @Autowired
     private Battle battle;
 
     @Autowired
@@ -35,25 +39,41 @@ public class BattlePageController {
     public void BattlePageController(){
         character = (GameCharacter) FacesContext.getCurrentInstance().
                 getExternalContext().getSessionMap().get("GameCharacter");
-        enemy = createEnemy();
-        battle = new Battle(character, enemy);
+        restart();
+    }
 
+    public void restart(){
+        battleLog.clear();
+        enemy = createEnemy();
+        battle.start(character, enemy);
     }
 
     public void step(){
+        if(!battle.isItGoing()){
+            return;
+        }
+        List<String> result = new LinkedList<>();
         try {
-            battleLog.addAll(battle.step(selectedAbility.getAbility().getAbilityScript().getScript(),
+           result.addAll(battle.step(
+                    selectedAbility.getAbility().getAbilityScript().getScript(),
                     Battle.GAMERS.me).getMessages());
         }catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
-        battle.step("enemy.regularAttack()", Battle.GAMERS.enemy);
+        Collections.reverse(result);
+        battleLog.addAll(0, result);
+        result.clear();
 
+        result.addAll(0,battle.step("enemy.regularAttack()", Battle.GAMERS.enemy).getMessages());
+        Collections.reverse(result); // Да, всё в такой странной последовательности
+        battleLog.addAll(result);
     }
 
     private GameCharacter createEnemy(){
-        enemy = characterRepository.findByMemberOwnerIsNotNull().get(0);
+        List<GameCharacter> possibleEnemies = characterRepository.findByMemberOwnerIsNotNull();
+        Random random = new Random(System.currentTimeMillis());
+        enemy = possibleEnemies.get(random.nextInt(possibleEnemies.size()));
         return enemy;
     }
 

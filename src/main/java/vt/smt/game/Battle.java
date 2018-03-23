@@ -1,5 +1,6 @@
 package vt.smt.game;
 
+import org.springframework.stereotype.Component;
 import vt.smt.ent.game.GameCharacter;
 
 import java.util.Scanner;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 /**
  * Created by semitro on 20.03.18.
  */
+@Component("battle")
 public class Battle {
 
     public enum GAMERS{
@@ -23,14 +25,16 @@ public class Battle {
 
     private boolean isItGoing;
 
-    public Battle(GameCharacter me, GameCharacter enemy){
-        this.gamer = me;
-        this.enemy = enemy;
-        turn = Math.random() > 0.25 ? GAMERS.me : GAMERS.enemy;
-        isItGoing = true;
+    public Battle(){
         gamerAction = new BattleScriptExecutor(new GamerCharacterActions());
         enemyAction = new BattleScriptExecutor(new GamerCharacterActions());
+    }
 
+    public void start(GameCharacter me, GameCharacter enemy){
+        this.gamer = me;
+        this.enemy = enemy;
+        turn = GAMERS.me;//Math.random() > 0.25 ? GAMERS.me : GAMERS.enemy;
+        isItGoing = true;
         gamerAction.setMe(gamer);
         gamerAction.setEnemy(enemy);
         enemyAction.setMe(enemy); // Для соперника соперник - игрок
@@ -46,10 +50,12 @@ public class Battle {
 
         if(who == GAMERS.me) {
             result = gamerAction.executeStatement(script);
+            result.getMessages().replaceAll(s->gamer.getName() + s);
             turn = GAMERS.enemy;
         }
         else {
             result = enemyAction.executeStatement(script);
+            result.getMessages().replaceAll(s->enemy.getName() + s);
             turn = GAMERS.me;
         }
 
@@ -69,8 +75,8 @@ public class Battle {
 
     public static void main(String[] args) {
         Battle.GAMERS t = Battle.GAMERS.me;
-        Battle b = new Battle(new GameCharacter(), new GameCharacter());
-
+        Battle b = new Battle();
+        b.start(new GameCharacter(), new GameCharacter());
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()){
             System.out.println(b.step(sc.nextLine(), t));
