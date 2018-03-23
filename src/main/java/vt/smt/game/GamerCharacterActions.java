@@ -22,7 +22,7 @@ public class GamerCharacterActions extends ListOfActions {
     public void groupOfBlood(){
         int health =  100 + (int)(312*Math.random());
         caster.setHealth(caster.getHealth() + health);
-        getResult().addMessage("узнал свою группу крови. Здоровье " + health);
+        getResult().addMessage("узнал свою группу крови. Здоровье + " + health);
     }
 
     // pure damage
@@ -37,11 +37,11 @@ public class GamerCharacterActions extends ListOfActions {
     private int attackBufValue = 0;
     public void gainOverload(){
         if(attackBufSteps != 0) {
-            attackBufSteps = 3; // Если вызываем несколько раз, продлеваем эффект, но не усиливаем
+            attackBufSteps = 4; // Если вызываем несколько раз, продлеваем эффект, но не усиливаем
             getResult().addMessage("перегруз накручен на 3 хода");
             return;
         }
-        attackBufSteps = 3;
+        attackBufSteps = 4;
         attackBufValue = caster.getAttack();
         caster.setAttack(caster.getAttack() + attackBufValue);
         getResult().addMessage("выкрутил ручку gain. На три хода атака x2");

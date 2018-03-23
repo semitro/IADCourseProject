@@ -68,11 +68,20 @@ public class BattlePageController {
             return;
         result.clear();
 
-        result.addAll(0,battle.step("enemy.regularAttack()", Battle.GAMERS.enemy).getMessages());
+        String enemyStep = getEnemyStep();
+        System.err.println("Соперник ходит cкриптом "  + enemyStep);
+        result.addAll(0,battle.step(enemyStep, Battle.GAMERS.enemy).getMessages());
         Collections.reverse(result); // Да, всё в такой странной последовательности
         battleLog.addAll(0, result);
     }
-
+    // It's AI!!
+    private String getEnemyStep(){
+        Random random = new Random();
+        if(enemy.getAbilities().size() == 0)
+            return "enemy.regularAttack()";
+        return enemy.getAbilities().get(random.nextInt(enemy.getAbilities().size()))
+                .getAbility().getAbilityScript().getScript();
+    }
     private GameCharacter createEnemy(){
         List<GameCharacter> possibleEnemies = characterRepository.findByMemberOwnerIsNotNull();
         Random random = new Random(System.currentTimeMillis());

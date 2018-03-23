@@ -68,8 +68,8 @@ public class ScriptExecutor {
                     + " в " + listOfActions.getClass() + " по скрипту '" + statement, e);
                 }
             }
-            listOfActions.tick(1);
         }
+        listOfActions.tick(1); // Удобно иметь метод, который вызывается каждый раз. 1 ничего не значит
         if(!thereIsSuchMethod)
             throw new IllegalArgumentException("Метод " + functionName + " не найден. Script: '" +
             statement + "' ");
