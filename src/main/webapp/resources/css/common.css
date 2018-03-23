@@ -35,5 +35,6 @@ body{
 }
 
 .hcentered {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
