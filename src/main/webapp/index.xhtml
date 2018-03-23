@@ -17,16 +17,16 @@
         <div class="floatToRight">
                 <H2>Добро пожаловать!</H2>
                 <h:form>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Логин"/>
-                        <p:inputText label="Логин" value="#{helloPageController.username}"/>
-                        <p:outputLabel value="Пароль"/>
-                        <p:password label="Пароль" value="#{helloPageController.password}"/>
-                    </p:panelGrid>
-                    <p:panelGrid columns="1">
-                        <p:commandButton value="Войти" action="#{helloPageController.signIn()}"/>
-                        <p:commandButton value="Зарегистрироваться"/>
-                    </p:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Логин" for="login_input"/>
+                        <p:inputText id="login_input" label="Логин" value="#{helloPageController.username}"/>
+                        <p:outputLabel value="Пароль" for="password_input"/>
+                        <p:password id="password_input" label="Пароль" value="#{helloPageController.password}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Вход" action="#{helloPageController.signIn()}"/>
+                        <p:commandButton value="Регистрация"/>
+                    </h:panelGrid>
                 </h:form>
             </div>
         <H1 class="bigLabelOnTop"> MuzzFights</H1>
