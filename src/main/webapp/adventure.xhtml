@@ -8,11 +8,11 @@
             Персонаж
         </title>
         <h:outputStylesheet name="css/common.css"/>
-
     </h:head>
 
     <h:body>
-        <div class="letThereBeSpace">
+        <div id="wrapper">
+        <nav class="letThereBeSpace">
             <h:form>
                 <p:toolbar>
                     <f:facet name="left">
@@ -26,8 +26,8 @@
                     </f:facet>
                 </p:toolbar>
             </h:form>
-        </div>
-        <div style="height: 200px; overflow: auto;">
+        </nav>
+        <div class="textLog" style="height: 200px;">
             <h:form id="dataListForm">
                 <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
                         #{events.date}: #{events.info}
@@ -40,7 +40,6 @@
                 update=":dataListForm:eventList"/>
             </h:form>
         </div>
-
+        </div>
     </h:body>
-
 </html>

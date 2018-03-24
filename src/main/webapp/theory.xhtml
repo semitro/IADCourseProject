@@ -11,7 +11,8 @@
     </h:head>
 
     <h:body>
-        <div class="letThereBeSpace">
+        <div id="wrapper">
+        <nav class="letThereBeSpace">
             <h:form>
                 <p:toolbar>
                     <f:facet name="left">
@@ -25,14 +26,24 @@
                     </f:facet>
                 </p:toolbar>
             </h:form>
-        </div>
+        </nav>
+        <aside>
         <h:form>
             <p:menu model="#{theoryPageController.menu}" />
         </h:form>
-        <p:outputLabel id="articleContent" styleClass="articleContent floatToRight"
+        </aside>
+        <section>
+            <p>
+                <p:outputLabel id="articleTitle"   styleClass="articleTitle"
+                              value="#{theoryPageController.articleTitle}"/>
+            </p>
+            <hr/>
+            <p>
+                <p:outputLabel id="articleContent" styleClass="articleContent"
                        value="#{theoryPageController.articleContent}"/>
-        <p:outputLabel id="articleTitle"   styleClass="articleTitle floatToRight"
-                       value="#{theoryPageController.articleTitle}"/>
+            </p>
+        </section>
+        </div>
     </h:body>
 
 </html>

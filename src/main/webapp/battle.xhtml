@@ -13,7 +13,8 @@
     </h:head>
 
     <h:body>
-        <div class="letThereBeSpace">
+        <div id="wrapper">
+        <nav class="letThereBeSpace">
             <h:form>
                 <p:toolbar>
                     <f:facet name="left">
@@ -27,7 +28,7 @@
                     </f:facet>
                 </p:toolbar>
             </h:form>
-        </div>
+        </nav>
         <div id="names">
             <p:outputLabel value="#{battlePageController.character.name}"/>
             <p:outputLabel value=" vs "/>
@@ -42,7 +43,7 @@
         <div style="height: 200px; overflow: auto;">
 
         </div>
-        <div style="height: 112px; overflow: auto;">
+        <div class="textLog" style="height: 112px;">
             <h:form id="dataListForm"> <!--лог битвы-->
                 <p:dataList id="eventList" value="#{battlePageController.battleLog}"
                             var="events" type="ordered"
@@ -57,37 +58,19 @@
             <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
                     style="text-align: center;" layout="block">
                 <h:panelGrid columns="4" style="width:100%" columnClasses="ability">
-                    <p:commandLink update=":abil_form:abilityDetail dataListForm paramsForm"
-                                   action="#{battlePageController.step()}"
-                                   ondblclick="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
+                    <p:commandLink update="dataListForm paramsForm"
+                                   action="#{battlePageController.step()}">
                         <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
                         <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
                     </p:commandLink>
                 </h:panelGrid>
             </p:ring>
-            <!--Всплывающее инфо о навыках-->
-            <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                <p:outputPanel id="abilityDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2" rendered="#{not empty battlePageController.selectedAbility}" columnClasses="label,value">
-                        <f:facet name="header">
-                            <p:graphicImage value="resources#{battlePageController.selectedAbility.ability.imageResource.url}"/>
-                        </f:facet>
-                        <h:outputText value="Навык" style="font-weight: bold"/>
-                        <h:outputText value="#{battlePageController.selectedAbility.ability.name}" style="font-weight: bold"/>
-                        <h:outputText value="Описание"/>
-                        <h:outputText value="#{battlePageController.selectedAbility.ability.description}" style="font-weight: bold"/>
-                        <h:outputText value="Сила"/>
-                        <h:outputText value="#{battlePageController.selectedAbility.powerLevel}"/>
-                    </p:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
         </h:form>
 
         <h:form>
             <h:commandButton value="В новый бой!"
                              update="dataListForm names paramsForm" action="#{battlePageController.restart()}"/>
         </h:form>
-
+        </div>
     </h:body>
-
 </html>

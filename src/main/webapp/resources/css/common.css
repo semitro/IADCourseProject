@@ -26,8 +26,31 @@ body{
     font-family: Atavyros;
 }
 
+#wrapper{
+    max-width: 980px;
+    margin: auto;
+}
+
+aside {
+    float: left;
+    width: 250px;
+}
+
+section {
+    margin-left: 280px;
+    padding-bottom: 50px;
+}
+
 .bolshe {
     font-weight: 1000;
+}
+
+.textLog{
+    overflow: auto;
+}
+/*Вид самого текста внутри лога*/
+.textLog *{
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
 }
 
 .letThereBeSpace {

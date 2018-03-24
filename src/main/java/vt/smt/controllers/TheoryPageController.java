@@ -24,8 +24,8 @@ public class TheoryPageController {
     private MenuModel menu;
 
     // Содержание активной статьи
-    private String articleContent = "";
-    private String articleTitle = "";
+    private String articleContent = "Помогает практике (:";
+    private String articleTitle = "Теория музыки";
 //    private Test articleTest;
     @Autowired
     private CourseRepository courseRepository;
@@ -33,7 +33,6 @@ public class TheoryPageController {
     @PostConstruct
     public void initMenu(){
         menu = new DefaultMenuModel();
-
         for (Course course : courseRepository.findAll()) {
             DefaultSubMenu currentMenu = new DefaultSubMenu(course.getTitle());
             for (Article article : course.getArticles()) {
