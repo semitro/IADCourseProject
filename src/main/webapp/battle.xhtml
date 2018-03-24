@@ -30,19 +30,18 @@
             </h:form>
         </nav>
         <div id="names">
-            <p:outputLabel value="#{battlePageController.character.name}"/>
-            <p:outputLabel value=" vs "/>
-            <p:outputLabel value="#{battlePageController.enemy.name}"/>
+            <p:outputLabel value="#{battlePageController.character.name}" styleClass="name"/>
+            <p:outputLabel value=" vs " styleClass="name"/>
+            <p:outputLabel value="#{battlePageController.enemy.name}" styleClass="name"/>
         </div>
         <h:form id="paramsForm">
             <div>
-                <p:outputLabel value="HP: #{battlePageController.character.health}"/>
-                <p:outputLabel value="HP: #{battlePageController.enemy.health}"/>
+                <p:outputLabel value="HP: #{battlePageController.character.health}"
+                               styleClass="hp" style="float: left"/>
+                <p:outputLabel value="HP: #{battlePageController.enemy.health}"
+                               styleClass="hp" style="float: right"/>
             </div>
         </h:form>
-        <div style="height: 200px; overflow: auto;">
-
-        </div>
         <div class="textLog" style="height: 112px;">
             <h:form id="dataListForm"> <!--лог битвы-->
                 <p:dataList id="eventList" value="#{battlePageController.battleLog}"
@@ -54,16 +53,15 @@
         </div>
 
         <h:form id="abil_form"> <!--навыки-->
-            <!--notify about the end of the battle-->
             <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
-                    style="text-align: center;" layout="block">
-                <h:panelGrid columns="4" style="width:100%" columnClasses="ability">
+                    styleClass="image-ring" easing="easeInOutBack">
+                <!--<h:panelGrid columns="1" style="width:100%" columnClasses="ability">-->
                     <p:commandLink update="dataListForm paramsForm"
                                    action="#{battlePageController.step()}">
                         <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
                         <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
                     </p:commandLink>
-                </h:panelGrid>
+                <!--</h:panelGrid>-->
             </p:ring>
         </h:form>
 

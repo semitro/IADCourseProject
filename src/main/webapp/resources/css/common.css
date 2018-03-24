@@ -53,6 +53,23 @@ section {
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
 }
 
+/* names of the battlers */
+#names{
+    font-size: larger;
+    font-family: sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.name{
+    font-size: xx-large;
+    font-family: Norasi;
+}
+
+.hp{
+    color: red;
+}
 .letThereBeSpace {
     margin-bottom: 1.5em;
 }
