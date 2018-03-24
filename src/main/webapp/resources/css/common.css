@@ -1,16 +1,27 @@
-.floatToRight{
-    float: right;
+.floatToRight .floatToLeft {
     padding: 20px;
     font-size: large;
     margin: 10px;
-    margin-right: 80px;
     border: 20px;
     color: gold;
+}
 
+.floatToRight {    
+    float: right;
+    margin-right: 80px;
+}
+
+.floatToLeft {
+    float: left;
+    margin-left: 80px;
 }
 
 .floatToRight *{
     background: transparent;
+}
+
+.clearLeft {
+    clear: left;
 }
 
 .bigLabelOnTop{
