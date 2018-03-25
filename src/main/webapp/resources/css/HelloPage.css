@@ -1,16 +1,6 @@
-.floatToRight{
-    float: right;
-    padding: 20px;
-    font-size: large;
-    margin: 10px;
-    margin-right: 80px;
-    border: 20px;
-    color: gold;
-
-}
-
-.floatToRight *{
-    background: transparent;
+body {
+    background-image: url("/resources/img/guitarPillar.jpg");
+    background-color: palegoldenrod;
 }
 
 .bigLabelOnTop{
@@ -21,9 +11,17 @@
     margin-left: 27px;
 }
 
-body{
-    background-image: url("/resources/img/guitarPillar.jpg");
-    background: palegoldenrod;
-    background-size: 100%;
-    font-family: Atavyros;
+.loginForm *{
+    background: transparent;
+}
+
+@media(min-width: 758px) {
+    .loginForm {    
+        margin-right: 80px;
+    }
+}
+@media(max-width: 757px) {
+    .loginForm {
+        margin-right: 1em;
+    }
 }

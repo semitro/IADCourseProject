@@ -1,5 +1,8 @@
 package vt.smt.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,6 +34,8 @@ public class AdventurePageController {
     private GameCharacter character;
 
     private List<AdventureEvent> events = new LinkedList<>();
+    
+    private DateFormat dateFormat = new SimpleDateFormat("dd.MM hh:mm:ss");
 
     private Authentication authentication; // session
     @PostConstruct
@@ -45,10 +50,17 @@ public class AdventurePageController {
             character = gameCharacterRepository.findByName(authentication.getName());
             adventure.setTraveler(character);
             events.add(0, adventure.go());
+            if (events.size()>100) {
+                events.subList(80, events.size()).clear();
+            }
             gameCharacterRepository.save(character);
         }catch (AlreadyInAdventureException e){
             System.err.println("Already in an adventure!");
         }
+    }
+    
+    public String formatDate(Date date) {
+        return dateFormat.format(date);
     }
 
     public AdventureInterface getAdventure() {
