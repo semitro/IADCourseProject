@@ -15,12 +15,12 @@ body {
     background: transparent;
 }
 
-@media(min-width: 700px) {
+@media(min-width: 758px) {
     .loginForm {    
         margin-right: 80px;
     }
 }
-@media(max-width: 699px) {
+@media(max-width: 757px) {
     .loginForm {
         margin-right: 1em;
     }
