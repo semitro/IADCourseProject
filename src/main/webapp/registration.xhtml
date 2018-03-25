@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>
+            MuzzFight!
+        </title>
+        <!--<script type="text/javascript" src="//vk.com/js/api/openapi.js?151"></script>-->
+        <h:outputStylesheet name="css/HelloPage.css"/>
+
+    </h:head>
+
+    <h:body>
+    <!--<body background="resources/img/guitarPillar.jpg" onload="VK.init({apiId: API_ID});">-->
+        <div class="floatToRight">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Логин" for="login_input"/>
+                        <p:inputText id="login_input" label="Логин" value="#{regitsterageController.username}"/>
+                        <p:outputLabel value="Пароль" for="password_input"/>
+                        <p:password id="password_input" label="Пароль" value="#{registerPageController.password}"/>
+                        <p:password id="password_input_repeat" label="Подтвердите Пароль"
+                                    value="#{registerPageController.password}"/>
+                        <p:inputText id="email" label="email"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Регистрация" action="#{registerPageController.signIn()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+        <H1 class="bigLabelOnTop"> MuzzFights</H1>
+
+
+    </h:body>
+
+</html>

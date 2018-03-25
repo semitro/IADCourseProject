@@ -116,4 +116,16 @@ public class Users implements Serializable {
         result = 31 * result + (accessLevel != null ? accessLevel.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", authType='" + authType + '\'' +
+                ", idExternal='" + idExternal + '\'' +
+                ", password='" + password + '\'' +
+                ", accessLevel=" + accessLevel +
+                '}';
+    }
 }
