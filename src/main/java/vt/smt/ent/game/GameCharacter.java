@@ -160,6 +160,18 @@ public class GameCharacter implements Serializable {
         this.defence = defence;
     }
 
+    @Override
+    public String toString() {
+        return "GameCharacter{" +
+                "characterId=" + characterId +
+                ", name='" + name + '\'' +
+                ", rhythm=" + rhythm +
+                ", experience=" + experience +
+                ", adventuringSince=" + adventuringSince +
+                ", imageResource=" + imageResource +
+                '}';
+    }
+
     public Integer getAttack() {
         return attack;
     }

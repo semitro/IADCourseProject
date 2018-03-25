@@ -14,6 +14,21 @@ import java.util.List;
 public class Users implements Serializable {
     private Integer userId;
     private String login;
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", authType='" + authType + '\'' +
+                ", idExternal='" + idExternal + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", accessLevel=" + accessLevel +
+                ", gameCharacters=" + gameCharacters +
+                '}';
+    }
+
     private String authType;
     private String idExternal;
     private String password;
@@ -129,15 +144,4 @@ public class Users implements Serializable {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "userId=" + userId +
-                ", login='" + login + '\'' +
-                ", authType='" + authType + '\'' +
-                ", idExternal='" + idExternal + '\'' +
-                ", password='" + password + '\'' +
-                ", accessLevel=" + accessLevel +
-                '}';
-    }
 }

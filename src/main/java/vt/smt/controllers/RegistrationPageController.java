@@ -29,6 +29,9 @@ public class RegistrationPageController {
     @Autowired
     private CharacterRepository characterRepository;
 
+    @Autowired
+    private ResourceRepository resourceRepository;
+
     public String signUp(){
         if(usersRepository.findByLogin(username) != null){
             FacesContext.getCurrentInstance().addMessage(null,
@@ -54,10 +57,15 @@ public class RegistrationPageController {
         character.setRoses(0);
         character.setdRoses(0);
         character.setRhythm(1);
-
-        characterRepository.save(character);
-
+        List<GameCharacter> gameCharacters = new LinkedList<>();
+        gameCharacters.add(character);
+        user.setGameCharacters(gameCharacters);
+        character.setOwner(user);
+        character.setClazz("plain");
+        // we need to have resource with name "default character"
+        character.setImageResource(resourceRepository.findByName("default character"));
         usersRepository.save(user);
+        characterRepository.save(character);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Успех",
                         "Вы зарегестрированы"));
@@ -67,13 +75,13 @@ public class RegistrationPageController {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -100,5 +108,13 @@ public class RegistrationPageController {
 
     public void setCharacterRepository(CharacterRepository characterRepository) {
         this.characterRepository = characterRepository;
+    }
+
+    public ResourceRepository getResourceRepository() {
+        return resourceRepository;
+    }
+
+    public void setResourceRepository(ResourceRepository resourceRepository) {
+        this.resourceRepository = resourceRepository;
     }
 }

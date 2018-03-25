@@ -38,6 +38,7 @@ public class CharacterPageController {
         // take it from the session
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
+        usersRepository.findAll().forEach(System.out::println);
         character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
     }
 
