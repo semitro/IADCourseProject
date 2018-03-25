@@ -60,7 +60,7 @@ public class TheoryPageController {
                 item.setParam("articleContent", article.getContent());
                 item.setParam("articleTitle", article.getTitle());
 
-                item.setUpdate("test:examButton");
+                item.setUpdate("examButton");
 
                 currentMenu.addElement(item);
             }
