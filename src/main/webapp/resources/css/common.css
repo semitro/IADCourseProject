@@ -1,6 +1,6 @@
 body{
     background-size: 100%;
-    font-family: Atavyros;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .floatToRight .floatToLeft {
@@ -8,7 +8,6 @@ body{
     font-size: large;
     margin: 10px;
     border: 20px;
-    color: gold;
 }
 
 .floatToRight {    
@@ -35,6 +34,7 @@ body{
     font-size: 54px;
     margin-top: 40px;
     margin-left: 27px;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 #wrapper{
