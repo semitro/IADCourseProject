@@ -1,3 +1,8 @@
+body{
+    background-size: 100%;
+    font-family: Atavyros;
+}
+
 .floatToRight .floatToLeft {
     padding: 20px;
     font-size: large;
@@ -30,11 +35,6 @@
     font-size: 54px;
     margin-top: 40px;
     margin-left: 27px;
-}
-
-body{
-    background-size: 100%;
-    font-family: Atavyros;
 }
 
 #wrapper{
