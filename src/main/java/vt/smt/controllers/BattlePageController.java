@@ -107,9 +107,10 @@ public class BattlePageController {
 
     private void showResult(String msg, int exp, int attack, int roses, int defence){
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(msg,
-                "опыт + " + exp + "\nатака + " + attack  +
-                        "\nзащита + " + defence + "\nрозы + " + roses));
+        String stats = "опыт + " + exp + "\nатака + " + attack  +
+                "\nзащита + " + defence + "\nрозы + " + roses;
+        context.addMessage(null, new FacesMessage(msg,stats));
+        battleLog.add(0, stats);
 
     }
 

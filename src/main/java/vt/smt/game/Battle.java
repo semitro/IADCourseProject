@@ -65,8 +65,6 @@ public class Battle {
         if(itsOver()) {
             isItGoing = false;
             // flag says battle's over
-            result.addMessage(enemy.getHealth() <= 0?
-            "Вы победили!": "Вы проиграли");
             if(enemy.getHealth() <= 0){
                 result.addMessage("Вы победили! :)");
                 winner = GAMERS.me;
