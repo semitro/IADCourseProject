@@ -31,18 +31,22 @@
                     </f:facet>
                 </p:toolbar>
             </nav>
-            <div class="textLog" style="height: 200px;">
-                <h:form id="dataListForm">
-                    <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
-                            #{events.date}: #{events.info}
-                    </p:dataList>
-                </h:form>
-            </div>
-            <div>
-                <h:form>
-                <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"
-                    update=":dataListForm:eventList"/>
-                </h:form>
+            <div style="background-color: white;">
+                <div class="textLog letThereBeSpace">
+                    <h:form id="dataListForm">
+                        <p:dataList id="eventList" value="#{adventurePageController.events}"
+                                    var="events" emptyMessage="Начни путешествие сейчас!">
+                            #{adventurePageController.formatDate(events.date)}: #{events.info}
+                        </p:dataList>
+                    </h:form>
+                </div>
+                <div>
+                    <h:form>
+                        <p:commandButton value="Пойти дальше " styleClass="floatToRight"
+                                action="#{adventurePageController.letsTravel()}"
+                                update=":dataListForm:eventList"/>
+                    </h:form>
+                </div>
             </div>
         </div>
     </h:body>

@@ -76,12 +76,23 @@ section {
     font-weight: 1000;
 }
 
-.textLog{
+.textLog {
     overflow: auto;
+    height: 300px;
+}
+.textLog ul {
+    padding: 0 0.5em;
+    margin: 0.2em;
+    list-style-type: none;    
 }
 /*Вид самого текста внутри лога*/
-.textLog *{
+.textLog li{
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+    border-bottom: gray 1px solid;
+    padding: 2px 0;
+}
+.textLog li:last-child {
+    border-bottom: none;
 }
 
 /* names of the battlers */
