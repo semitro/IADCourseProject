@@ -11,7 +11,7 @@ create table Users(
 	auth_type   varchar(40) default 'password' not null,
 	id_external varchar(120), --#for data created by external auth-providers
 	--password bytea not null,
-	password bytea, -- for testing
+	password varchar, -- for testing
 	access_level integer default 0 not null
 );
 
@@ -123,7 +123,7 @@ create table Character_Ability(
 					on delete cascade,
 
 	power_level integer default 0,
-	last_used  date default null
+	last_useed  date default null
 );
 -- THEORY --
 create table Question(
@@ -156,6 +156,7 @@ create table Article(
 	course_id integer references Course(course_id)
 				on update cascade
 				on delete set null,
+	test_id integer references Test(test_id),
 	title varchar(80),
 	subtitle varchar(80) default '',
 	content text not null
