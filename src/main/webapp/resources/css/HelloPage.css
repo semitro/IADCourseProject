@@ -1,4 +1,31 @@
-body{
+html {
+    height: 100%;
+}
+
+body {
     background-image: url("/resources/img/guitarPillar.jpg");
-    background: palegoldenrod;
+    background-color: palegoldenrod;
+}
+
+.bigLabelOnTop{
+    /*font-size: xx-large;*/
+    font-style: normal;
+    font-size: 54px;
+    margin-top: 40px;
+    margin-left: 27px;
+}
+
+.loginForm *{
+    background: transparent;
+}
+
+@media(min-width: 700px) {
+    .loginForm {    
+        margin-right: 80px;
+    }
+}
+@media(max-width: 699px) {
+    .loginForm {
+        margin-right: 1em;
+    }
 }

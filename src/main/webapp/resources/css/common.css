@@ -1,40 +1,36 @@
-body{
-    background-size: 100%;
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Ubuntu', sans-serif;
 }
 
-.floatToRight .floatToLeft {
+/*
+.floatToRight, .floatToLeft {
     padding: 20px;
     font-size: large;
     margin: 10px;
     border: 20px;
 }
+*/
+
+.muzzfight {    
+    font-family: 'Josefin Sans', sans-serif;
+}
 
 .floatToRight {    
     float: right;
-    margin-right: 80px;
 }
 
 .floatToLeft {
     float: left;
-    margin-left: 80px;
-}
-
-.floatToRight *{
-    background: transparent;
 }
 
 .clearLeft {
     clear: left;
 }
 
-.bigLabelOnTop{
-    /*font-size: xx-large;*/
-    font-style: normal;
-    font-size: 54px;
-    margin-top: 40px;
-    margin-left: 27px;
-    font-family: 'Josefin Sans', sans-serif;
+.clearRight {
+    clear: right;
 }
 
 #wrapper{
@@ -89,7 +85,6 @@ section {
     margin-left: auto;
     margin-right: auto;
 }
-
 
 .articleTitle{
     font-size: 25px;
