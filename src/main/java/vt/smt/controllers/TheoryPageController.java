@@ -10,11 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vt.smt.db.repositories.CourseRepository;
+import vt.smt.db.repositories.TestRepository;
 import vt.smt.ent.theory.Article;
-import vt.smt.ent.theory.*;
+import vt.smt.ent.theory.Course;
+import vt.smt.ent.theory.Question;
+import vt.smt.ent.theory.Test;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import java.util.LinkedList;
+import java.util.List;
 
 @Component(value = "theoryPageController")
 @Scope(value = "session")
@@ -26,13 +32,26 @@ public class TheoryPageController {
     // Содержание активной статьи
     private String articleContent = "Помогает практике (:";
     private String articleTitle = "Теория музыки";
-//    private Test articleTest;
+
+    private List<String> questions = new LinkedList<>();
+
+    private String usrAnswer = "";
+
+    private String buttonName = "Сдать экзамен";
+
+    private String weDontHaveTests = "";
+
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private TestRepository testRepository;
+    private Test           articleTest;
 
     @PostConstruct
     public void initMenu(){
         menu = new DefaultMenuModel();
+
         for (Course course : courseRepository.findAll()) {
             DefaultSubMenu currentMenu = new DefaultSubMenu(course.getTitle());
             for (Article article : course.getArticles()) {
@@ -40,24 +59,53 @@ public class TheoryPageController {
                 item.setCommand("#{theoryPageController.setArticleContentDynamic}");
                 item.setParam("articleContent", article.getContent());
                 item.setParam("articleTitle", article.getTitle());
-//                item.setParam("test", article.getTest());
-                item.setUpdate("articleContent articleTitle");
+
+                item.setUpdate("test:examButton");
 
                 currentMenu.addElement(item);
             }
             menu.addElement(currentMenu);
         }
     }
-
     public void setArticleContentDynamic(ActionEvent event){
+        System.out.println("set article content dynamic");
         articleContent = ((MenuActionEvent)event).getMenuItem().getParams().get("articleContent").get(0);
-        articleTitle   = ((MenuActionEvent)event).getMenuItem().getParams().get("articleTitle").get(0);
-//        articleTest = ((MenuActionEvent)event).getMenuItem().s
+        articleTitle   = ((MenuActionEvent)event).getMenuItem().getParams().get("articleTitle")  .get(0);
+        weDontHaveTests = "";
+        buttonName      = "";
+        articleTest = testRepository.findByTitle(articleTitle);
+        if(articleTest == null) {
+            weDontHaveTests = "Извините, тест для данного раздела ещё не придуман!";
+        }
+        else
+            buttonName = "Ответить!";
+        event.getComponent().processUpdates(FacesContext.getCurrentInstance());
+
+//        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("#test:examButton");
+//        RequestContext.getCurrentInstance().update("#test:examButton");
+
+    }
+
+    public void passTheExam(){
+//        weDontHaveTests = "";
+//        if(buttonName.equals("Сдать экзамен")){
+            questions.clear();
+            System.out.println(articleTest);
+            for (Question question : articleTest.getQuestions()) {
+                questions.add(question.getWrong1());
+                questions.add(question.getWrong2());
+                questions.add(question.getWrong3());
+                questions.add(question.getAnswer());
+            }
+//        }
+        System.out.println("Пользователь попытался сдать экзамен. Ответ=" + usrAnswer
+                + "Успех = " + articleTest.getQuestions().get(0).getAnswer().equals(usrAnswer));
     }
 
     public MenuModel getMenu() {
         return menu;
     }
+
     public void setMenu(MenuModel menu) {
         this.menu = menu;
     }
@@ -65,7 +113,6 @@ public class TheoryPageController {
     public String getArticleContent() {
         return articleContent;
     }
-
     public void setArticleContent(String articleContent) {
         this.articleContent = articleContent;
     }
@@ -73,9 +120,48 @@ public class TheoryPageController {
     public String getArticleTitle() {
         return articleTitle;
     }
-
     public void setArticleTitle(String articleTitle) {
         this.articleTitle = articleTitle;
+    }
+
+    public TestRepository getTestRepository() {
+        return testRepository;
+    }
+
+    public void setTestRepository(TestRepository testRepository) {
+        this.testRepository = testRepository;
+    }
+
+    public List<String> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<String> questions) {
+        this.questions = questions;
+    }
+
+    public String getUsrAnswer() {
+        return usrAnswer;
+    }
+
+    public void setUsrAnswer(String usrAnswer) {
+        this.usrAnswer = usrAnswer;
+    }
+
+    public String getButtonName() {
+        return buttonName;
+    }
+
+    public void setButtonName(String buttonName) {
+        this.buttonName = buttonName;
+    }
+
+    public String getWeDontHaveTests() {
+        return weDontHaveTests;
+    }
+
+    public void setWeDontHaveTests(String weDontHaveTests) {
+        this.weDontHaveTests = weDontHaveTests;
     }
 
 }

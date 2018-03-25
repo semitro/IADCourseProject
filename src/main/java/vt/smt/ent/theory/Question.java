@@ -14,6 +14,18 @@ public class Question implements Serializable {
     private String answer;
     private String wrong1;
     private String wrong2;
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "content='" + content + '\'' +
+                ", answer='" + answer + '\'' +
+                ", wrong1='" + wrong1 + '\'' +
+                ", wrong2='" + wrong2 + '\'' +
+                ", wrong3='" + wrong3 + '\'' +
+                '}';
+    }
+
     private String wrong3;
 
     @ManyToOne(optional=true)

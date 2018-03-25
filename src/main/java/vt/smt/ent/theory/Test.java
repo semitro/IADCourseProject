@@ -21,11 +21,11 @@ public class Test implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="reward_script_id", referencedColumnName = "script_id")
     private Script script;
 
-    @OneToMany(mappedBy ="test",fetch=FetchType.LAZY)
+    @OneToMany(mappedBy ="test",fetch=FetchType.EAGER)
     private List<Question> questions;
 
     public List<Question> getQuestions() {
@@ -85,5 +85,16 @@ public class Test implements Serializable {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "testId=" + testId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", script=" + script +
+                ", questions=" + questions +
+                '}';
     }
 }
