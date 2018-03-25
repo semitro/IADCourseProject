@@ -3,10 +3,13 @@ package vt.smt.game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import vt.smt.db.repositories.BandRepository;
 import vt.smt.db.repositories.CharacterRepository;
+import vt.smt.ent.bands.Band;
 import vt.smt.ent.game.GameCharacter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Component("adventureProcessor")
@@ -37,6 +40,9 @@ public class AdventureProcessor implements AdventureInterface {
         return new AdventureEvent(ans, new Date(System.currentTimeMillis()));
     }
 
+    @Autowired
+    private BandRepository bandRepository;
+
     // С одной стороны, лучше передавать игрока прямо в метод go:
     // не храним состояние, избегаем ошибок и бла-бла-бла;
     // но такой подход позволяет реализовать некую историю похода,
@@ -49,7 +55,7 @@ public class AdventureProcessor implements AdventureInterface {
     private String makeSomethingWithCharacter(){
         Random random = new Random(System.currentTimeMillis());
 
-        switch (random.nextInt(6)){
+        switch (random.nextInt(9)){
             case 0: {
                 int newRoses = random.nextInt(50);
                 gameCharacter.setRoses(gameCharacter.getRoses() + newRoses);
@@ -57,12 +63,15 @@ public class AdventureProcessor implements AdventureInterface {
             }
 
             case 1:{
-                gameCharacter.setName("репей");
-                return "Теперь вас зовут репей!";
+                int rhythm = random.nextInt(20);
+                int exp = random.nextInt(100);
+                gameCharacter.setRhythm(gameCharacter.getRhythm() );
+                return "Вы наконец-то порепетировали. Опыт +"
+                        + exp + ", ритм + " + rhythm + "!";
             }
             case 2:{
-                int health = random.nextInt(10);
-                gameCharacter.setAttack(gameCharacter.getAttack() + 1);
+                int health = random.nextInt(20);
+                gameCharacter.setAttack(gameCharacter.getAttack() + health);
                 gameCharacter.setHealth(gameCharacter.getHealth() - health >= 0?
                         gameCharacter.getHealth() - health : 0);
 
@@ -80,7 +89,7 @@ public class AdventureProcessor implements AdventureInterface {
                         " роз " + roses + " отжато";
             }
             case 4:{
-                int health = random.nextInt(120);
+                int health = random.nextInt(1200);
                 gameCharacter.setHealth(gameCharacter.getHealth() + health);
                 return "Вы добрались до Бахчисарая. Здоровье +" + health;
             }
@@ -89,16 +98,42 @@ public class AdventureProcessor implements AdventureInterface {
                 gameCharacter.setExperience(gameCharacter.getExperience() + exp);
                 return "Вы прошли не одну дорогу.. опыт + " + exp;
             }
+            case 6:{
+                int exp   = random.nextInt(400);
+                int roses = random.nextInt(gameCharacter.getRoses() > 50 ? 50 : 0);
+                List<Band> bands = bandRepository.findAll();
+                int group = random.nextInt(bands.size());
+                String bandName = bands.get(group).getName();
+                gameCharacter.setExperience(gameCharacter.getExperience() + exp);
+                return "Вы попали на концерт " + bandName
+                        + " опыт + " + exp + " розы - " + roses;
+            }
+            case 7:{
+                int exp = random.nextInt(12);
+                int defence = random.nextInt(15);
+                gameCharacter.setDefence(gameCharacter.getDefence() + defence);
+                gameCharacter.setExperience(gameCharacter.getExperience() + exp);
+                return "Вас подвезли хиппи."
+                + "опыт + " + exp + ", защита + " + defence;
+
+            }
         }
         return "Ничего не произошло";
     }
-
 //    @Override
-//    public Integer getProgress() {
-//        return progress;
+
 //    }
-//
-//    public void setProgress(Integer progress) {
 //        this.progress = progress;
+//    public void setProgress(Integer progress) {
+//
 //    }
+//        return progress;
+//    public Integer getProgress() {
+public BandRepository getBandRepository() {
+    return bandRepository;
+}
+
+    public void setBandRepository(BandRepository bandRepository) {
+        this.bandRepository = bandRepository;
+    }
 }
