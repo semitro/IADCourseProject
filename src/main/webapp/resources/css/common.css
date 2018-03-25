@@ -128,3 +128,14 @@ section {
 .articleContent{
 
 }
+
+@media(max-width: 860px) {
+    .mainPageTable {
+        max-width: 48%;
+    }
+}
+@media(min-width: 861px) {
+    .mainPageTable {
+        min-width: 48%;
+    }
+}
