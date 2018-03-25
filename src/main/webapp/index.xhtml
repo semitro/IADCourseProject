@@ -14,6 +14,14 @@
         <h:outputStylesheet name="css/HelloPage.css"/>
     </h:head>
     <h:body>
+        <p:messages id="messages" showDetail="true" autoUpdate="true" rendered="${empty param['error']}"/>
+        <h:panelGroup class="messages" rendered="${!empty param['error']}">
+            <div id="messagesInner" class="ui-messages-error ui-corner-all">
+                <span class="ui-messages-error-icon"/>
+                <span class="ui-messages-error-summary">Ошибка!</span>
+                <span class="ui-messages-error-detail">Не удалось совершить вход.</span>
+            </div>
+        </h:panelGroup>
         <H1 class="bigLabelOnTop muzzfight">MuzzFight</H1>
         <div class="clearRight"/>
         <div class="floatToRight loginForm">
@@ -27,9 +35,6 @@
                     <p:password id="password" name="password" label="Пароль"
                                 placeholder="password" value="#{helloPageController.password}"
                                 required="true"/>
-                    <td colspan="2">
-                        <p:outputLabel value="Login failed!" rendered="${!empty param['error']}" />
-                    </td>
                 </h:panelGrid>
                 <p:commandButton value="Войти" ajax="false"/>
             </h:form>
