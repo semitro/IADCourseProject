@@ -13,6 +13,8 @@ import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.Battle;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,11 +77,17 @@ public class BattlePageController {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+
         characterRepository.save(character);
         Collections.reverse(result);
         battleLog.addAll(0, result);
-        if(!battle.isItGoing()) // if battle's over after gamer's step, enemy can't step
+        if(!battle.isItGoing()) { // if battle's over after gamer's step, enemy can't step
+            if(battle.getWinner() == Battle.GAMERS.me)
+                winRegards(enemy); // Поднимаем статы за победу
+            else
+                thankForComingRegards(enemy);
             return;
+        }
         result.clear();
 
         String enemyStep = getEnemyStep();
@@ -87,6 +95,49 @@ public class BattlePageController {
         result.addAll(0,battle.step(enemyStep, Battle.GAMERS.enemy).getMessages());
         Collections.reverse(result); // Да, всё в такой странной последовательности
         battleLog.addAll(0, result);
+        characterRepository.save(character);
+        // Нужно дублирование
+        if(!battle.isItGoing()) {
+            if (battle.getWinner() == Battle.GAMERS.me)
+                winRegards(enemy); // Поднимаем статы за победу
+            else
+                thankForComingRegards(enemy);
+        }
+    }
+
+    private void showResult(String msg, int exp, int attack, int roses, int defence){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(msg,
+                "опыт + " + exp + "\nатака + " + attack  +
+                        "\nзащита + " + defence + "\nрозы + " + roses));
+
+    }
+
+    private void thankForComingRegards(GameCharacter opponent){
+        int exp = opponent.getExperience() /440 + 1;
+        int attack = opponent.getAttack() / 140 + 1;
+        int roses = opponent.getRoses() / 160 + 10;
+        int defence = opponent.getDefence() / 190 + 15;
+
+        character.setExperience(character.getExperience() + exp);
+        character.setAttack(character.getAttack() + attack);
+        character.setRoses(character.getRoses() + roses);
+        character.setDefence(character.getDefence() + defence);
+        showResult("Получены характеристики: ",exp, attack, roses,defence);
+        characterRepository.save(character);
+    }
+
+    private void winRegards(GameCharacter opponent){
+        int exp = opponent.getExperience() /10 + 1;
+        int attack = opponent.getAttack() / 14 + 1;
+        int roses = opponent.getRoses() / 15 + 10;
+        int defence = opponent.getDefence() / 8 + 15;
+
+        character.setExperience(character.getExperience() + exp);
+        character.setAttack(character.getAttack() + attack);
+        character.setRoses(character.getRoses() + roses);
+        character.setDefence(character.getDefence() + defence);
+        showResult("Это победа!", exp, attack, roses, defence);
         characterRepository.save(character);
     }
     // It's AI!!

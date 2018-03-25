@@ -15,6 +15,9 @@
     <h:body>
         <div id="backgroundText"/>
         <div id="wrapper">
+            <h:form id="gr">
+                <p:growl id="growl" showDetail="true" sticky="true" />
+            </h:form>
             <nav class="letThereBeSpace">
                 <p:toolbar>
                     <f:facet name="left">
@@ -59,7 +62,7 @@
                 <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
                         styleClass="image-ring" easing="easeInOutBack">
                     <!--<h:panelGrid columns="1" style="width:100%" columnClasses="ability">-->
-                        <p:commandLink update="dataListForm paramsForm"
+                        <p:commandLink update="dataListForm paramsForm :gr:growl"
                                        action="#{battlePageController.step()}">
                             <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
                             <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />

@@ -30,10 +30,13 @@ public class Battle {
         enemyAction = new BattleScriptExecutor(new GamerCharacterActions());
     }
 
+    private GAMERS winner = null;
+
     public void start(GameCharacter me, GameCharacter enemy){
         this.gamer = me;
         this.enemy = enemy;
         turn = GAMERS.me;//Math.random() > 0.25 ? GAMERS.me : GAMERS.enemy;
+        winner = null;
         isItGoing = true;
         gamerAction.setMe(gamer);
         gamerAction.setEnemy(enemy);
@@ -63,7 +66,15 @@ public class Battle {
             isItGoing = false;
             // flag says battle's over
             result.addMessage(enemy.getHealth() <= 0?
-            "Вы попедили!": "Вы проиграли");
+            "Вы победили!": "Вы проиграли");
+            if(enemy.getHealth() <= 0){
+                result.addMessage("Вы победили! :)");
+                winner = GAMERS.me;
+            }
+            else{
+                result.addMessage("Вы проиграли");
+                winner = GAMERS.enemy;
+            }
         }
 
         return result;
@@ -88,9 +99,13 @@ public class Battle {
 
     }
 
-
     public boolean isItGoing() {
         return isItGoing;
+    }
+
+
+    public GAMERS getWinner() {
+        return winner;
     }
 
 }
