@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CharacterRepository extends JpaRepository<GameCharacter, Integer> {
     List<GameCharacter> findByMemberOwnerIsNotNull();
+    GameCharacter findByName(String name);
 }

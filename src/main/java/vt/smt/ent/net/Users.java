@@ -17,8 +17,10 @@ public class Users implements Serializable {
     private String authType;
     private String idExternal;
     private String password;
-    private Integer accessLevel;
 
+    private String role;
+
+    private Integer accessLevel;
     private List<GameCharacter> gameCharacters;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
@@ -89,6 +91,16 @@ public class Users implements Serializable {
 
     public void setAccessLevel(Integer accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    @Basic
+    @Column(name = "role")
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

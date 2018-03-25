@@ -37,7 +37,10 @@ public class MyUserDetailService implements UserDetailsService {
         }
         System.out.println(user);
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+        for (String role : user.getRole().split(" ")) {
+            // Если хочется много ролей, перечисляй через пробел
+            authorityList.add(new SimpleGrantedAuthority(role));
+        }
 //        user.getAllUserRoles().forEach(role -> authorityList.add(new SimpleGrantedAuthority(role.getName())));
         return new User(user.getLogin(),user.getPassword(),authorityList);
     }

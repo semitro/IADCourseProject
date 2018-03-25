@@ -19,10 +19,11 @@
                     <h:panelGrid columns="2">
                         <p:outputLabel value="Логин" for="username"/>
                         <p:inputText id="username" name="username" label="Логин" placeholder="User name"
-                                     value="#{helloPageController.username}"/>
+                                     value="#{helloPageController.username}" required="true"/>
                         <p:outputLabel value="Пароль"  for="password"/>
                         <p:password id="password" name="password" label="Пароль"
-                                    placeholder="Password" value="#{helloPageController.password}"/>
+                                    placeholder="Password" value="#{helloPageController.password}"
+                        required="true"/>
                     </h:panelGrid>
                     <p:outputLabel value="Login failed!" rendered="${!empty param['error']}" />
                         <p:commandButton value="Вход" ajax="false"/>
