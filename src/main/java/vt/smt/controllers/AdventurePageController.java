@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import vt.smt.db.repositories.UsersRepository;
+import vt.smt.db.repositories.CharacterRepository;
 import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.AdventureEvent;
 import vt.smt.game.AdventureInterface;
@@ -26,22 +26,26 @@ public class AdventurePageController {
     private AdventureInterface adventure;
 
     @Autowired
-    private UsersRepository usersRepository;
+    private CharacterRepository gameCharacterRepository;
+
     private GameCharacter character;
 
     private List<AdventureEvent> events = new LinkedList<>();
 
+    private Authentication authentication; // session
     @PostConstruct
     public void loadCharacterFromSession(){
-        Authentication authentication =
+        authentication =
                 SecurityContextHolder.getContext().getAuthentication();
-        character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
-        adventure.setTraveler(character);
     }
 
     public void letsTravel(){
         try {
+            //
+            character = gameCharacterRepository.findByName(authentication.getName());
+            adventure.setTraveler(character);
             events.add(0, adventure.go());
+            gameCharacterRepository.save(character);
         }catch (AlreadyInAdventureException e){
             System.err.println("Already in an adventure!");
         }

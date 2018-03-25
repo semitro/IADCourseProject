@@ -66,26 +66,27 @@ public class AdventureProcessor implements AdventureInterface {
                 int rhythm = random.nextInt(20);
                 int exp = random.nextInt(100);
                 gameCharacter.setRhythm(gameCharacter.getRhythm() );
-                return "Вы наконец-то порепетировали. Опыт +"
+                return "Вы наконец-то порепетировали! Опыт +"
                         + exp + ", ритм + " + rhythm + "!";
             }
             case 2:{
                 int health = random.nextInt(20);
-                gameCharacter.setAttack(gameCharacter.getAttack() + health);
+                int attack = random.nextInt(250);
+                gameCharacter.setAttack(gameCharacter.getAttack() + attack);
                 gameCharacter.setHealth(gameCharacter.getHealth() - health >= 0?
                         gameCharacter.getHealth() - health : 0);
-
-                return "Вы попали в драку и победили. Атака + 1, здоровье - " + health;
+                return "Вы попали в драку и победили. Атака + " + attack + ", здоровье - " + health;
             }
             case 3:{
                 int health = random.nextInt(200);
                 int roses  = random.nextInt(32);
-                gameCharacter.setDefence(gameCharacter.getDefence() + 1);
+                int defence = random.nextInt(200);
+                gameCharacter.setDefence(gameCharacter.getDefence() + defence);
                 gameCharacter.setHealth(gameCharacter.getHealth() - health >= 0?
                         gameCharacter.getHealth() - health : 0);
                 gameCharacter.setRoses(gameCharacter.getRoses() - roses >= 0?
                         gameCharacter.getRoses() - roses : 0);
-                return "Вы попали в драку и проиграли.\n Навык защиты +1, здоровье -" + health +
+                return "Вы попали в драку и проиграли.\n Навык защиты + " + defence + ", здоровье -" + health +
                         " роз " + roses + " отжато";
             }
             case 4:{
@@ -113,11 +114,12 @@ public class AdventureProcessor implements AdventureInterface {
                 int defence = random.nextInt(15);
                 gameCharacter.setDefence(gameCharacter.getDefence() + defence);
                 gameCharacter.setExperience(gameCharacter.getExperience() + exp);
-                return "Вас подвезли хиппи."
+                return "Вас подвезли хиппи :) "
                 + "опыт + " + exp + ", защита + " + defence;
 
             }
         }
+        characterRepository.save(gameCharacter);
         return "Ничего не произошло";
     }
 //    @Override

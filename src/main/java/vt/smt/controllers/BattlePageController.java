@@ -34,26 +34,34 @@ public class BattlePageController {
 
     @Autowired
     private CharacterRepository characterRepository;
+
     @Autowired
     private UsersRepository usersRepository;
 
     private List<String> battleLog = new LinkedList<>();
 
+    private Authentication authentication;
+
     @PostConstruct
     public void BattlePageController(){
-        Authentication authentication =
+//        Authentication authentication =
+//                SecurityContextHolder.getContext().getAuthentication();
+        authentication =
                 SecurityContextHolder.getContext().getAuthentication();
-        character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
+//        character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
         restart();
     }
 
     public void restart(){
+        character = characterRepository.findByName(authentication.getName());
         battleLog.clear();
         enemy = createEnemy();
         battle.start(character, enemy);
     }
 
+
     public void step(){
+        System.out.println(character);
         if(!battle.isItGoing()){
             return;
         }
@@ -67,6 +75,7 @@ public class BattlePageController {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+        characterRepository.save(character);
         Collections.reverse(result);
         battleLog.addAll(0, result);
         if(!battle.isItGoing()) // if battle's over after gamer's step, enemy can't step
@@ -78,6 +87,7 @@ public class BattlePageController {
         result.addAll(0,battle.step(enemyStep, Battle.GAMERS.enemy).getMessages());
         Collections.reverse(result); // Да, всё в такой странной последовательности
         battleLog.addAll(0, result);
+        characterRepository.save(character);
     }
     // It's AI!!
     private String getEnemyStep(){

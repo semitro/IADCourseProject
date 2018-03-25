@@ -28,6 +28,7 @@ public class MyUserDetailService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         System.out.println(s);
@@ -41,6 +42,8 @@ public class MyUserDetailService implements UserDetailsService {
             // Если хочется много ролей, перечисляй через пробел
             authorityList.add(new SimpleGrantedAuthority(role));
         }
+        // Здесь мы кладём GameCharacter в сессию JSF
+
 //        user.getAllUserRoles().forEach(role -> authorityList.add(new SimpleGrantedAuthority(role.getName())));
         return new User(user.getLogin(),user.getPassword(),authorityList);
     }

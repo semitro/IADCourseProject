@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 @Service
 // / Such classes are considered as candidates for auto-detection
 // when using annotation-based configuration and classpath scanning. (spring)
-@Scope(value = "session")
+@Scope(value = "request")
 @ELBeanName(value = "characterPageController")  // EL - expression language - как он зоётся из JSF
 public class CharacterPageController {
 
