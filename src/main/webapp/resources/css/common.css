@@ -139,3 +139,16 @@ section {
         min-width: 48%;
     }
 }
+
+.messages, #messages {
+    position: fixed;
+    bottom: 0.2em;
+    width: 90%;
+    margin-left: 5%;
+    animation: messageFadeOut 5s 3s forwards; 
+}
+
+@keyframes messageFadeOut {
+    from {opacity: 1.0;}
+    to {opacity: 0.0;}
+}
