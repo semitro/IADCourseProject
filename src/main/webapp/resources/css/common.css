@@ -1,29 +1,60 @@
-.floatToRight{
-    float: right;
+html {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: cadetblue;
+}
+
+/*
+.floatToRight, .floatToLeft {
     padding: 20px;
     font-size: large;
     margin: 10px;
-    margin-right: 80px;
     border: 20px;
-    color: gold;
+}
+*/
 
+.muzzfight {    
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-.floatToRight *{
-    background: transparent;
+#backgroundText {
+    top: -50px;
+    left: -100px;
+    right: -500px;
+    bottom: -500px;
+    position: fixed;
+    transform: rotate(20deg);
+    z-index: -100;
+    background-color: cornsilk;
+    padding: 2em;
 }
 
-.bigLabelOnTop{
-    /*font-size: xx-large;*/
-    font-style: normal;
-    font-size: 54px;
-    margin-top: 40px;
-    margin-left: 27px;
+#backgroundText:after {
+    content: "MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight";
+    font-size: 4em;
+    font-family: "Josefin Sans", sans-serif;
+    opacity: 0.8;
 }
 
-body{
-    background-size: 100%;
-    font-family: Atavyros;
+.floatToRight {    
+    float: right;
+}
+
+.floatToLeft {
+    float: left;
+}
+
+.clearLeft {
+    clear: left;
+}
+
+.clearRight {
+    clear: right;
 }
 
 #wrapper{
@@ -45,12 +76,23 @@ section {
     font-weight: 1000;
 }
 
-.textLog{
+.textLog {
     overflow: auto;
+    height: 300px;
+}
+.textLog ul {
+    padding: 0 0.5em;
+    margin: 0.2em;
+    list-style-type: none;    
 }
 /*Вид самого текста внутри лога*/
-.textLog *{
+.textLog li{
     font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+    border-bottom: gray 1px solid;
+    padding: 2px 0;
+}
+.textLog li:last-child {
+    border-bottom: none;
 }
 
 /* names of the battlers */
@@ -79,11 +121,21 @@ section {
     margin-right: auto;
 }
 
-
 .articleTitle{
     font-size: 25px;
 }
 
 .articleContent{
 
+}
+
+@media(max-width: 860px) {
+    .mainPageTable {
+        max-width: 48%;
+    }
+}
+@media(min-width: 861px) {
+    .mainPageTable {
+        min-width: 48%;
+    }
 }

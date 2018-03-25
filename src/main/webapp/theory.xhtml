@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <meta charset="utf-8"/>
         <title>
             Теория
         </title>
@@ -11,6 +12,7 @@
     </h:head>
 
     <h:body>
+        <div id="backgroundText"/>
         <div id="wrapper">
             <nav class="letThereBeSpace">
                 <p:toolbar>
@@ -29,22 +31,22 @@
                     </f:facet>
                 </p:toolbar>
             </nav>
-        <aside>
-        <h:form>
-            <p:menu model="#{theoryPageController.menu}" />
-        </h:form>
-        </aside>
-        <section>
-            <p>
-                <p:outputLabel id="articleTitle"   styleClass="articleTitle"
-                              value="#{theoryPageController.articleTitle}"/>
-            </p>
-            <hr/>
-            <p>
-                <p:outputLabel id="articleContent" styleClass="articleContent"
-                       value="#{theoryPageController.articleContent}"/>
-            </p>
-        </section>
+            <aside>
+                <h:form>
+                    <p:menu model="#{theoryPageController.menu}" />
+                </h:form>
+            </aside>
+            <section>
+                <p>
+                    <p:outputLabel id="articleTitle"   styleClass="articleTitle"
+                                  value="#{theoryPageController.articleTitle}"/>
+                </p>
+                <hr/>
+                <p>
+                    <p:outputLabel id="articleContent" styleClass="articleContent"
+                           value="#{theoryPageController.articleContent}"/>
+                </p>
+            </section>
         </div>
     </h:body>
 
