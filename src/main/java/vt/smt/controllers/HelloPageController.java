@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vt.smt.db.repositories.UsersRepository;
+import vt.smt.ent.net.*;
+import javax.faces.context.FacesContext;
 
 @Component(value = "helloPageController" )
 @Scope(value = "session")
@@ -38,23 +40,23 @@ public class HelloPageController {
         this.password = password;
     }
 
-    public void signIn(){
-//        FacesContext context = FacesContext.getCurrentInstance();
+    public void setUpSession(){
+        System.out.println("--xxx--");
+        FacesContext context = FacesContext.getCurrentInstance();
 
-//        Users user = usersRepository.findByLogin(username);
-//        if(user == null){
-//            System.err.println("Пользователь " + username + " не найден в базе");
-//        }
-//        else {
-//            try {
-//                context.getExternalContext().getSessionMap().put("GameCharacter", user.getGameCharacters().get(0));
-//            }
-//            catch (RuntimeException e){
-//                e.printStackTrace();
-//                System.err.println("У пользователя " + username + " нет персонажей!");
-//            }
-//        }
-        System.out.println("I am Yulia");
+        Users user = usersRepository.findByLogin(username);
+        if(user == null){
+            System.err.println("Пользователь " + username + " не найден в базе");
+        }
+        else {
+            try {
+                context.getExternalContext().getSessionMap().put("GameCharacter", user.getGameCharacters().get(0));
+            }
+            catch (RuntimeException e){
+                e.printStackTrace();
+                System.err.println("У пользователя " + username + " нет персонажей!");
+            }
+        }
 
     }
 }

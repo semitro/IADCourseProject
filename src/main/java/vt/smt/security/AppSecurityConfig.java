@@ -52,7 +52,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/index.jsf?error=true");
 
         http.logout()
-                .logoutSuccessUrl("/index.xhtml")
+                .logoutSuccessUrl("/index.jsf")
                 .permitAll()
                 .and()
                 .exceptionHandling();

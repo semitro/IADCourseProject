@@ -1,13 +1,17 @@
 package vt.smt.controllers;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import vt.smt.db.repositories.UsersRepository;
 import vt.smt.ent.game.CharacterAbility;
 import vt.smt.ent.game.GameCharacter;
 
-import javax.faces.context.FacesContext;
+import javax.annotation.PostConstruct;
 
 /*
  * Бины создаёт Spring, судя по всему (аннотации JSF-бинодела закомменчены)
@@ -26,10 +30,15 @@ public class CharacterPageController {
 
     private CharacterAbility selectedAbility;
 
-    public CharacterPageController(){
+    @Autowired
+    private UsersRepository usersRepository;
+
+    @PostConstruct
+    public void CharacterPageController(){
         // take it from the session
-        character = (GameCharacter) FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap().get("GameCharacter");
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
     }
 
     public GameCharacter getCharacter() {

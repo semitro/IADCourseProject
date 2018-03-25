@@ -14,21 +14,23 @@
 
     <h:body>
         <div id="wrapper">
-        <nav class="letThereBeSpace">
-            <h:form>
+            <nav class="letThereBeSpace">
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
-                        <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
-                        <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
-                        <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
+                        <h:form>
+                            <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
+                            <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
+                            <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
+                            <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
+                        </h:form>
                     </f:facet>
                     <f:facet name="right">
-                        <p:commandButton value="Выйти" action="index?faces-redirect=true"/>
+                        <h:form onsubmit="this.action='#{request.contextPath}/logout';">
+                            <p:commandButton value="Выйти" ajax="false" />
+                        </h:form>
                     </f:facet>
                 </p:toolbar>
-            </h:form>
-        </nav>
+            </nav>
         <div id="names">
             <p:outputLabel value="#{battlePageController.character.name}" styleClass="name"/>
             <p:outputLabel value=" vs " styleClass="name"/>

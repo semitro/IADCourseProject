@@ -3,14 +3,16 @@ package vt.smt.controllers;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import vt.smt.db.repositories.CharacterRepository;
+import vt.smt.db.repositories.UsersRepository;
 import vt.smt.ent.game.CharacterAbility;
 import vt.smt.ent.game.GameCharacter;
 import vt.smt.game.Battle;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,13 +34,16 @@ public class BattlePageController {
 
     @Autowired
     private CharacterRepository characterRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
     private List<String> battleLog = new LinkedList<>();
 
     @PostConstruct
     public void BattlePageController(){
-        character = (GameCharacter) FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap().get("GameCharacter");
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
         restart();
     }
 
