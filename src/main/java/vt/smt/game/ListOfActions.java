@@ -31,4 +31,9 @@ public abstract class ListOfActions {
     public void setResult(ActionResult result) {
         this.result = result;
     }
+
+    // Метод будет вызываться, например, каждый ход. @override в потомках
+    public void tick(Integer value){
+
+    }
 }

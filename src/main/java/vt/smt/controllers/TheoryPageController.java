@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import vt.smt.db.repositories.CourseRepository;
 import vt.smt.ent.theory.Article;
-import vt.smt.ent.theory.Course;
+import vt.smt.ent.theory.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
@@ -24,17 +24,15 @@ public class TheoryPageController {
     private MenuModel menu;
 
     // Содержание активной статьи
-    private String articleContent = "";
-
-    private String articleTitle = "";
-
+    private String articleContent = "Помогает практике (:";
+    private String articleTitle = "Теория музыки";
+//    private Test articleTest;
     @Autowired
     private CourseRepository courseRepository;
 
     @PostConstruct
     public void initMenu(){
         menu = new DefaultMenuModel();
-
         for (Course course : courseRepository.findAll()) {
             DefaultSubMenu currentMenu = new DefaultSubMenu(course.getTitle());
             for (Article article : course.getArticles()) {
@@ -42,6 +40,7 @@ public class TheoryPageController {
                 item.setCommand("#{theoryPageController.setArticleContentDynamic}");
                 item.setParam("articleContent", article.getContent());
                 item.setParam("articleTitle", article.getTitle());
+//                item.setParam("test", article.getTest());
                 item.setUpdate("articleContent articleTitle");
 
                 currentMenu.addElement(item);
@@ -53,6 +52,7 @@ public class TheoryPageController {
     public void setArticleContentDynamic(ActionEvent event){
         articleContent = ((MenuActionEvent)event).getMenuItem().getParams().get("articleContent").get(0);
         articleTitle   = ((MenuActionEvent)event).getMenuItem().getParams().get("articleTitle").get(0);
+//        articleTest = ((MenuActionEvent)event).getMenuItem().s
     }
 
     public MenuModel getMenu() {

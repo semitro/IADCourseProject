@@ -37,10 +37,50 @@ body{
     font-family: Atavyros;
 }
 
+#wrapper{
+    max-width: 980px;
+    margin: auto;
+}
+
+aside {
+    float: left;
+    width: 250px;
+}
+
+section {
+    margin-left: 280px;
+    padding-bottom: 50px;
+}
+
 .bolshe {
     font-weight: 1000;
 }
 
+.textLog{
+    overflow: auto;
+}
+/*Вид самого текста внутри лога*/
+.textLog *{
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+/* names of the battlers */
+#names{
+    font-size: larger;
+    font-family: sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.name{
+    font-size: xx-large;
+    font-family: Norasi;
+}
+
+.hp{
+    color: red;
+}
 .letThereBeSpace {
     margin-bottom: 1.5em;
 }
@@ -48,4 +88,13 @@ body{
 .hcentered {
     margin-left: auto;
     margin-right: auto;
+}
+
+
+.articleTitle{
+    font-size: 25px;
+}
+
+.articleContent{
+
 }

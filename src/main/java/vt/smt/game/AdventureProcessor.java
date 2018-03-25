@@ -69,14 +69,14 @@ public class AdventureProcessor implements AdventureInterface {
                 return "Вы попали в драку и победили. Атака + 1, здоровье - " + health;
             }
             case 3:{
-                int health = random.nextInt(10);
+                int health = random.nextInt(200);
                 int roses  = random.nextInt(32);
                 gameCharacter.setDefence(gameCharacter.getDefence() + 1);
                 gameCharacter.setHealth(gameCharacter.getHealth() - health >= 0?
                         gameCharacter.getHealth() - health : 0);
                 gameCharacter.setRoses(gameCharacter.getRoses() - roses >= 0?
                         gameCharacter.getRoses() - roses : 0);
-                return "Вы попали в драку и проиграли. Навык защиты +1, здоровье -" + health +
+                return "Вы попали в драку и проиграли.\n Навык защиты +1, здоровье -" + health +
                         " роз " + roses + " отжато";
             }
             case 4:{

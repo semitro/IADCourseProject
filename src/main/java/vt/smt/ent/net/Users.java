@@ -4,7 +4,6 @@ import vt.smt.ent.game.GameCharacter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,7 +16,7 @@ public class Users implements Serializable {
     private String login;
     private String authType;
     private String idExternal;
-    private byte[] password;
+    private String password;
     private Integer accessLevel;
 
     private List<GameCharacter> gameCharacters;
@@ -74,11 +73,11 @@ public class Users implements Serializable {
 
     @Basic
     @Column(name = "password")
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -103,7 +102,6 @@ public class Users implements Serializable {
         if (login != null ? !login.equals(users.login) : users.login != null) return false;
         if (authType != null ? !authType.equals(users.authType) : users.authType != null) return false;
         if (idExternal != null ? !idExternal.equals(users.idExternal) : users.idExternal != null) return false;
-        if (!Arrays.equals(password, users.password)) return false;
         if (accessLevel != null ? !accessLevel.equals(users.accessLevel) : users.accessLevel != null) return false;
 
         return true;
@@ -115,8 +113,19 @@ public class Users implements Serializable {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (authType != null ? authType.hashCode() : 0);
         result = 31 * result + (idExternal != null ? idExternal.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(password);
         result = 31 * result + (accessLevel != null ? accessLevel.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", authType='" + authType + '\'' +
+                ", idExternal='" + idExternal + '\'' +
+                ", password='" + password + '\'' +
+                ", accessLevel=" + accessLevel +
+                '}';
     }
 }

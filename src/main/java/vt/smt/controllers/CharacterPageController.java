@@ -1,14 +1,17 @@
 package vt.smt.controllers;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import vt.smt.ent.game.*;
-import vt.smt.util.ResourceManager;
+import org.springframework.stereotype.Service;
+import vt.smt.db.repositories.UsersRepository;
+import vt.smt.ent.game.CharacterAbility;
+import vt.smt.ent.game.GameCharacter;
 
-import javax.faces.context.FacesContext;
+import javax.annotation.PostConstruct;
 
 /*
  * Бины создаёт Spring, судя по всему (аннотации JSF-бинодела закомменчены)
@@ -16,7 +19,8 @@ import javax.faces.context.FacesContext;
 //@ManagedBean(eager = true)
 //@ApplicationScoped - не нужны
 @Component(value = "characterPageController") // Indicates that an annotated class is a "component".
-// Such classes are considered as candidates for auto-detection
+@Service
+// / Such classes are considered as candidates for auto-detection
 // when using annotation-based configuration and classpath scanning. (spring)
 @Scope(value = "session")
 @ELBeanName(value = "characterPageController")  // EL - expression language - как он зоётся из JSF
@@ -26,10 +30,15 @@ public class CharacterPageController {
 
     private CharacterAbility selectedAbility;
 
-    public CharacterPageController(){
+    @Autowired
+    private UsersRepository usersRepository;
+
+    @PostConstruct
+    public void CharacterPageController(){
         // take it from the session
-        character = (GameCharacter) FacesContext.getCurrentInstance().
-                getExternalContext().getSessionMap().get("GameCharacter");
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+        character = usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0);
     }
 
     public GameCharacter getCharacter() {

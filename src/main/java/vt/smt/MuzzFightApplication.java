@@ -12,13 +12,9 @@ import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
 
+
 @SpringBootApplication
-//@Configuration
-//@SpringBootApplication
 @ComponentScan("vt.smt")
-//@EnableJpaRepositories(basePackages="vt.smt.db.repositories")
-//@EnableTransactionManagement
-//@EntityScan(basePackages="vt.smt.ent")
 public class MuzzFightApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MuzzFightApplication.class, args);
@@ -41,4 +37,5 @@ public class MuzzFightApplication {
 		rwFilter.addUrlPatterns("/*");
 		return rwFilter;
 	}
+
 }

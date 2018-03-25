@@ -23,6 +23,7 @@
 
 body{
     background-image: url("/resources/img/guitarPillar.jpg");
+    background: palegoldenrod;
     background-size: 100%;
     font-family: Atavyros;
 }

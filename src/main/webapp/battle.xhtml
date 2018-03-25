@@ -13,81 +13,64 @@
     </h:head>
 
     <h:body>
-        <nav class="letThereBeSpace">
-            <h:form>
+        <div id="wrapper">
+            <nav class="letThereBeSpace">
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
-                        <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
-                        <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
-                        <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
+                        <h:form>
+                            <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
+                            <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
+                            <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
+                            <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
+                        </h:form>
                     </f:facet>
                     <f:facet name="right">
-                        <p:commandButton value="Выйти" action="index?faces-redirect=true"/>
+                        <h:form onsubmit="this.action='#{request.contextPath}/logout';">
+                            <p:commandButton value="Выйти" ajax="false" />
+                        </h:form>
                     </f:facet>
                 </p:toolbar>
-            </h:form>
-        </nav>
-        <div id="names">
-            <p:outputLabel value="#{battlePageController.character.name}"/>
-            <p:outputLabel value=" vs "/>
-            <p:outputLabel value="#{battlePageController.enemy.name}"/>
-        </div>
-        <h:form id="paramsForm">
-            <div>
-                <p:outputLabel value="HP: #{battlePageController.character.health}"/>
-                <p:outputLabel value="HP: #{battlePageController.enemy.health}"/>
+            </nav>
+            <div id="names">
+                <p:outputLabel value="#{battlePageController.character.name}" styleClass="name"/>
+                <p:outputLabel value=" vs " styleClass="name"/>
+                <p:outputLabel value="#{battlePageController.enemy.name}" styleClass="name"/>
             </div>
-        </h:form>
-        <div style="height: 200px; overflow: auto;">
+            <h:form id="paramsForm">
+                <div>
+                    <p:outputLabel value="HP: #{battlePageController.character.health}"
+                                   styleClass="hp" style="float: left"/>
+                    <p:outputLabel value="HP: #{battlePageController.enemy.health}"
+                                   styleClass="hp" style="float: right"/>
+                </div>
+            </h:form>
+            <div class="textLog" style="height: 124px;">
+                <h:form id="dataListForm"> <!--лог битвы-->
+                    <p:dataList id="eventList" value="#{battlePageController.battleLog}"
+                                var="events" type="ordered"
+                                rendered="#{!battlePageController.battleLog.isEmpty()}">
+                        #{events}
+                    </p:dataList>
+                </h:form>
+            </div>
 
-        </div>
-        <div style="height: 112px; overflow: auto;">
-            <h:form id="dataListForm"> <!--лог битвы-->
-                <p:dataList id="eventList" value="#{battlePageController.battleLog}"
-                            var="events" type="ordered"
-                            rendered="#{!battlePageController.battleLog.isEmpty()}">
-                    #{events}
-                </p:dataList>
+            <h:form id="abil_form"> <!--навыки-->
+                <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
+                        styleClass="image-ring" easing="easeInOutBack">
+                    <!--<h:panelGrid columns="1" style="width:100%" columnClasses="ability">-->
+                        <p:commandLink update="dataListForm paramsForm"
+                                       action="#{battlePageController.step()}">
+                            <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
+                            <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
+                        </p:commandLink>
+                    <!--</h:panelGrid>-->
+                </p:ring>
+            </h:form>
+
+            <h:form>
+                <h:commandButton value="В новый бой!"
+                                 update="dataListForm names paramsForm" action="#{battlePageController.restart()}"/>
             </h:form>
         </div>
-
-        <h:form id="abil_form"> <!--навыки-->
-            <!--notify about the end of the battle-->
-            <p:ring value="#{battlePageController.character.abilities}" var="char_ability"
-                    style="text-align: center;" layout="block">
-                <h:panelGrid columns="4" style="width:100%" columnClasses="ability">
-                    <p:commandLink update=":abil_form:abilityDetail dataListForm paramsForm"
-                                   action="#{battlePageController.step()}"
-                                   ondblclick="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
-                        <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
-                        <p:graphicImage value="resources#{char_ability.ability.imageResource.url}" />
-                    </p:commandLink>
-                </h:panelGrid>
-            </p:ring>
-            <!--Всплывающее инфо о навыках-->
-            <p:dialog header="Информация о навыке" widgetVar="abilityDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                <p:outputPanel id="abilityDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2" rendered="#{not empty battlePageController.selectedAbility}" columnClasses="label,value">
-                        <f:facet name="header">
-                            <p:graphicImage value="resources#{battlePageController.selectedAbility.ability.imageResource.url}"/>
-                        </f:facet>
-                        <h:outputText value="Навык" style="font-weight: bold"/>
-                        <h:outputText value="#{battlePageController.selectedAbility.ability.name}" style="font-weight: bold"/>
-                        <h:outputText value="Описание"/>
-                        <h:outputText value="#{battlePageController.selectedAbility.ability.description}" style="font-weight: bold"/>
-                        <h:outputText value="Сила"/>
-                        <h:outputText value="#{battlePageController.selectedAbility.powerLevel}"/>
-                    </p:panelGrid>
-                </p:outputPanel>
-            </p:dialog>
-        </h:form>
-
-        <h:form>
-            <h:commandButton value="В новый бой!"
-                             update="dataListForm names paramsForm" action="#{battlePageController.restart()}"/>
-        </h:form>
-
     </h:body>
-
 </html>

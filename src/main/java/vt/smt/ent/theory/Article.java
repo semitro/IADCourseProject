@@ -16,6 +16,8 @@ public class Article implements Serializable {
 
     private Course course;
 
+    private Test test;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="course_id")
     public Course getCourse() {
@@ -37,12 +39,12 @@ public class Article implements Serializable {
         this.articleId = articleId;
     }
 
-
     @Basic
     @Column(name = "title")
     public String getTitle() {
         return title;
     }
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -56,6 +58,16 @@ public class Article implements Serializable {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="test_id", referencedColumnName = "test_id")
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
     }
 
     @Basic

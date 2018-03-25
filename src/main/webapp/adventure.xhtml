@@ -8,39 +8,40 @@
             Персонаж
         </title>
         <h:outputStylesheet name="css/common.css"/>
-
     </h:head>
 
     <h:body>
-        <nav class="letThereBeSpace">
-            <h:form>
+        <div id="wrapper">
+            <nav class="letThereBeSpace">
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
-                        <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
-                        <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
-                        <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
+                        <h:form>
+                            <p:commandButton value="Персонаж"    action="main?faces-redirect=true"/>
+                            <p:commandButton value="Битва"       action="battle?faces-redirect=true"/>
+                            <p:commandButton value="Путешествия" action="adventure?faces-redirect=true"/>
+                            <p:commandButton value="Теория"      action="theory?faces-redirect=true"/>
+                        </h:form>
                     </f:facet>
                     <f:facet name="right">
-                        <p:commandButton value="Выйти" action="index?faces-redirect=true"/>
+                        <h:form onsubmit="this.action='#{request.contextPath}/logout';">
+                            <p:commandButton value="Выйти" ajax="false" />
+                        </h:form>
                     </f:facet>
                 </p:toolbar>
-            </h:form>
-        </nav>
-        <div style="height: 200px; overflow: auto;">
-            <h:form id="dataListForm">
-                <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
-                        #{events.date}: #{events.info}
-                </p:dataList>
-            </h:form>
+            </nav>
+            <div class="textLog" style="height: 200px;">
+                <h:form id="dataListForm">
+                    <p:dataList id="eventList" value="#{adventurePageController.events}" var="events" type="ordered">
+                            #{events.date}: #{events.info}
+                    </p:dataList>
+                </h:form>
+            </div>
+            <div>
+                <h:form>
+                <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"
+                    update=":dataListForm:eventList"/>
+                </h:form>
+            </div>
         </div>
-        <div>
-            <h:form>
-            <p:commandButton value="Пойти дальше " action="#{adventurePageController.letsTravel()}"
-                update=":dataListForm:eventList"/>
-            </h:form>
-        </div>
-
     </h:body>
-
 </html>
