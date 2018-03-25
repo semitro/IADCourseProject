@@ -14,7 +14,7 @@
         <h:outputStylesheet name="css/HelloPage.css"/>
     </h:head>
     <h:body>
-        <p:messages  id="messages" showDetail="true" autoUpdate="true" />
+        <p:messages id="messages" showDetail="true" autoUpdate="true" />
         <H1 class="bigLabelOnTop muzzfight">MuzzFight</H1>
         <div class="clearRight"/>
         <div class="floatToRight loginForm">
@@ -33,12 +33,10 @@
                                 required="true" match="pwd2" feedback="true"
                                 promptLabel="Надёжность пароля"
                                 weakLabel="Слабый" goodLabel="Хороший" strongLabel="Надёжный"/>
-                    <p:outputLabel value="" for="pwd2"/>
+                    <p:outputLabel value="повтор пароля" for="pwd2" style="display: none;"/>
                     <p:password id="pwd2" label="Подтвердите пароль" maxlength="128"
                                 placeholder="повторите пароль"
-
-                                value="#{registrationPageController.password2}"
-                                required="true"/>
+                                value="#{registrationPageController.password2}"/>
                     <!--
                     <p:outputLabel value="e-mail" for="email"/>
                     <p:inputText type="email" id="email" label="e-mail" placeholder="email@example.com"/>
