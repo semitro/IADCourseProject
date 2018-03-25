@@ -100,7 +100,7 @@ public class RegistrationPageController {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Успех",
                         "Вы зарегестрированы"));
-        return "/index.jsf?faces-redirect=true";
+        return "/registered?faces-redirect=true";
     }
     public String getUsername() {
         return username;

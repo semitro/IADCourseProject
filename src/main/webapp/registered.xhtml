@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>
+            MuzzFight!
+        </title>
+        <!--<script type="text/javascript" src="//vk.com/js/api/openapi.js?151"></script>-->
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu" rel="stylesheet"/>
+        <h:outputStylesheet name="css/common.css"/>
+        <h:outputStylesheet name="css/HelloPage.css"/>
+    </h:head>
+    <h:body>        
+        <H1 class="bigLabelOnTop muzzfight">MuzzFight</H1>   
+        <p:messages/>
+        <h:panelGroup styleClass="messages">
+            <div class="ui-messages-info ui-corner-all">
+                <span class="ui-messages-info-icon"/>
+                <span class="ui-messages-info-summary">Поздравялем!</span>
+                <span class="ui-messages-info-detail">Вы успешно зарегистрировались.</span>
+                <span class="ui-messages-info-detail">
+                    Вы будете перенаправлены на страницу входа через 5 секунд.
+                    Нажмите <a href="index.xhtml">здесь</a>, если этого не произошло.
+                </span>
+            </div>
+        </h:panelGroup>
+        <script type="text/javascript">
+            setTimeout(function() {
+                location.replace("/index.jsf");
+            }, 5000);
+        </script>
+    </h:body>
+</html>
+
