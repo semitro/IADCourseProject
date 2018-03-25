@@ -13,20 +13,19 @@
     </h:head>
 
     <h:body>
-    <!--<body background="resources/img/guitarPillar.jpg" onload="VK.init({apiId: API_ID});">-->
         <div class="floatToRight">
                 <h:form>
                     <h:panelGrid columns="2">
                         <p:outputLabel value="Логин" for="login_input"/>
-                        <p:inputText id="login_input" label="Логин" value="#{regitsterageController.username}"/>
+                        <p:inputText id="login_input" label="Логин" value="#{registrationPageController.username}"/>
                         <p:outputLabel value="Пароль" for="password_input"/>
-                        <p:password id="password_input" label="Пароль" value="#{registerPageController.password}"/>
+                        <p:password id="password_input" label="Пароль" value="#{registrationPageController.password}"/>
                         <p:password id="password_input_repeat" label="Подтвердите Пароль"
-                                    value="#{registerPageController.password}"/>
+                                    value="#{registrationPageontroller.password}"/>
                         <p:inputText id="email" label="email"/>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
-                        <p:commandButton value="Регистрация" action="#{registerPageController.signIn()}"/>
+                        <p:commandButton value="Регистрация" action="#{registrationPageController.signUp()}"/>
                     </h:panelGrid>
                 </h:form>
             </div>

@@ -41,6 +41,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/",
                         "/index.jsf",
+                        "/registration.jsf",
                         "/javax.faces.resource/**"
                 ).permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")

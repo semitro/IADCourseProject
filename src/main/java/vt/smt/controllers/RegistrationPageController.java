@@ -1,0 +1,37 @@
+package vt.smt.controllers;
+
+/**
+ * Created by semitro on 25.03.18.
+ */
+public class RegistrationPageController {
+    private String username;
+    private String password;
+    private String password2;
+
+    public void signUp(){
+        System.out.println("signUp");
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+}

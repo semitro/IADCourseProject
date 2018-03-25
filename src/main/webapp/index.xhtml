@@ -12,12 +12,10 @@
     </h:head>
 
     <h:body>
-    <!--<body background="resources/img/guitarPillar.jpg" onload="VK.init({apiId: API_ID});">-->
         <div class="floatToRight">
                 <H2>Добро пожаловать!</H2>
 
             <h:form prependId="false">
-                <p:outputLabel value="Login failed!" rendered="${!empty param['error']}" />
                     <h:panelGrid columns="2">
                         <p:outputLabel value="Логин" for="username"/>
                         <p:inputText id="username" name="username" label="Логин" placeholder="User name"
@@ -26,11 +24,10 @@
                         <p:password id="password" name="password" label="Пароль"
                                     placeholder="Password" value="#{helloPageController.password}"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="2">
+                    <p:outputLabel value="Login failed!" rendered="${!empty param['error']}" />
                         <p:commandButton value="Вход" ajax="false"/>
-                        <p:commandButton value="Регистрация"/>
-                    </h:panelGrid>
-                </h:form>
+            </h:form>
+            <p:button value="Регистрация" outcome="registration?faces-redirect=true"/>
             </div>
         <H1 class="bigLabelOnTop"> MuzzFights</H1>
 
