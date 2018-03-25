@@ -48,7 +48,7 @@ public class AdventurePageController {
         try {
             events.add(0, adventure.go());
             if (events.size()>100) {
-                events.retainAll(events.subList(0, 80));
+                events.subList(80, events.size()).clear();
             }
         }catch (AlreadyInAdventureException e){
             System.err.println("Already in an adventure!");
