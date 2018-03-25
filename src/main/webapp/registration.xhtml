@@ -28,12 +28,14 @@
                     <p:password id="pass_t" label="Пароль" maxlength="128"
                                 placeholder="пароль"
                                 value="#{registrationPageController.password}"
-                                required="true" match="pwd2" feedback="true"/>
+                                required="true" match="pwd2" feedback="true"
+                                promptLabel="Надёжность пароля"
+                                weakLabel="Слабый" goodLabel="Хороший" strongLabel="Надёжный"/>
                     <p:outputLabel value="" for="pwd2"/>
                     <p:password id="pwd2" label="Подтвердите пароль" maxlength="128"
                                 placeholder="повторите пароль"
                                 value="#{registrationPageontroller.password}"
-                                required="true" match="pass_t" feedback="true"/>
+                                required="true"/>
                     <!--
                     <p:outputLabel value="e-mail" for="email"/>
                     <p:inputText type="email" id="email" label="e-mail" placeholder="email@example.com"/>
