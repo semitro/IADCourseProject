@@ -1,8 +1,8 @@
 package vt.smt.ent.game;
 
+import vt.smt.ent.bands.Member;
 import vt.smt.ent.net.Resource;
 import vt.smt.ent.net.Users;
-import vt.smt.ent.bands.Member;
 
 import javax.persistence.*;
 import java.io.Serializable;
