@@ -8,30 +8,35 @@
             MuzzFight!
         </title>
         <!--<script type="text/javascript" src="//vk.com/js/api/openapi.js?151"></script>-->
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu" rel="stylesheet"/>
+        <h:outputStylesheet name="css/common.css"/>
         <h:outputStylesheet name="css/HelloPage.css"/>
-
     </h:head>
-
     <h:body>
-        <div class="floatToRight">
-                <h:form>
-                    <h:panelGrid columns="2">
-                        <p:outputLabel value="Логин" for="login_input"/>
-                        <p:inputText id="login_input" label="Логин" value="#{registrationPageController.username}"/>
-                        <p:outputLabel value="Пароль" for="password_input"/>
-                        <p:password id="password_input" label="Пароль" value="#{registrationPageController.password}"/>
-                        <p:password id="password_input_repeat" label="Подтвердите Пароль"
-                                    value="#{registrationPageontroller.password}"/>
-                        <p:inputText id="email" label="email"/>
-                    </h:panelGrid>
-                    <h:panelGrid columns="2">
-                        <p:commandButton value="Регистрация" action="#{registrationPageController.signUp()}"/>
-                    </h:panelGrid>
-                </h:form>
-            </div>
-        <H1 class="bigLabelOnTop"> MuzzFights</H1>
-
-
+        <H1 class="bigLabelOnTop muzzfight">MuzzFight</H1>
+        <div class="clearRight"/>
+        <div class="floatToRight loginForm">
+            <h2>Регистрация в <span class="muzzfight">MuzzFight</span></h2>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Логин" for="login_input"/>
+                    <p:inputText id="login_input" label="Логин" placeholder="username"
+                                 value="#{registrationPageController.username}"
+                                 required="true"/>
+                    <p:outputLabel value="Пароль" for="password_input"/>
+                    <p:password id="password_input" label="Пароль" placeholder="password"
+                                value="#{registrationPageController.password}"
+                                required="true"/>
+                    <p:outputLabel value="" for="password_input_repeat"/>
+                    <p:password id="password_input_repeat" label="Подтвердите Пароль"
+                                placeholder="repeat password"
+                                value="#{registrationPageontroller.password}"
+                                required="true"/>
+                    <p:outputLabel value="e-mail" for="email"/>
+                    <p:inputText type="email" id="email" label="e-mail" placeholder="email@example.com"/>
+                </h:panelGrid>
+                <p:commandButton value="Зарегистрироваться" action="#{registrationPageController.signUp()}"/>
+            </h:form>
+        </div>
     </h:body>
-
 </html>
