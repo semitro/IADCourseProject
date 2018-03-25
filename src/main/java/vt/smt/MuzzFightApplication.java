@@ -7,22 +7,14 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
 
-//@Configuration
-@EnableAspectJAutoProxy(proxyTargetClass = true)
-@SpringBootApplication
-//@Configuration
-//@Configuration("Main applicationContext")
-@ComponentScan("vt.smt")
 
-//@EnableJpaRepositories(basePackages="vt.smt.db.repositories")
-//@EnableTransactionManagement
-//@EntityScan(basePackages="vt.smt.ent")
+@SpringBootApplication
+@ComponentScan("vt.smt")
 public class MuzzFightApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MuzzFightApplication.class, args);
