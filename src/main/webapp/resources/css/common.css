@@ -1,7 +1,12 @@
+html {
+    height: 100%;
+}
+
 body {
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Ubuntu', sans-serif;
+    background-color: cadetblue;
 }
 
 /*
@@ -15,6 +20,25 @@ body {
 
 .muzzfight {    
     font-family: 'Josefin Sans', sans-serif;
+}
+
+#backgroundText {
+    top: -50px;
+    left: -100px;
+    right: -500px;
+    bottom: -500px;
+    position: fixed;
+    transform: rotate(20deg);
+    z-index: -100;
+    background-color: cornsilk;
+    padding: 2em;
+}
+
+#backgroundText:after {
+    content: "MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight MuzzFight";
+    font-size: 4em;
+    font-family: "Josefin Sans", sans-serif;
+    opacity: 0.8;
 }
 
 .floatToRight {    
