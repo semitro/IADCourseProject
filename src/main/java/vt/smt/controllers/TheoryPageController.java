@@ -11,10 +11,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
 import vt.smt.db.repositories.*;
-import vt.smt.ent.game.*;
-import vt.smt.ent.theory.*;
+import vt.smt.ent.game.Ability;
+import vt.smt.ent.game.CharacterAbility;
+import vt.smt.ent.game.GameCharacter;
+import vt.smt.ent.theory.Article;
+import vt.smt.ent.theory.Course;
+import vt.smt.ent.theory.Question;
+import vt.smt.ent.theory.Test;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -41,7 +45,7 @@ public class TheoryPageController {
 
     private String usrAnswer = "";
 
-    private String buttonName = "Сдать экзамен";
+    private String buttonName = "";
 
 //    private String weDontHaveTests = "";
 
@@ -90,13 +94,6 @@ public class TheoryPageController {
         articleTitle   = ((MenuActionEvent)event).getMenuItem().getParams().get("articleTitle")  .get(0);
         buttonName      = "";
         articleTest = testRepository.findByTitle(articleTitle);
-        if(articleTest == null) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Извините", "Тест для данного раздела" +
-                    "находится в разработке"));
-        }
-        else
-            buttonName = "Ответить!";
 
         questions.clear();
         System.out.println(articleTest);
@@ -127,22 +124,39 @@ public class TheoryPageController {
             regardUser(usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0),
                 articleTest.getScript().getScript());
         }
+        else {
+            messageNotify("Хмм", usrAnswer.contains("окуни") ?
+                    "~Стеклянные окуни- это Java EE~" :" Это неправильный ответ");
+        }
+    }
+
+    private void messageNotify(String head, String msg){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(head, msg));
     }
 
     private void regardUser(GameCharacter character, String rewardScript){
-        Ability newAbility =
-            abilityRepository.findByName(rewardScript);
+        messageNotify("Вы защитили теорию!", "В награду вы получаете новое умение!");
+        Ability newAbility = abilityRepository.findByName(rewardScript);
         // Даём игроку новую абилку
         CharacterAbility character_ability = new CharacterAbility();
         character_ability.setAbility(newAbility);
-        character_ability.setGameCharacter(character);
-        character_ability.setPowerLevel(1);
-        System.out.println("Новая способность:" + character_ability + character + newAbility);
-        characterAbilityRespitory.save(character_ability);
+        if(!character.getAbilities().contains(character_ability)) {
+            character_ability.setAbility(newAbility);
+            character_ability.setGameCharacter(character);
+            character_ability.setPowerLevel(1);
+            System.out.println("Новая способность:" + character_ability + character + newAbility);
+            characterAbilityRespitory.save(character_ability);
+
+            messageNotify(newAbility.getName(), newAbility.getDescription());
+        }
+        else
+            messageNotify("Ах :)", "А ведь вы уже имеете способность " + newAbility.getName());
     }
     public MenuModel getMenu() {
         return menu;
     }
+
     public void setMenu(MenuModel menu) {
         this.menu = menu;
     }

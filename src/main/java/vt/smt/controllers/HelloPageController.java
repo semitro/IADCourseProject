@@ -14,9 +14,6 @@ public class HelloPageController {
 
     private String password;
 
-    public HelloPageController(){
-        System.err.println("hello pageContorller constructor");
-    }
     public String getUsername() {
         return username;
     }
