@@ -3,10 +3,9 @@ package vt.smt.game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import vt.smt.db.repositories.BandRepository;
-import vt.smt.db.repositories.CharacterRepository;
+import vt.smt.db.repositories.*;
 import vt.smt.ent.bands.Band;
-import vt.smt.ent.game.GameCharacter;
+import vt.smt.ent.game.*;
 
 import java.util.Date;
 import java.util.List;
@@ -16,22 +15,19 @@ import java.util.Random;
 @Scope(value = "session")
 public class AdventureProcessor implements AdventureInterface {
 
-//    private Integer progress = 0;
-
     private GameCharacter gameCharacter;
     private boolean inAdventure = false;
 
     @Autowired
     private CharacterRepository characterRepository;
 
+    @Autowired
+    private ItemTypeRepository itemTypeRepository;
+
     @Override
     public AdventureEvent go(){
         if(inAdventure) throw new AlreadyInAdventureException();
-//        inAdventure = true;
-
-
         String ans = makeSomethingWithCharacter();
-//        inAdventure = false;
         try {
             characterRepository.saveAndFlush(gameCharacter);
         }catch (Exception e){
@@ -42,6 +38,8 @@ public class AdventureProcessor implements AdventureInterface {
 
     @Autowired
     private BandRepository bandRepository;
+    @Autowired
+    private Shop itemShop; // Отсюда берём подарки
 
     // С одной стороны, лучше передавать игрока прямо в метод go:
     // не храним состояние, избегаем ошибок и бла-бла-бла;
@@ -52,10 +50,11 @@ public class AdventureProcessor implements AdventureInterface {
     public void setTraveler(GameCharacter character) {
         this.gameCharacter = character;
     }
+
     private String makeSomethingWithCharacter(){
         Random random = new Random(System.currentTimeMillis());
 
-        switch (random.nextInt(9)){
+        switch (random.nextInt(10)){
             case 0: {
                 int newRoses = random.nextInt(50);
                 gameCharacter.setRoses(gameCharacter.getRoses() + newRoses);
@@ -118,20 +117,21 @@ public class AdventureProcessor implements AdventureInterface {
                 + "опыт + " + exp + ", защита + " + defence;
 
             }
+            case 8:{
+                List<ItemType> protoItems = itemTypeRepository.findAll();
+                int index = random.nextInt(protoItems.size());
+                if(protoItems.size()  == 0)
+                    throw new IllegalStateException("Не могу подарить игроку предметов." +
+                            "В базе нет записи о itemType");
+                itemShop.giftItemToTheCharacter(gameCharacter, protoItems.get(index));
+                return "Найден предмет: " + protoItems.get(index).getName();
+            }
         }
         characterRepository.save(gameCharacter);
         return "Ничего не произошло";
     }
-//    @Override
 
-//    }
-//        this.progress = progress;
-//    public void setProgress(Integer progress) {
-//
-//    }
-//        return progress;
-//    public Integer getProgress() {
-public BandRepository getBandRepository() {
+    public BandRepository getBandRepository() {
     return bandRepository;
 }
 

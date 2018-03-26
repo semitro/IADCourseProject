@@ -81,9 +81,8 @@ public class CharacterItem implements Serializable{
 
     @Override
     public int hashCode() {
-        int result = characterItemId.hashCode();
+        int result = 1;
         result = 31 * result + item.hashCode();
-        result = 31 * result + gameCharacter.hashCode();
         return result;
     }
 

@@ -29,18 +29,18 @@ public class GameAspect {
 
     @After("execution(* sellItem(..))")
     public void getSellingAfteradvice(JoinPoint joinPoint){
-        logger.info("Попытка продажи- {} ", joinPoint);
+        logger.info("Продано- {} ", joinPoint);
     }
 
+    @Before("execution(* giftItemToTheCharacter(..))")
+    public void getGiftBeforeAdvice(JoinPoint joinPoint){
+        logger.info("Вход в процедуру подарка - {} ", joinPoint);
+    }
 
-    //What kind of method calls I would intercept
-    //execution(* PACKAGE.*.*(..))
-    //Weaving & Weaver
-//    @Before("execution(* vt.smt.controllers.*.*(..))")
-//    public void before(JoinPoint joinPoint){
-//        //Advice
-//        logger.info(" Check for user access ");
-//        logger.info(" Allowed execution for {}", joinPoint);
-//    }
+    @After("execution(* giftItemToTheCharacter(..))")
+    public void getGiftAfterAdvice(JoinPoint joinPoint){
+        logger.info("Подарен- {} ", joinPoint);
+    }
+
 
 }

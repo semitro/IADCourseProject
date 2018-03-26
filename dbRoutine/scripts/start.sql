@@ -9,3 +9,4 @@
 \ir setUpResources.sql
 \ir setUpCharacters.sql
 \ir setUpAbilities.sql
+\ir setUpItems.sql

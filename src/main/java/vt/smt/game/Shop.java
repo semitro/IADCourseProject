@@ -5,16 +5,17 @@ package vt.smt.game;
  */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vt.smt.db.repositories.CharacterItemRepository;
-import vt.smt.ent.game.CharacterItem;
-import vt.smt.ent.game.GameCharacter;
-import vt.smt.ent.game.Item;
+import vt.smt.db.repositories.*;
+import vt.smt.ent.game.*;
 
 @Component
 public class Shop {
 
     @Autowired
     private CharacterItemRepository characterItemRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     public void sellItem(GameCharacter character, Item item) throws IllegalArgumentException{
 
@@ -35,5 +36,34 @@ public class Shop {
         // Нет такого предмета в инвентаре
         throw new IllegalArgumentException("Пользователь " + character +
                 " не имеет предмета " + item + ", а потому не может его продать");
+    }
+
+    public void giftItemToTheCharacter(GameCharacter character, ItemType itemType){
+        // Если предмет есть, количество + 1
+        for (CharacterItem characterItem : character.getItems()) {
+              if(characterItem.getItem().getType().equals(itemType)) {
+                  characterItem.setNumber(characterItem.getNumber() + 1);
+                  characterItemRepository.save(characterItem);
+                  return;
+              }
+        }
+       // Если нет предмета
+        CharacterItem characterItem = new CharacterItem();
+        Item item = new Item();
+        item.setName(itemType.getName());
+        item.setPrice(itemType.getTypeId()*123); // Хи-хи
+        item.setType(itemType);
+        characterItem.setGameCharacter(character); // owner
+        itemRepository.save(item);
+        characterItem.setItem(item);
+        characterItem.setNumber(1);
+        characterItemRepository.save(characterItem);
+    }
+    private boolean hasItem(GameCharacter character, ItemType item){
+        for (CharacterItem characterItem : character.getItems()) {
+            if(characterItem.getItem().getType().equals(item))
+                return true;
+        }
+        return  false;
     }
 }
