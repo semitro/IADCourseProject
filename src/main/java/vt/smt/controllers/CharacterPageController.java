@@ -1,7 +1,5 @@
 package vt.smt.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -9,14 +7,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import vt.smt.db.repositories.UsersRepository;
-import vt.smt.ent.game.CharacterAbility;
-import vt.smt.ent.game.GameCharacter;
+import vt.smt.db.repositories.*;
+import vt.smt.ent.game.*;
+import vt.smt.ent.net.Resource;
+import vt.smt.game.Shop;
 
 import javax.annotation.PostConstruct;
-import vt.smt.db.repositories.CharacterRepository;
-import vt.smt.db.repositories.ResourceRepository;
-import vt.smt.ent.net.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Бины создаёт Spring, судя по всему (аннотации JSF-бинодела закомменчены)
@@ -32,17 +30,25 @@ import vt.smt.ent.net.Resource;
 public class CharacterPageController {
 
     private GameCharacter character;
-
     private CharacterAbility selectedAbility;
+
+    private CharacterItem selectedItem;
 
     @Autowired
     private UsersRepository usersRepository;
-    
+
     @Autowired
     private ResourceRepository resourceRepository;
-    
+
     @Autowired
     private CharacterRepository characterRepository;
+
+    @Autowired
+    private Shop itemShop;
+
+    public void sellSelectedItem(){
+        itemShop.sellItem(character, selectedItem.getItem());
+    }
 
     @PostConstruct
     public void CharacterPageController(){
@@ -55,19 +61,19 @@ public class CharacterPageController {
     public GameCharacter getCharacter() {
         return character;
     }
-    
+
     public List<Resource> getCharacterImages() {
         List<Resource> res = resourceRepository.findByType("img");
         return res.stream()
                 .filter(r -> r.getUrl().startsWith("/img/characters"))
                 .collect(Collectors.toList());
     }
-    
+
     public void setImage(Resource image) {
         character.setImageResource(image);
         characterRepository.save(character);
     }
-    
+
     public Resource getImage() {
         return character.getImageResource();
     }
@@ -75,6 +81,7 @@ public class CharacterPageController {
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
+
 
     public CharacterAbility getSelectedAbility() {
         return selectedAbility;
@@ -95,4 +102,13 @@ public class CharacterPageController {
     public void setCharacterRepository(CharacterRepository characterRepository) {
         this.characterRepository = characterRepository;
     }
+
+    public CharacterItem getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(CharacterItem selectedItem) {
+        this.selectedItem = selectedItem;
+    }
+
 }
