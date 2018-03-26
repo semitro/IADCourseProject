@@ -78,12 +78,12 @@ body {
 
 aside {
     float: left;
-    width: 250px;
+    margin-right: 2em;
 }
 
-section {
-    margin-left: 280px;
-    padding-bottom: 50px;
+article {
+    float: left;
+    min-width: 50%;
 }
 
 .bolshe {
