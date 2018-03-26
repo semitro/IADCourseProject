@@ -1,9 +1,9 @@
 package vt.smt.ent.game;
 
+import vt.smt.ent.net.Resource;
+
 import javax.persistence.*;
 import java.io.Serializable;
-
-import vt.smt.ent.net.Resource;
 
 /**
  * Created by semitro on 03.12.17.
@@ -11,6 +11,7 @@ import vt.smt.ent.net.Resource;
 @Entity
 @Table(name = "item_type")
 public class ItemType implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_id")
@@ -19,7 +20,22 @@ public class ItemType implements Serializable {
     @Basic
     @Column(name = "name")
     private String name;
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ItemType itemType = (ItemType) o;
+
+        return name.equals(itemType.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
     @ManyToOne()
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id")
     private Resource imageResource;
@@ -62,23 +78,4 @@ public class ItemType implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ItemType itemType = (ItemType) o;
-
-        if (typeId != null ? !typeId.equals(itemType.typeId) : itemType.typeId != null) return false;
-        if (name != null ? !name.equals(itemType.name) : itemType.name != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = typeId != null ? typeId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
 }

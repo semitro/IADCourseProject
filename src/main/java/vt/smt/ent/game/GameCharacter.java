@@ -1,5 +1,7 @@
 package vt.smt.ent.game;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import vt.smt.ent.bands.Member;
 import vt.smt.ent.net.Resource;
 import vt.smt.ent.net.Users;
@@ -63,15 +65,18 @@ public class GameCharacter implements Serializable {
     @Column(name = "adventuring_since")
     private Date adventuringSince;
     /// Двунаправленная связь с ассоциативной таблицей Character_Item
-    @OneToMany(mappedBy="gameCharacter", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="gameCharacter", fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<CharacterItem> items;
     /// Двунаправленная связь с ассоциативной таблицей Character_Ability
     @OneToMany(mappedBy="gameCharacter", fetch=FetchType.EAGER)
     private List<CharacterAbility> abilities;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id",
 			nullable = false)
     private Resource imageResource;
+
     public List<CharacterItem> getItems() {
         return items;
     }

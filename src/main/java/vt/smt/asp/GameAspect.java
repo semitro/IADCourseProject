@@ -1,6 +1,7 @@
 package vt.smt.asp;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class BattleAspect {
+public class GameAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -20,6 +21,17 @@ public class BattleAspect {
     public void getStepAdvice(JoinPoint joinPoint){
         logger.info("Step - {} ", joinPoint);
     }
+
+    @Before("execution(* sellItem(..))")
+    public void getSellingBeforeAdvice(JoinPoint joinPoint){
+        logger.info("Попытка продажи- {} ", joinPoint);
+    }
+
+    @After("execution(* sellItem(..))")
+    public void getSellingAfteradvice(JoinPoint joinPoint){
+        logger.info("Попытка продажи- {} ", joinPoint);
+    }
+
 
     //What kind of method calls I would intercept
     //execution(* PACKAGE.*.*(..))
