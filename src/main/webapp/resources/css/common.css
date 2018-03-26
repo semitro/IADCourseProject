@@ -230,6 +230,9 @@ article {
     .mainPageTable {
         max-width: 48%;
     }
+    .battleAbility {
+        max-width: 25%;
+    }
 }
 @media(min-width: 861px) {
     .mainPageTable {
