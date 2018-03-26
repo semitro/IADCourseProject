@@ -129,8 +129,6 @@ public class TheoryPageController {
     // Проверить тест и, возможно, наградить
     public void passTheExam(){
 
-        
-
         if(articleTest != null) {
             System.out.println("Пользователь попытался сдать экзамен. Ответ=" +
                 usrAnswer.entrySet().stream().map(e -> e.getValue()).collect(Collectors.joining(", "))
