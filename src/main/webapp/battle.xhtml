@@ -51,10 +51,14 @@
                                    styleClass="name"/>
                 </h:panelGroup>
                 <h:panelGroup id="paramsForm">
-                    <p:outputLabel value="HP: #{battlePageController.character.health}"
-                                   styleClass="hp floatToLeft"/>
-                    <p:outputLabel value="HP: #{battlePageController.enemy.health}"
-                                   styleClass="hp floatToRight"/>
+                    <h:panelGrid columns="1" styleClass="hp floatToLeft">
+                        <p:outputLabel value="HP: #{battlePageController.character.health}"/>
+                        <p:outputLabel value="Roses: #{battlePageController.character.roses}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" styleClass="hp floatToRight">
+                        <p:outputLabel value="HP: #{battlePageController.enemy.health}"/>
+                        <p:outputLabel value="Roses: #{battlePageController.enemy.roses}"/>
+                    </h:panelGrid>
                 </h:panelGroup>
                 <div style="height: 10em;"/>
                 <div class="textLog">

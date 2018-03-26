@@ -152,7 +152,6 @@ article {
 }
 .battleWrapper .textLog {
     height: 22ex;
-    overflow: hidden;
 }
 /* names of the battlers */
 #names{
