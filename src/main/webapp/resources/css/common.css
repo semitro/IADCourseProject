@@ -71,6 +71,10 @@ body {
     max-height: 200px;
 }
 
+.mainPageTable {
+    min-width: 48%;
+}
+
 #wrapper{
     max-width: 980px;
     margin: auto;
@@ -231,10 +235,5 @@ article {
     }
     .battleAbility {
         max-width: 25%;
-    }
-}
-@media(min-width: 861px) {
-    .mainPageTable {
-        min-width: 48%;
     }
 }
