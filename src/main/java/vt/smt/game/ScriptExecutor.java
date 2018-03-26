@@ -1,5 +1,7 @@
 package vt.smt.game;
 
+import org.springframework.stereotype.Component;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
@@ -12,6 +14,7 @@ import java.util.List;
  * Можно передавать произвольное число параметров типа Integer или
  * вызывать метод без аргументов
  */
+
 public class ScriptExecutor {
 
     private ListOfActions listOfActions; // all the methods of this class can be invoked by script
