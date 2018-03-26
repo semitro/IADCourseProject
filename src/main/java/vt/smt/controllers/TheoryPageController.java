@@ -122,7 +122,7 @@ public class TheoryPageController {
             Authentication authentication = // get it from the session
                     SecurityContextHolder.getContext().getAuthentication();
             regardUser(usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0),
-                articleTest.getScript().getScript());
+                articleTest.getScript().getScript()); // getScript. (см. setUpCourses.sql)
         }
         else {
             messageNotify("Хмм", usrAnswer.contains("окуни") ?
