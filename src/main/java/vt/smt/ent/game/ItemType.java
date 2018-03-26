@@ -17,10 +17,6 @@ public class ItemType implements Serializable {
     @Column(name = "type_id")
     private Integer typeId;
 
-    @Basic
-    @Column(name = "name")
-    private String name;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,6 +31,10 @@ public class ItemType implements Serializable {
     public int hashCode() {
         return name.hashCode();
     }
+
+    @Basic
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne()
     @JoinColumn(name = "image_resource_id", referencedColumnName = "resource_id")

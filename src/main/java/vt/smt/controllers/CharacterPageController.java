@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import vt.smt.db.repositories.*;
 import vt.smt.ent.game.*;
 import vt.smt.ent.net.Resource;
-import vt.smt.game.Shop;
+import vt.smt.game.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -46,8 +46,9 @@ public class CharacterPageController {
     @Autowired
     private Shop itemShop;
 
-    public void sellSelectedItem(){
-        itemShop.sellItem(character, selectedItem.getItem());
+    public void sellSelectedItem(CharacterItem characterItem){
+        System.out.println("sellSelectedItem");
+        itemShop.sellItem(characterItem);
     }
 
     @PostConstruct

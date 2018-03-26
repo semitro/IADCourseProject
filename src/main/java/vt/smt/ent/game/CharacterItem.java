@@ -19,7 +19,8 @@ public class CharacterItem implements Serializable{
     @Basic
     @Column(name = "slot")
     private Short slot;
-	@ManyToOne(optional = false)
+
+    @ManyToOne(optional = false)
 	@JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
@@ -37,6 +38,21 @@ public class CharacterItem implements Serializable{
 
     public Item getItem() {
         return item;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CharacterItem that = (CharacterItem) o;
+
+        return item.equals(that.item);
+    }
+
+    @Override
+    public int hashCode() {
+        return item.hashCode();
     }
 
     public void setItem(Item item) {
@@ -68,22 +84,12 @@ public class CharacterItem implements Serializable{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CharacterItem that = (CharacterItem) o;
-
-        if (!characterItemId.equals(that.characterItemId)) return false;
-        if (!item.equals(that.item)) return false;
-        return gameCharacter.equals(that.gameCharacter);
+    public String toString() {
+        return "CharacterItem{" +
+                "characterItemId=" + characterItemId +
+                ", number=" + number +
+                ", slot=" + slot +
+                ", item=" + item +
+                '}';
     }
-
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = 31 * result + item.hashCode();
-        return result;
-    }
-
 }

@@ -17,26 +17,49 @@ public class Shop {
     @Autowired
     private ItemRepository itemRepository;
 
-    public void sellItem(GameCharacter character, Item item) throws IllegalArgumentException{
+    @Autowired
+    private CharacterRepository characterRepository;
 
-        for (CharacterItem characterItem : character.getItems()) {
-            if(characterItem.getItem().equals(item)) {
-                character.setRoses(character.getRoses() + item.getPrice());
-                if(characterItem.getNumber() == null
-                        || characterItem.getNumber() == 1) { // Если -1 не имеет смысла
-                    characterItemRepository.delete(characterItem);
-                }
-                else{
-                    characterItem.setNumber(characterItem.getNumber()-1);
-                    characterItemRepository.save(characterItem);
-                }
-            }
+    public void sellItem(CharacterItem ch_item){
+        if(ch_item == null)
+            System.out.println("Попытка продажи null item");
+        else
+            System.out.println(ch_item);
+
+        if(ch_item.getNumber() > 1){
+            ch_item.setNumber(ch_item.getNumber() - 1);
+            characterItemRepository.save(ch_item);
+        }
+        else{
+            characterItemRepository.delete(ch_item);
         }
 
-        // Нет такого предмета в инвентаре
-        throw new IllegalArgumentException("Пользователь " + character +
-                " не имеет предмета " + item + ", а потому не может его продать");
+//        else {
+//            System.err.println("Предмет не продан: не найден");
+//            throw new IllegalArgumentException("Пользователь " + character +
+//                    " не имеет предмета " + ch_item + ", а потому не может его продать");
+//          }
     }
+//    public void sellItem(GameCharacter character, Item item) throws IllegalArgumentException{
+//
+//        for (CharacterItem characterItem : character.getItems()) {
+//            if(characterItem.getItem().equals(item)) {
+//                character.setRoses(character.getRoses() + item.getPrice());
+//                if(characterItem.getNumber() == null
+//                        || characterItem.getNumber() == 1) { // Если -1 не имеет смысла
+//                    characterItemRepository.delete(characterItem);
+//                }
+//                else{
+//                    characterItem.setNumber(characterItem.getNumber()-1);
+//                    characterItemRepository.save(characterItem);
+//                }
+//            }
+//        }
+//
+//        // Нет такого предмета в инвентаре
+//        throw new IllegalArgumentException("Пользователь " + character +
+//                " не имеет предмета " + item + ", а потому не может его продать");
+//    }
 
     public void giftItemToTheCharacter(GameCharacter character, ItemType itemType){
         // Если предмет есть, количество + 1
