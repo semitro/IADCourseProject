@@ -126,14 +126,6 @@ create table Character_Ability(
 	last_useed  date default null
 );
 -- THEORY --
-create table Question(
-	question_id serial primary key,
-	content text not null,
-	answer text not null,
-	wrong1 text,
-	wrong2 text,
-	wrong3 text
-);
 
 create table Test(
 	test_id serial primary key,
@@ -144,6 +136,15 @@ create table Test(
 						on delete set null
 );
 
+create table Question(
+	question_id serial primary key,
+	test_id integer references Test(test_id),
+	content text not null,
+	answer text not null,
+	wrong1 text,
+	wrong2 text,
+	wrong3 text
+);
 
 create table Course(
 		course_id serial primary key,
