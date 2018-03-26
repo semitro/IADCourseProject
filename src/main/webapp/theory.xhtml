@@ -12,6 +12,9 @@
     </h:head>
 
     <h:body>
+        <h:form id="gr">
+            <p:growl id="growl" showDetail="true" sticky="true" />
+        </h:form>
         <div id="backgroundText"/>
         <div id="wrapper">
             <nav class="letThereBeSpace">
@@ -32,10 +35,11 @@
                 </p:toolbar>
             </nav>
 
-            <h:form id="test">
 
             <aside>
-                    <p:menu model="#{theoryPageController.menu}" />
+                <h:form id="menu">
+                    <p:menu model="#{theoryPageController.menu}"/>
+                </h:form>
             </aside>
             <section>
 
@@ -49,19 +53,21 @@
                        value="#{theoryPageController.articleContent}"/>
             </p>
             <hr/>
-                <p:commandButton id="examButton" value="#{theoryPageController.buttonName}"
+                <h:form id="test">
+                    <p:button id="examButton" value="#{theoryPageController.buttonName}"
                              action="#{theoryPageController.passTheExam()}"
+                                 update=":gr:growl qeez examButton"
                                  rendered="#{theoryPageController.buttonName.length() > 1}"/>
             <h:panelGrid id="radio" columns="2" style="margin-bottom:10px" cellpadding="5"
                          rendered="#{theoryPageController.questions.size() != 0}">
+
                 <p:selectOneRadio id="qeez" value="#{theoryPageController.usrAnswer}"  layout="grid" columns="1">
                     <f:selectItems          value="#{theoryPageController.questions}"
                                             var="q" itemLabel="#{q}" itemValue="#{q}"/>
                 </p:selectOneRadio>
             </h:panelGrid>
-            <p:outputLabel id="weDontHaveTests" value="#{theoryPageController.weDontHaveTests}"/>
+                </h:form>
             </section>
-        </h:form>
 
     </div>
 

@@ -17,8 +17,12 @@ import vt.smt.ent.theory.Question;
 import vt.smt.ent.theory.Test;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,7 +43,7 @@ public class TheoryPageController {
 
     private String buttonName = "Сдать экзамен";
 
-    private String weDontHaveTests = "";
+//    private String weDontHaveTests = "";
 
     @Autowired
     private CourseRepository courseRepository;
@@ -56,12 +60,11 @@ public class TheoryPageController {
             DefaultSubMenu currentMenu = new DefaultSubMenu(course.getTitle());
             for (Article article : course.getArticles()) {
                 DefaultMenuItem item = new DefaultMenuItem(article.getTitle());
-                item.setCommand("#{theoryPageController.setArticleContentDynamic}");
                 item.setParam("articleContent", article.getContent());
                 item.setParam("articleTitle", article.getTitle());
+                item.setCommand("#{theoryPageController.setArticleContentDynamic}");
 
-                item.setUpdate("examButton");
-
+                item.setUpdate("test:examButton");
                 currentMenu.addElement(item);
             }
             menu.addElement(currentMenu);
@@ -71,19 +74,24 @@ public class TheoryPageController {
         System.out.println("set article content dynamic");
         articleContent = ((MenuActionEvent)event).getMenuItem().getParams().get("articleContent").get(0);
         articleTitle   = ((MenuActionEvent)event).getMenuItem().getParams().get("articleTitle")  .get(0);
-        weDontHaveTests = "";
+//        weDontHaveTests = "";
         buttonName      = "";
         articleTest = testRepository.findByTitle(articleTitle);
         if(articleTest == null) {
-            weDontHaveTests = "Извините, тест для данного раздела ещё не придуман!";
+//            weDontHaveTests = "Извините, тест для данного раздела ещё не придуман!";
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Извините", "Тест для данного раздела" +
+                    "находится в разработке"));
         }
         else
             buttonName = "Ответить!";
         event.getComponent().processUpdates(FacesContext.getCurrentInstance());
-
-//        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("#test:examButton");
-//        RequestContext.getCurrentInstance().update("#test:examButton");
-
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void passTheExam(){
@@ -156,12 +164,12 @@ public class TheoryPageController {
         this.buttonName = buttonName;
     }
 
-    public String getWeDontHaveTests() {
-        return weDontHaveTests;
-    }
-
-    public void setWeDontHaveTests(String weDontHaveTests) {
-        this.weDontHaveTests = weDontHaveTests;
-    }
+//    public String getWeDontHaveTests() {
+//        return weDontHaveTests;
+//    }
+//
+//    public void setWeDontHaveTests(String weDontHaveTests) {
+//        this.weDontHaveTests = weDontHaveTests;
+//    }
 
 }
