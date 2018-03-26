@@ -17,7 +17,7 @@
         <div id="backgroundText"/>
         <div id="wrapper">
             <h:form id="gr">
-                <p:growl id="growl" showDetail="true" sticky="false" />
+                <p:growl id="growl" showDetail="true" sticky="true"/>
             </h:form>
             <nav class="letThereBeSpace">
                 <p:toolbar>
@@ -36,27 +36,36 @@
                     </f:facet>
                 </p:toolbar>
             </nav>
-            <div id="names">
-                <p:outputLabel value="#{battlePageController.character.name}" styleClass="name"/>
-                <p:outputLabel value=" vs " styleClass="name"/>
-                <p:outputLabel value="#{battlePageController.enemy.name}" styleClass="name"/>
-            </div>
-            <h:form id="paramsForm">
-                <div>
+            <h:form>
+                <p:commandButton value="В новый бой!" styleClass="floatToRight"
+                                 update="dataListForm names paramsForm"
+                                 action="#{battlePageController.restart()}"/>
+            </h:form>
+            <div class="clearRight"/>
+            <div class="battleWrapper">
+                <h:panelGroup layout="block" id="names">
+                    <p:outputLabel value="#{battlePageController.character.name}"
+                                   styleClass="name"/>
+                    <p:outputLabel value=" VS "/>
+                    <p:outputLabel value="#{battlePageController.enemy.name}"
+                                   styleClass="name"/>
+                </h:panelGroup>
+                <h:panelGroup id="paramsForm">
                     <p:outputLabel value="HP: #{battlePageController.character.health}"
                                    styleClass="hp floatToLeft"/>
                     <p:outputLabel value="HP: #{battlePageController.enemy.health}"
                                    styleClass="hp floatToRight"/>
+                </h:panelGroup>
+                <div style="height: 10em;"/>
+                <div class="textLog">
+                    <h:form id="dataListForm"> <!--лог битвы-->
+                        <p:dataList id="eventList" value="#{battlePageController.battleLog}"
+                                    var="events" type="unordered" emptyMessage="Вперёд, в битву!"
+                                    rendered="#{!battlePageController.battleLog.isEmpty()}">
+                            #{events}
+                        </p:dataList>
+                    </h:form>
                 </div>
-            </h:form>
-            <div class="textLog" style="height: 124px;">
-                <h:form id="dataListForm"> <!--лог битвы-->
-                    <p:dataList id="eventList" value="#{battlePageController.battleLog}"
-                                var="events" type="ordered"
-                                rendered="#{!battlePageController.battleLog.isEmpty()}">
-                        #{events}
-                    </p:dataList>
-                </h:form>
             </div>
             <div>
                 <h:form id="abil_form">
@@ -65,16 +74,19 @@
                         <f:facet name="header">
                             <p:outputLabel value="Используй свои навыки!" />
                         </f:facet>
-                        <p:repeat value="#{battlePageController.character.abilities}" var="char_ability">
+                        <p:repeat value="#{battlePageController.character.abilities}"
+                                  var="char_ability">
                             <p:commandLink update="dataListForm paramsForm :gr:growl"
-                                   action="#{battlePageController.step()}" style="margin: auto; width: 100px;">
-                                <f:setPropertyActionListener value="#{char_ability}" target="#{battlePageController.selectedAbility}" />
-                                <div class="battleAbility">
+                                   action="#{battlePageController.step()}"
+                                   style="margin: auto; width: 100px;">
+                                <f:setPropertyActionListener value="#{char_ability}"
+                                                             target="#{battlePageController.selectedAbility}" />
+                                <div class="battleAbility"
+                                     style="background-image: url('resources#{char_ability.ability.imageResource.url}')">
                                     <h:panelGrid columns='1'>
-                                        <p:outputLabel value="#{char_ability.ability.name}" style="font-weight: bold"/>
-                                        <div class="hcentered" style="width: 100px;">
-                                            <p:graphicImage styleClass="w100mh100" value="resources#{char_ability.ability.imageResource.url}" />
-                                        </div>
+                                        <p:outputLabel
+                                            value="#{char_ability.ability.name}"
+                                            style="font-weight: bold"/>
                                         <!--
                                         <h:panelGroup layout="block" rendered="#{char_ability.lastUsed}"
                                             style="position: absolute; z-index: 1;
@@ -89,11 +101,6 @@
                     <div class="clearLeft"/>
                 </h:form>
             </div>
-
-            <h:form>
-                <h:commandButton value="В новый бой!"
-                                 update="dataListForm names paramsForm" action="#{battlePageController.restart()}"/>
-            </h:form>
         </div>
     </h:body>
 </html>

@@ -57,6 +57,11 @@ body {
     clear: right;
 }
 
+.w100mh100 {
+    width: 100px;
+    max-height: 100px;
+}
+
 #wrapper{
     max-width: 980px;
     margin: auto;
@@ -95,23 +100,6 @@ section {
     border-bottom: none;
 }
 
-/* names of the battlers */
-#names{
-    font-size: larger;
-    font-family: sans-serif;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-}
-
-.name{
-    font-size: xx-large;
-    font-family: Norasi;
-}
-
-.hp{
-    color: red;
-}
 .letThereBeSpace {
     margin-bottom: 1.5em;
 }
@@ -129,17 +117,6 @@ section {
 
 }
 
-@media(max-width: 860px) {
-    .mainPageTable {
-        max-width: 48%;
-    }
-}
-@media(min-width: 861px) {
-    .mainPageTable {
-        min-width: 48%;
-    }
-}
-
 .messages, #messages {
     position: fixed;
     bottom: 0.2em;
@@ -152,8 +129,70 @@ section {
     to {opacity: 0.0;}
 }
 
+.battleWrapper {
+    background: white;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 6px 6px 0 0;
+    position: relative;
+}
+.battleWrapper .textLog {
+    height: 22ex;
+    overflow: hidden;
+}
+/* names of the battlers */
+#names{
+    font-size: larger;
+    font-family: sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid grey;
+    border-radius: inherit;
+    width: 100%;
+    text-align: center;
+    padding: 0.5em 0 0.6em;
+    animation: namesAnim 0.3s 0s linear infinite;
+}
+@keyframes namesAnim {
+    0% {background: linear-gradient(to right, red, orange, red);}
+    25% {background: linear-gradient(to right, orange, red, orange, red, orange);}
+    50% {background: linear-gradient(to right, orange, red, orange)}
+    75% {background: linear-gradient(to right, red, orange, red, orange, red);}
+    100% {background: linear-gradient(to right, red, orange, red);}
+}
+
+#names :nth-child(2) {
+    font-style: italic;
+    font-weight: 1000;
+}
+.name {
+    font-size: xx-large;
+    font-family: 'Josefin Sans';
+    display: inline-block;
+    padding: 0 0.5em;
+    position: relative;
+}
+.name:first-child {
+    top: -0.3em;
+}
+.name:last-child {
+    top: 0.3em;
+}
+
+.hp{
+    color: red;
+    font-size:larger;
+    padding: 0.3em;
+    font-weight: bold;
+}
+.hp:first-child {
+    padding-left: 20%;
+}
+.hp:last-child {
+    padding-right: 20%;
+}
+
 .battleAbility {
-    max-width: 50%;
+    max-width: 8em;
     min-width: 20%;
     border-radius: 3px;
     background-color: gainsboro;
@@ -161,13 +200,34 @@ section {
     position: relative;
     float: left;
     margin: 1em;
+    height: 8em;
+    word-wrap:break-word;
+    color: rgb(20,20,20);
+    text-shadow: whitesmoke 0px 0px 2px;
+    background-size: cover;
 }
 .battleAbility:hover {
-    top: -1px;
+    top: -2px;
     box-shadow: 0 1px 1px grey;
 }
 
-.w100mh100 {
-    width: 100px;
-    max-height: 100px;
+@media(max-width: 860px) {
+    .mainPageTable {
+        max-width: 48%;
+    }
+    #growl {
+        display: none;
+    }
+}
+@media(min-width: 861px) {
+    .mainPageTable {
+        min-width: 48%;
+    }
+    #growl {
+        animation: growlFadeOut 5s 3s forwards;
+    }
+    @keyframes growlFadeOut {
+        from {opacity: 1.0;}
+        to {opacity: 0.0;}
+    }
 }
