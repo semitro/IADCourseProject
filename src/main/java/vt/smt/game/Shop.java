@@ -20,12 +20,12 @@ public class Shop {
     @Autowired
     private CharacterRepository characterRepository;
 
-    public void sellItem(CharacterItem ch_item){
+    public void sellItem(CharacterItem ch_item, GameCharacter by){
         if(ch_item == null)
             System.out.println("Попытка продажи null item");
         else
             System.out.println(ch_item);
-
+        by.setRoses(by.getRoses() + ch_item.getItem().getPrice());
         if(ch_item.getNumber() > 1){
             ch_item.setNumber(ch_item.getNumber() - 1);
             characterItemRepository.save(ch_item);

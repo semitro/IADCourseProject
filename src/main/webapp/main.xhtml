@@ -55,7 +55,7 @@
                             <div class="clearLeft"/>
                         </p:dialog>
                     </h:form>
-                    <h:panelGrid columns="1">
+                    <h:panelGrid columns="1" id="stats">
                         <p:outputLabel value="Опыт: #{characterPageController.character.experience}"/>
                         <p:outputLabel value="Здоровье: #{characterPageController.character.health}"/>
                         <p:outputLabel value="Атака: #{characterPageController.character.attack}"/>
@@ -119,9 +119,9 @@
                         <f:facet name="header">
                             <p:outputLabel value="Инвентарь" />
                         </f:facet>
-                        <p:repeat value="#{characterPageController.character.items}" var="char_item">
+                        <p:repeat value="#{characterPageController.character.items}" var="char_item" id="rep">
                             <p:row>
-                                <h:panelGrid columns="2">
+                                <h:panelGrid columns="2" id="pgrid">
                                     <p:commandLink update=":item_form:itemDetail" oncomplete="PF('itemDialog').show()"> <!--инфо о выбранном предмете-->
                                         <f:setPropertyActionListener value="#{char_item}" target="#{characterPageController.selectedItem}" />
                                         <p:graphicImage styleClass="w100mh100" value="resources#{char_item.item.type.imageResource.url}" />
@@ -134,7 +134,10 @@
                                             <p:outputLabel value="Количество"/>
                                             <p:outputLabel value="#{char_item.number}"/>
                                         </h:panelGrid>
-                                        <p:commandButton value="Продать" action="#{characterPageController.sellSelectedItem(char_item)}"/>
+                                        <p:commandButton value="Продать"
+                                                         action="#{characterPageController.sellSelectedItem(char_item)}"
+                                                         update="stats pgrid rep item_form"
+                                        />
                                     </h:panelGroup>
                                 </h:panelGrid>
                             <hr />

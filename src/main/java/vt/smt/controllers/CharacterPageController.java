@@ -47,8 +47,8 @@ public class CharacterPageController {
     private Shop itemShop;
 
     public void sellSelectedItem(CharacterItem characterItem){
-        System.out.println("sellSelectedItem");
-        itemShop.sellItem(characterItem);
+        itemShop.sellItem(characterItem, character);
+        characterRepository.save(character);
     }
 
     @PostConstruct
