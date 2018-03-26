@@ -27,10 +27,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component(value = "theoryPageController")
 @Scope(value = "session")
@@ -43,9 +46,11 @@ public class TheoryPageController {
     private String articleContent = "Помогает практике (:";
     private String articleTitle = "Теория музыки";
 
-    private List<String> questions = new LinkedList<>();
+    private Map<String, List<String>> questions = new HashMap<>();
+    
+    private Map<String, String> questionContent = new HashMap<>();
 
-    private String usrAnswer = "";
+    private Map<String, String> usrAnswer = new HashMap<>();
 
     private String buttonName = "";
 
@@ -83,7 +88,7 @@ public class TheoryPageController {
                 item.setParam("articleTitle", article.getTitle());
                 item.setCommand("#{theoryPageController.setArticleContentDynamic}");
 
-                item.setUpdate("test:examButton");
+                item.setUpdate(":test");
                 currentMenu.addElement(item);
             }
             menu.addElement(currentMenu);
@@ -98,15 +103,21 @@ public class TheoryPageController {
         articleTest = testRepository.findByTitle(articleTitle);
 
         questions.clear();
+        questionContent.clear();
+        usrAnswer.clear();
         System.out.println(articleTest);
-        if(articleTest != null)
-        for (Question question : articleTest.getQuestions()) {
-            questions.add(question.getWrong1());
-            questions.add(question.getWrong2());
-            questions.add(question.getWrong3());
-            questions.add(question.getAnswer());
+        if(articleTest != null) {
+            for (Question question : articleTest.getQuestions()) {
+                List<String> q = new LinkedList<>();
+                q.add(question.getWrong1());
+                q.add(question.getWrong2());
+                q.add(question.getWrong3());
+                q.add(question.getAnswer());
+                Collections.shuffle(q);
+                questions.put(question.getQuestionId().toString(), q);
+                questionContent.put(question.getQuestionId().toString(), question.getContent());
+            }
         }
-        Collections.shuffle(questions);
         event.getComponent().processUpdates(FacesContext.getCurrentInstance());
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
@@ -118,18 +129,25 @@ public class TheoryPageController {
     // Проверить тест и, возможно, наградить
     public void passTheExam(){
 
-        System.out.println("Пользователь попытался сдать экзамен. Ответ=" + usrAnswer
-                + "Успех = " + articleTest.getQuestions().get(0).getAnswer().equals(usrAnswer));
+        
 
-        if(articleTest.getQuestions().get(0).getAnswer().equals(usrAnswer)) {
-            Authentication authentication = // get it from the session
-                    SecurityContextHolder.getContext().getAuthentication();
-            regardUser(usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0),
-                articleTest.getScript().getScript()); // getScript. (см. setUpCourses.sql)
-        }
-        else {
-            messageNotify("Хмм", usrAnswer.contains("окуни") ?
-                    "~Стеклянные окуни- это Java EE~" :" Это неправильный ответ");
+        if(articleTest != null) {
+            System.out.println("Пользователь попытался сдать экзамен. Ответ=" +
+                usrAnswer.entrySet().stream().map(e -> e.getValue()).collect(Collectors.joining(", "))
+                + "\nУспех = " +
+                articleTest.getQuestions().stream().map(q -> q.getAnswer()).collect(Collectors.joining(","))
+            );
+            if(articleTest.getQuestions().stream()
+                    .allMatch(q -> q.getAnswer().equals(usrAnswer.get(q.getQuestionId().toString())))) {
+                Authentication authentication = // get it from the session
+                        SecurityContextHolder.getContext().getAuthentication();
+                regardUser(usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0),
+                    articleTest.getScript().getScript()); // getScript. (см. setUpCourses.sql)
+            }
+            else {
+                messageNotify("Хмм", usrAnswer.containsValue("окуни") ?
+                        "~Стеклянные окуни- это Java EE~" :" Это неправильный ответ");
+            }
         }
     }
 
@@ -186,20 +204,32 @@ public class TheoryPageController {
         this.testRepository = testRepository;
     }
 
-    public List<String> getQuestions() {
+    public Map<String, List<String>> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<String> questions) {
+    public void setQuestions(Map<String, List<String>> questions) {
         this.questions = questions;
     }
 
-    public String getUsrAnswer() {
+    public Map<String, String> getUsrAnswer() {
         return usrAnswer;
     }
 
-    public void setUsrAnswer(String usrAnswer) {
+    public void setUsrAnswer(Map<String, String> usrAnswer) {
         this.usrAnswer = usrAnswer;
+    }
+    
+    public Map<String, String> getQuestionContent() {
+        return questionContent;
+    }
+    
+    public void setQuestionContent(Map<String, String> q) {
+        questionContent = q;
+    }
+    
+    public List<String> getQuestionIds() {
+        return questionContent.keySet().stream().map(i -> i.toString()).collect(Collectors.toList());
     }
 
     public String getButtonName() {
