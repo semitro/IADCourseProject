@@ -1,5 +1,7 @@
 package vt.smt.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -12,6 +14,9 @@ import vt.smt.ent.game.CharacterAbility;
 import vt.smt.ent.game.GameCharacter;
 
 import javax.annotation.PostConstruct;
+import vt.smt.db.repositories.CharacterRepository;
+import vt.smt.db.repositories.ResourceRepository;
+import vt.smt.ent.net.Resource;
 
 /*
  * Бины создаёт Spring, судя по всему (аннотации JSF-бинодела закомменчены)
@@ -32,6 +37,12 @@ public class CharacterPageController {
 
     @Autowired
     private UsersRepository usersRepository;
+    
+    @Autowired
+    private ResourceRepository resourceRepository;
+    
+    @Autowired
+    private CharacterRepository characterRepository;
 
     @PostConstruct
     public void CharacterPageController(){
@@ -44,7 +55,22 @@ public class CharacterPageController {
     public GameCharacter getCharacter() {
         return character;
     }
-
+    
+    public List<Resource> getCharacterImages() {
+        List<Resource> res = resourceRepository.findByType("img");
+        return res.stream()
+                .filter(r -> r.getUrl().startsWith("/img/characters"))
+                .collect(Collectors.toList());
+    }
+    
+    public void setImage(Resource image) {
+        character.setImageResource(image);
+        characterRepository.save(character);
+    }
+    
+    public Resource getImage() {
+        return character.getImageResource();
+    }
 
     public void setCharacter(GameCharacter character) {
         this.character = character;
@@ -56,5 +82,17 @@ public class CharacterPageController {
 
     public void setSelectedAbility(CharacterAbility selectedAbility) {
         this.selectedAbility = selectedAbility;
+    }
+
+    public void setResourceRepository(ResourceRepository resourceRepository) {
+        this.resourceRepository = resourceRepository;
+    }
+
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
+    public void setCharacterRepository(CharacterRepository characterRepository) {
+        this.characterRepository = characterRepository;
     }
 }

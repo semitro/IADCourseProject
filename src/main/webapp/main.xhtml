@@ -36,7 +36,25 @@
                     <f:facet name="header">
                         <p:outputLabel styleClass="bolshe" value="#{characterPageController.character.name}"/>
                     </f:facet>
-                    <p:graphicImage value="resources#{characterPageController.character.imageResource.url}"/>
+                    <h:form id="charImage">
+                        <!-- Выбор изображения персонажа -->
+                        <p:commandLink update=":charImage"
+                                       oncomplete="PF('imageDialog').show()">
+                            <p:graphicImage value="resources#{characterPageController.character.imageResource.url}"
+                                            styleClass="characterImage"/>
+                        </p:commandLink>
+                        <p:dialog header="Как выглядишь ты?" widgetVar="imageDialog" modal="true" resizable="false">
+                            <div class="clearLeft"/>
+                            <p:repeat value="#{characterPageController.characterImages}" var="char_image">
+                                <p:commandLink action="#{characterPageController.setImage(char_image)}"
+                                               update=":charImage">
+                                    <f:setPropertyActionListener value="#{char_image}" target="#{characterPageController.image}"/>
+                                    <p:graphicImage styleClass="w100mh100 floatToLeft margin05" value="resources#{char_image.url}"/>
+                                </p:commandLink>
+                            </p:repeat>
+                            <div class="clearLeft"/>
+                        </p:dialog>
+                    </h:form>
                     <h:panelGrid columns="1">
                         <p:outputLabel value="Опыт: #{characterPageController.character.experience}"/>
                         <p:outputLabel value="Здоровье: #{characterPageController.character.health}"/>
