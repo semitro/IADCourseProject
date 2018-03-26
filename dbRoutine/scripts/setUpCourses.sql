@@ -13,7 +13,8 @@ insert into article(title, subtitle, content, course_id) values
 -- В скрипт награды (script)  просто кладём название абилки, которую мы получим
 insert into script(name, script)
 	values  ('getGroupOfBloodSkill', 'Узнать группу крови на рукаве'),
-		('getGainOverLoadSkill', 'Выкрутить Gain');
+		('getGainOverLoadSkill', 'Выкрутить Gain'),
+		('getAdmirersSkill', 'Натравить поклонников');
 
 insert into test(title, description, reward_script_id) values
 ('Интервалы', 'Насколько хорошо вы знаете музыкальные интервалы?',
@@ -21,7 +22,7 @@ insert into test(title, description, reward_script_id) values
 ('Трезвучия', 'Поговорим об аккордах',
 	(select script_id from script where name = 'getGainOverLoadSkill')),
 ('Септаккорды', 'Кто здесь?',
-	(select script_id from script where name = 'getGainOverLoadSkill'));
+	(select script_id from script where name = 'getAdmirersSkill'));
 
 insert into question(content, answer, wrong1, wrong2, wrong3, test_id) values
 ('Что такое интервал?', 'Две нотки, связанные гармонически или мелодически',

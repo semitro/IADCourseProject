@@ -7,4 +7,5 @@ insert into resource(name, type, url) values
 	('bloodGroup', 'img','/img/skills/bloodGroup.png'),
 	('gainOverload', 'img','/img/skills/gainOverload.png'),
 	('extrimVocal', 'img','/img/skills/extrimVocal.png'),
-	('regularAttack', 'img', '/img/skills/regularAttack.png');
+	('regularAttack', 'img', '/img/skills/regularAttack.png'),
+	('admirers', 'img', '/img/skills/admirers.jpeg');
