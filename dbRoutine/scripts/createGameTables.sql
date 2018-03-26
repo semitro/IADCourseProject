@@ -12,6 +12,7 @@ create table Users(
 	id_external varchar(120), --#for data created by external auth-providers
 	--password bytea not null,
 	password varchar, -- for testing
+	role varchar,
 	access_level integer default 0 not null
 );
 
