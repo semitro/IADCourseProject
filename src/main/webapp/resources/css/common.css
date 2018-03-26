@@ -76,16 +76,6 @@ body {
     margin: auto;
 }
 
-aside {
-    float: left;
-    margin-right: 2em;
-}
-
-article {
-    float: left;
-    min-width: 50%;
-}
-
 .bolshe {
     font-weight: 1000;
 }
@@ -118,8 +108,24 @@ article {
     margin-right: auto;
 }
 
+aside {
+    float: left;
+    margin-right: 2em;
+}
+
+article {
+    float: left;
+    min-width: 50%;
+    background: linear-gradient(white, lightgray);
+    border-radius: 3px;
+    border: 1px solid #a8a8a8;
+    padding: 0.3em;
+    color: #333;
+}
+
 .articleTitle{
     font-size: 25px;
+    font-weight: bolder;
 }
 
 .articleContent{
@@ -158,7 +164,7 @@ article {
     border-radius: inherit;
     width: 100%;
     text-align: center;
-    padding: 0.5em 0 0.6em;
+    padding: 0.7em 0 0.5em;
     animation: namesAnim 0.3s 0s linear infinite;
 }
 @keyframes namesAnim {
@@ -224,19 +230,12 @@ article {
     .mainPageTable {
         max-width: 48%;
     }
-    #growl {
-        display: none;
+    .battleAbility {
+        max-width: 25%;
     }
 }
 @media(min-width: 861px) {
     .mainPageTable {
         min-width: 48%;
-    }
-    #growl {
-        animation: growlFadeOut 5s 3s forwards;
-    }
-    @keyframes growlFadeOut {
-        from {opacity: 1.0;}
-        to {opacity: 0.0;}
     }
 }

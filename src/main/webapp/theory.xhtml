@@ -42,35 +42,37 @@
                     <p:menu model="#{theoryPageController.menu}"/>
                 </h:form>
             </aside>
-            <section>
-
-            <p>
-                <p:outputLabel id="articleTitle"   styleClass="articleTitle"
-                              value="#{theoryPageController.articleTitle}" />
-            </p>
-            <hr/>
-            <p>
-                <p:outputLabel id="articleContent" styleClass="articleContent"
-                       value="#{theoryPageController.articleContent}"/>
-            </p>
-            <hr/>
-                <h:form id="test">
-                    <p:commandButton id="examButton" value="Ответить!"
-                             action="#{theoryPageController.passTheExam()}"
-                             rendered="#{theoryPageController.questions.size() != 0}"
-                             update=":gr:growl"/>
-            <h:panelGrid id="radio" columns="2" style="margin-bottom:10px" cellpadding="5"
-                         rendered="#{theoryPageController.questions.size() != 0}">
-
-                <p:selectOneRadio id="qeez" value="#{theoryPageController.usrAnswer}"  layout="grid" columns="1">
-                    <f:selectItems          value="#{theoryPageController.questions}"
-                                            var="q" itemLabel="#{q}" itemValue="#{q}"/>
-                </p:selectOneRadio>
-            </h:panelGrid>
-                </h:form>
-            </section>
-
-    </div>
+            <article>
+                <p:outputPanel>
+                    <p>
+                        <h:outputText id="articleTitle"   styleClass="articleTitle"
+                                      value="#{theoryPageController.articleTitle}" />
+                    </p>
+                    <hr/>
+                    <section>
+                        <h:outputText id="articleContent" styleClass="articleContent"
+                               value="#{theoryPageController.articleContent}"/>
+                    </section>
+                    <hr/>
+                    <section>
+                        <h:form id="test" rendered="#{theoryPageController.questionIds.size()!=0}">
+                            <p:repeat value="#{theoryPageController.questionIds}" var="qid">
+                                <p:outputLabel value="#{theoryPageController.questionContent[qid]}"/>
+                                <p:selectOneRadio id="quiz#{qid.toString()}"
+                                                  value="#{theoryPageController.usrAnswer[qid]}"
+                                                  layout="grid" columns="1">
+                                    <f:selectItems value="#{theoryPageController.questions[qid]}"
+                                                   var ="q" itemLabel="#{q}" itemValue="#{q}"/> 
+                                </p:selectOneRadio>
+                            </p:repeat>
+                            <p:commandButton id="examButton" value="Ответить!"
+                                     action="#{theoryPageController.passTheExam()}"
+                                     update=":gr:growl"/>
+                        </h:form>
+                    </section>
+                </p:outputPanel>
+            </article>
+        </div>
 
     </h:body>
 
