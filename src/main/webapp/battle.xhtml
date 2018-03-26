@@ -37,11 +37,11 @@
                 </p:toolbar>
             </nav>
             <h:form>
-                <p:commandButton value="В новый бой!" styleClass="floatToRight"
+                <p:commandButton value="В новый бой!" styleClass="floatToLeft"
                                  update="dataListForm names paramsForm"
                                  action="#{battlePageController.restart()}"/>
             </h:form>
-            <div class="clearRight"/>
+            <div class="clearLeft"/>
             <div class="battleWrapper">
                 <h:panelGroup layout="block" id="names">
                     <p:outputLabel value="#{battlePageController.character.name}"
