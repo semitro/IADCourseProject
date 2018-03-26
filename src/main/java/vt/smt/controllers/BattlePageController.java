@@ -115,7 +115,7 @@ public class BattlePageController {
 
     private void thankForComingRegards(GameCharacter opponent){
         int exp = opponent.getExperience() /440 + 1;
-        int attack = opponent.getAttack() / 140 + 1;
+        int attack = opponent.getAttack() / 80 + 1;
         int roses = opponent.getRoses() / 160 + 10;
         int defence = opponent.getDefence() / 190 + 15;
 
