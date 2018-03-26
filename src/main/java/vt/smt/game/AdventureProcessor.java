@@ -65,7 +65,7 @@ public class AdventureProcessor implements AdventureInterface {
             case 1:{
                 int rhythm = random.nextInt(20);
                 int exp = random.nextInt(100);
-                gameCharacter.setRhythm(gameCharacter.getRhythm() );
+                gameCharacter.setRhythm(gameCharacter.getRhythm() + rhythm);
                 return "Вы наконец-то порепетировали! Опыт +"
                         + exp + ", ритм + " + rhythm + "!";
             }
