@@ -60,7 +60,7 @@
                                 <h:panelGrid columns="2">
                                     <p:commandLink update=":abil_form:abilityDetail" oncomplete="PF('abilityDialog').show()"> <!--инфо о выбранном навыке-->
                                         <f:setPropertyActionListener value="#{char_ability}" target="#{characterPageController.selectedAbility}" />
-                                        <p:graphicImage width="100" value="resources#{char_ability.ability.imageResource.url}" />
+                                        <p:graphicImage styleClass="w100mh100" value="resources#{char_ability.ability.imageResource.url}" />
                                     </p:commandLink>
                                     <h:panelGroup>
                                         <p:outputLabel value="#{char_ability.ability.name}" style="font-weight: bold"/>
@@ -106,7 +106,7 @@
                                 <h:panelGrid columns="2">
                                     <p:commandLink update=":item_form:itemDetail" oncomplete="PF('itemDialog').show()"> <!--инфо о выбранном предмете-->
                                         <f:setPropertyActionListener value="#{char_ability}" target="#{characterPageController.selectedAbility}" />
-                                        <p:graphicImage width="100" value="resources#{char_ability.ability.imageResource.url}" />
+                                        <p:graphicImage styleClass="w100mh100" value="resources#{char_ability.ability.imageResource.url}" />
                                     </p:commandLink>
                                     <h:panelGroup>
                                         <p:outputLabel value="#{char_ability.ability.name}" style="font-weight: bold"/>
