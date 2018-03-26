@@ -27,6 +27,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -104,6 +106,7 @@ public class TheoryPageController {
             questions.add(question.getWrong3());
             questions.add(question.getAnswer());
         }
+        Collections.shuffle(questions);
         event.getComponent().processUpdates(FacesContext.getCurrentInstance());
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
