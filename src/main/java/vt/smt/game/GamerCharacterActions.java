@@ -6,46 +6,66 @@ public class GamerCharacterActions extends ListOfActions {
     private GameCharacter target;
     private GameCharacter caster;
 
-    public void hit(Integer damage){
+    public Boolean hit(Integer damage){
         target.setHealth(target.getHealth() - damage);
+        return Boolean.TRUE;
     }
 
+    public Boolean heal(Integer health) {
+        caster.setHealth(caster.getHealth() + health);
+        return Boolean.TRUE;
+    }
+    
+    public Boolean spendRoses(Integer roses) {
+        if (caster.getRoses() >= roses) {
+            caster.setRoses(caster.getRoses() - roses);
+            getResult().addMessage("потратил " + roses + " роз");
+            return Boolean.TRUE;
+        }
+        else {
+            getResult().addMessage("недостаточно роз!");
+            return Boolean.FALSE;
+        }
+    }
 
-    public void regularAttack(){
+    public Boolean regularAttack(){
         int damage = caster.getAttack() - target.getDefence();
-        damage = damage > 0 ? damage : 0;
+        damage = damage > 0 ? damage : 1;
         hit(damage);
         getResult().addMessage("обычная атака: нанесено " + damage + " урона ");
+        return Boolean.TRUE;
     }
 
     // Хилка
-    public void groupOfBlood(){
+    public Boolean groupOfBlood(){
         int health =  100 + (int)(312*Math.random());
-        caster.setHealth(caster.getHealth() + health);
+        heal(health);
         getResult().addMessage("узнал свою группу крови. Здоровье + " + health);
+        return Boolean.TRUE;
     }
 
     // pure damage
-    public void extremeVocal(){
+    public Boolean extremeVocal(){
         int damage = 100 + (int)(Math.random()*500);
         hit(damage);
         getResult().addMessage("поёт скримом. нанесено " + damage + " чистого урона");
+        return Boolean.TRUE;
     }
 
     // Увеличиваем атаку в два раза на три хода.
     private int attackBufSteps = 0;
     private int attackBufValue = 0;
-    public void gainOverload(){
+    public Boolean gainOverload(){
         if(attackBufSteps != 0) {
             attackBufSteps = 4; // Если вызываем несколько раз, продлеваем эффект, но не усиливаем
             getResult().addMessage("перегруз накручен на 3 хода");
-            return;
+            return Boolean.TRUE;
         }
         attackBufSteps = 4;
         attackBufValue = caster.getAttack();
         caster.setAttack(caster.getAttack() + attackBufValue);
         getResult().addMessage("выкрутил ручку gain. На три хода атака x2");
-
+        return Boolean.TRUE;
     }
 
     // Каждый ход!

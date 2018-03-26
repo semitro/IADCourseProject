@@ -62,7 +62,10 @@ public class ScriptExecutor {
             if(method.getName().equals(functionName)){
                 thereIsSuchMethod = true;
                 try {
-                    method.invoke(listOfActions, functionArgs.toArray());
+                    Boolean success = (Boolean)method.invoke(listOfActions, functionArgs.toArray());
+                    if (!success) {
+                        throw new IllegalStateException();
+                    }
                 } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
                     throw new IllegalArgumentException("Не могу вызвать метод " + functionName
                     + " в " + listOfActions.getClass() + " по скрипту '" + statement, e);
