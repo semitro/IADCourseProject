@@ -147,8 +147,27 @@ section {
     margin-left: 5%;
     animation: messageFadeOut 5s 3s forwards; 
 }
-
 @keyframes messageFadeOut {
     from {opacity: 1.0;}
     to {opacity: 0.0;}
+}
+
+.battleAbility {
+    max-width: 50%;
+    min-width: 20%;
+    border-radius: 3px;
+    background-color: gainsboro;
+    border: 1px solid gray;
+    position: relative;
+    float: left;
+    margin: 1em;
+}
+.battleAbility:hover {
+    top: -1px;
+    box-shadow: 0 1px 1px grey;
+}
+
+.w100mh100 {
+    width: 100px;
+    max-height: 100px;
 }
