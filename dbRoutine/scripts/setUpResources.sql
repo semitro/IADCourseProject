@@ -1,7 +1,7 @@
 insert into resource (name, type, url) values
 	('default character', 'img', '/img/characters/defaultCharacter.png'),
-	('character1', 'img', 'img/characters/character1.jpeg'),
-	('character2', 'img', 'img/characters/character2.jpeg');
+	('character1', 'img', '/img/characters/character1.jpeg'),
+	('character2', 'img', '/img/characters/character2.jpeg');
 
 insert into resource(name, type, url) values
 	('bloodGroup', 'img','/img/skills/bloodGroup.png'),
