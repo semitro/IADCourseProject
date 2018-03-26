@@ -1,9 +1,10 @@
 package vt.smt.ent.game;
 
+import vt.smt.ent.Script;
+import vt.smt.ent.net.Resource;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import vt.smt.ent.net.Resource;
-import vt.smt.ent.Script;
 /**
  *  Ability is a skill that the player can use in the battle
  *  <p>
@@ -14,6 +15,8 @@ import vt.smt.ent.Script;
  */
 @Entity
 public class Ability implements Serializable {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ability_id")
@@ -90,9 +93,6 @@ public class Ability implements Serializable {
         this.description = description;
     }
 
-
-
-
     public String getForClass() {
         return forClass;
     }
@@ -133,8 +133,16 @@ public class Ability implements Serializable {
         this.passive = passive;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Ability{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", onlyInBattle=" + onlyInBattle +
+                ", passive=" + passive +
+                ", abilityScript=" + abilityScript +
+                '}';
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -54,9 +54,8 @@
             </p>
             <hr/>
                 <h:form id="test">
-                    <p:button id="examButton" value="#{theoryPageController.buttonName}"
+                    <p:commandButton id="examButton" value="#{theoryPageController.buttonName}"
                              action="#{theoryPageController.passTheExam()}"
-                                 update=":gr:growl qeez examButton"
                                  rendered="#{theoryPageController.buttonName.length() > 1}"/>
             <h:panelGrid id="radio" columns="2" style="margin-bottom:10px" cellpadding="5"
                          rendered="#{theoryPageController.questions.size() != 0}">

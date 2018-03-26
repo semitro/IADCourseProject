@@ -8,13 +8,13 @@ import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import vt.smt.db.repositories.CourseRepository;
-import vt.smt.db.repositories.TestRepository;
-import vt.smt.ent.theory.Article;
-import vt.smt.ent.theory.Course;
-import vt.smt.ent.theory.Question;
-import vt.smt.ent.theory.Test;
+
+import vt.smt.db.repositories.*;
+import vt.smt.ent.game.*;
+import vt.smt.ent.theory.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -49,7 +49,20 @@ public class TheoryPageController {
     private CourseRepository courseRepository;
 
     @Autowired
+    private UsersRepository usersRepository;
+
+    @Autowired
+    private CharacterRepository characterRepository;
+
+    @Autowired
     private TestRepository testRepository;
+
+    @Autowired
+    private AbilityRepository abilityRepository;
+
+    @Autowired
+    private CharacterAbilityRepository characterAbilityRespitory;
+
     private Test           articleTest;
 
     @PostConstruct
@@ -70,21 +83,30 @@ public class TheoryPageController {
             menu.addElement(currentMenu);
         }
     }
+
     public void setArticleContentDynamic(ActionEvent event){
         System.out.println("set article content dynamic");
         articleContent = ((MenuActionEvent)event).getMenuItem().getParams().get("articleContent").get(0);
         articleTitle   = ((MenuActionEvent)event).getMenuItem().getParams().get("articleTitle")  .get(0);
-//        weDontHaveTests = "";
         buttonName      = "";
         articleTest = testRepository.findByTitle(articleTitle);
         if(articleTest == null) {
-//            weDontHaveTests = "Извините, тест для данного раздела ещё не придуман!";
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Извините", "Тест для данного раздела" +
                     "находится в разработке"));
         }
         else
             buttonName = "Ответить!";
+
+        questions.clear();
+        System.out.println(articleTest);
+        if(articleTest != null)
+        for (Question question : articleTest.getQuestions()) {
+            questions.add(question.getWrong1());
+            questions.add(question.getWrong2());
+            questions.add(question.getWrong3());
+            questions.add(question.getAnswer());
+        }
         event.getComponent().processUpdates(FacesContext.getCurrentInstance());
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
@@ -93,27 +115,34 @@ public class TheoryPageController {
             e.printStackTrace();
         }
     }
-
+    // Проверить тест и, возможно, наградить
     public void passTheExam(){
-//        weDontHaveTests = "";
-//        if(buttonName.equals("Сдать экзамен")){
-            questions.clear();
-            System.out.println(articleTest);
-            for (Question question : articleTest.getQuestions()) {
-                questions.add(question.getWrong1());
-                questions.add(question.getWrong2());
-                questions.add(question.getWrong3());
-                questions.add(question.getAnswer());
-            }
-//        }
+
         System.out.println("Пользователь попытался сдать экзамен. Ответ=" + usrAnswer
                 + "Успех = " + articleTest.getQuestions().get(0).getAnswer().equals(usrAnswer));
+
+        if(articleTest.getQuestions().get(0).getAnswer().equals(usrAnswer)) {
+            Authentication authentication = // get it from the session
+                    SecurityContextHolder.getContext().getAuthentication();
+            regardUser(usersRepository.findByLogin(authentication.getName()).getGameCharacters().get(0),
+                articleTest.getScript().getScript());
+        }
     }
 
+    private void regardUser(GameCharacter character, String rewardScript){
+        Ability newAbility =
+            abilityRepository.findByName(rewardScript);
+        // Даём игроку новую абилку
+        CharacterAbility character_ability = new CharacterAbility();
+        character_ability.setAbility(newAbility);
+        character_ability.setGameCharacter(character);
+        character_ability.setPowerLevel(1);
+        System.out.println("Новая способность:" + character_ability + character + newAbility);
+        characterAbilityRespitory.save(character_ability);
+    }
     public MenuModel getMenu() {
         return menu;
     }
-
     public void setMenu(MenuModel menu) {
         this.menu = menu;
     }
@@ -121,17 +150,17 @@ public class TheoryPageController {
     public String getArticleContent() {
         return articleContent;
     }
+
     public void setArticleContent(String articleContent) {
         this.articleContent = articleContent;
     }
-
     public String getArticleTitle() {
         return articleTitle;
     }
+
     public void setArticleTitle(String articleTitle) {
         this.articleTitle = articleTitle;
     }
-
     public TestRepository getTestRepository() {
         return testRepository;
     }
@@ -163,13 +192,5 @@ public class TheoryPageController {
     public void setButtonName(String buttonName) {
         this.buttonName = buttonName;
     }
-
-//    public String getWeDontHaveTests() {
-//        return weDontHaveTests;
-//    }
-//
-//    public void setWeDontHaveTests(String weDontHaveTests) {
-//        this.weDontHaveTests = weDontHaveTests;
-//    }
 
 }

@@ -111,7 +111,6 @@ public class BattlePageController {
                 "\nзащита + " + defence + "\nрозы + " + roses;
         context.addMessage(null, new FacesMessage(msg,stats));
         battleLog.add(0, stats);
-
     }
 
     private void thankForComingRegards(GameCharacter opponent){

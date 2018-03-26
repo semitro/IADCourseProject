@@ -36,27 +36,35 @@ public class Test implements Serializable {
         this.questions = questions;
     }
 
-
     public Integer getTestId() {
         return testId;
     }
+
 
     public void setTestId(Integer testId) {
         this.testId = testId;
     }
 
-
     public String getTitle() {
         return title;
     }
+
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-
     public String getDescription() {
         return description;
+    }
+
+
+    public Script getScript() {
+        return script;
+    }
+
+    public void setScript(Script script) {
+        this.script = script;
     }
 
     public void setDescription(String description) {
