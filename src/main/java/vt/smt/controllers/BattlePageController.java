@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import vt.smt.db.repositories.CharacterAbilityRepository;
 
 @Component(value = "battlePageController")
 @Scope(value = "session")
@@ -39,6 +40,9 @@ public class BattlePageController {
 
     @Autowired
     private UsersRepository usersRepository;
+    
+    @Autowired
+    private CharacterAbilityRepository characterAbilityRepository;
 
     private List<String> battleLog = new LinkedList<>();
 
@@ -77,6 +81,9 @@ public class BattlePageController {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+        
+        selectedAbility.setPowerLevel(selectedAbility.getPowerLevel() + 1);
+        characterAbilityRepository.save(selectedAbility);
 
         characterRepository.save(character);
         Collections.reverse(result);
@@ -162,6 +169,10 @@ public class BattlePageController {
     public void setSelectedAbility(CharacterAbility selectedAbility) {
         this.selectedAbility = selectedAbility;
     }
+    
+    public boolean getAbilityAvailable(CharacterAbility ability) {
+        return character.getExperience() >= ability.getAbility().getMinExpToUse();
+    }
 
     public GameCharacter getCharacter() {
         return character;
@@ -184,6 +195,18 @@ public class BattlePageController {
 
     public void setEnemy(GameCharacter enemy) {
         this.enemy = enemy;
+    }
+
+    public void setCharacterRepository(CharacterRepository characterRepository) {
+        this.characterRepository = characterRepository;
+    }
+
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
+
+    public void setCharacterAbilityRepository(CharacterAbilityRepository characterAbilityRepository) {
+        this.characterAbilityRepository = characterAbilityRepository;
     }
 
 

@@ -83,10 +83,8 @@
                                     <h:panelGroup>
                                         <p:outputLabel value="#{char_ability.ability.name}" style="font-weight: bold"/>
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <p:outputLabel value="Сила"/>
-                                            <p:outputLabel value="#{char_ability.powerLevel}"/>
-                                            <p:outputLabel value="Откат"/>
-                                            <p:outputLabel value="#{char_ability.ability.cooldown}"/>
+                                            <p:outputLabel value="Доступен?"/>
+                                            <p:outputLabel value="#{characterPageController.getAbilityAvailable(char_ability)}"/>
                                         </h:panelGrid>
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -105,8 +103,8 @@
                                 <p:outputLabel value="#{characterPageController.selectedAbility.ability.name}" style="font-weight: bold"/>
                                 <p:outputLabel value="Описание"/>
                                 <p:outputLabel value="#{characterPageController.selectedAbility.ability.description}" style="font-weight: bold"/>
-                                <p:outputLabel value="Сила"/>
-                                <p:outputLabel value="#{characterPageController.selectedAbility.powerLevel}"/>
+                                <p:outputLabel value="#{characterPageController.selectedAbility.ability.minExpToUse}"/>
+                                <p:outputLabel value="опыта требуется для использования"/>
                             </p:panelGrid>
                         </p:outputPanel>
                     </p:dialog>

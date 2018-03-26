@@ -15,6 +15,6 @@ values
 	(select script_id from script where name = 'gainOverLoad'), 1),
 ('Обычная атака', false, 'Урон зависит от атаки, защиты соперника и ритма', 0, (select resource_id from resource where name = 'regularAttack'),
 	(select script_id from script where name = 'regularAttack'), 0),
-('Натравить поклонников', false, 'Потрать роз и натрави поклонников на противника!', 5000, (select resource_id from resource where name = 'admirers'),
+('Натравить поклонников', false, 'Потрать роз 1000 и натрави поклонников на противника!', 5000, (select resource_id from resource where name = 'admirers'),
 	(select script_id from script where name = 'admirers'), 1);
 

@@ -87,6 +87,17 @@ public class CharacterPageController {
     public CharacterAbility getSelectedAbility() {
         return selectedAbility;
     }
+    
+    public String getAbilityAvailable(CharacterAbility ability) {
+        System.err.println(character);
+        System.err.println(ability);
+        if(character.getExperience() >= ability.getAbility().getMinExpToUse()) {
+                return "Да";
+        }
+        else {
+            return "Нет";
+        }
+    }
 
     public void setSelectedAbility(CharacterAbility selectedAbility) {
         this.selectedAbility = selectedAbility;

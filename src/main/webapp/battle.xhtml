@@ -82,7 +82,8 @@
                                   var="char_ability">
                             <p:commandLink update="dataListForm paramsForm :gr:growl"
                                    action="#{battlePageController.step()}"
-                                   style="margin: auto; width: 100px;">
+                                   style="margin: auto; width: 100px;"
+                                   rendered="#{battlePageController.getAbilityAvailable(char_ability)}">
                                 <f:setPropertyActionListener value="#{char_ability}"
                                                              target="#{battlePageController.selectedAbility}" />
                                 <div class="battleAbility"
