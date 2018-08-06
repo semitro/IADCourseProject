@@ -1,2 +1,3 @@
-# IADCourseProject
-Muzz-battles in your house
+# Курсовая работа по Интернет-Приложениям
+Онлайн-игра с битвами с музыкантами и изучением музыкальной теории для получения новых навыков в битве
+Используются Spring (including JPA, Security), JSF (with primefaces).
